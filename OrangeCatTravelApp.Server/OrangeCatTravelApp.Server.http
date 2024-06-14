@@ -1,0 +1,6 @@
+@OrangeCatTravelApp.Server_HostAddress = http://localhost:5030
+
+GET {{OrangeCatTravelApp.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

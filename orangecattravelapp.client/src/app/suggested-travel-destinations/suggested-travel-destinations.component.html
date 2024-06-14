@@ -1,0 +1,10 @@
+<div class="destinations-container">
+  <div class="destination" *ngFor="let destination of destinations">
+    <a [href]="destination.link">
+      <div class="image-container">
+        <img [src]="destination.image" [alt]="destination.name" />
+      </div>
+      <div class="destination-name">{{ destination.name }}</div>
+    </a>
+  </div>
+</div>

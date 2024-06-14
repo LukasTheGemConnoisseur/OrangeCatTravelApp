@@ -1,0 +1,32 @@
+.search-container {
+  position: relative;
+  display: inline-block; /* Ensure it takes only the width of its content */
+  margin-bottom: 20px;
+}
+
+.search-input {
+  padding: 10px 40px 10px 10px; /* Adjust padding to accommodate the button */
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px; /* Rounded edges */
+  width: 600px;
+  box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+.search-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%; /* Match the height of the input */
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #ff851b;
+  color: white;
+  border: none;
+  border-radius: 0 20px 20px 0; /* Adjust radius to match input */
+  cursor: pointer;
+}
+
+  .search-button:hover {
+    background-color: #0056b3;
+  }

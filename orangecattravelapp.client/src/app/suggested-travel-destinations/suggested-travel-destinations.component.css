@@ -1,0 +1,50 @@
+.destinations-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding-bottom: 150px;
+}
+
+.destination {
+  text-align: center;
+  margin: 10px;
+}
+
+  .destination a {
+    text-decoration: none; /* Remove underline by default */
+    color: inherit; /* Inherit color from the parent element */
+    display: inline-block;
+    position: relative;
+  }
+
+    .destination a:hover .destination-name {
+      text-decoration: underline; /* Underline text on hover */
+    }
+
+.image-container {
+  position: relative;
+  width: 200px;
+  height: 150px;
+}
+
+.destination img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  transition: box-shadow 0.3s ease; /* Smooth transition for box-shadow */
+}
+
+.destination a:hover .image-container img {
+  box-shadow: 0 0 0 5px #050038, 0 0 0 10px lightgrey; /* Inner black border and outer grey border */
+}
+
+.destination-name {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #050038;
+}

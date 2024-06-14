@@ -1,0 +1,30 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 20px;
+  margin-top: 0;
+}
+
+.navbar-left,
+.navbar-center,
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.company-logo {
+  height: 75px; /* Adjust size as needed */
+}
+
+.company-name {
+  font-size: 48px; /* Adjust font size as needed */
+  color: orange; /* Change the color to orange or any color you prefer */
+  font-weight: bold; /* Optionally make the text bold */
+}
+
+.user-profile {
+  height: 75px; /* Adjust size as needed */
+  border-radius: 50%; /* Make the profile picture round */
+}

@@ -1,0 +1,127 @@
+/*.profilePicture {
+  display: flex;
+  height: 250px;
+  width: auto;
+  border-radius: 50%;*/ /* Make the profile picture round */
+  /*padding-left: 150px;
+  overflow: hidden;*/ /* Ensure the picture stays within its boundaries */
+/*}
+.user-name {
+  font-size: 36px;
+  color: #050038;
+  font-weight: bold;
+  padding-left: 50px;
+  padding-top: 75px;
+}
+.pictureAndName {
+  display: flex;
+  align-items: center;*/ /* Center items vertically */
+/*}
+.profileFields {
+  background-color: #bfe6F4;
+  border-style: groove;
+  margin-left: 200px;
+  margin-right: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 150px;*/ /* Adjust this value to control how far from the left edge */
+/*}*/
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto;
+  padding: 20px;
+  max-width: 600px;
+  background-color: #bfe6F4;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.profile-picture {
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.user-profile {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.user-info {
+  margin-left: 20px;
+}
+
+.user-name {
+  font-size: 24px;
+  color: #333;
+  font-weight: bold;
+}
+
+.username {
+  font-size: 16px;
+  color: #666;
+}
+
+.profile-body {
+  width: 100%;
+}
+
+.about-you textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  margin-bottom: 50px;
+}
+
+.communication-preferences {
+  margin-top: 10px;
+}
+
+  .communication-preferences label {
+    margin-right: 15px;
+  }
+
+.profile-buttons {
+  margin-top: 40px;
+}
+
+.cancel-button,
+.save-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: solid;
+  border-color: #050038;
+  border-width: 2px;
+  border-radius: 4px;
+  background-color: white;
+  color: #050038;
+  margin-right: 10px;
+  margin-top: 50px;
+}
+
+.save-button {
+  background-color: #050038;
+  color: white; 
+}
+
+  .cancel-button:hover,
+  .save-button:hover {
+    opacity: 0.8;
+  }

@@ -10,9 +10,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { SuggestedTravelDestinationsComponent } from './suggested-travel-destinations/suggested-travel-destinations.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent } // Define your routes here
+  { path: '', component: HomeComponent },
+  { path: 'user-profile', component: UserProfileComponent }
 ];
 
 @NgModule({
@@ -22,11 +24,13 @@ const routes: Routes = [
     NavbarComponent,
     FooterComponent,
     SearchBarComponent,
-    SuggestedTravelDestinationsComponent
+    SuggestedTravelDestinationsComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, RouterModule.forRoot(routes), FormsModule
   ],
+  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })

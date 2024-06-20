@@ -1,0 +1,52 @@
+
+<div class="profile-container">
+  <div class="profile-header">
+    <div class="profile-picture">
+      <img src="assets/profile_picture.png" alt="User Profile" class="user-profile">
+      <!--Update html later when the user storage logic is known -->
+    </div>
+    <div class="user-info">
+      <div class="user-name">{{ userName }}</div>
+      <div class="username">@{{ userUsername }}</div>
+    </div>
+  </div>
+
+  <div class="profile-body">
+    <h2>About Me</h2>
+    <div class="about-you">
+      <textarea [(ngModel)]="aboutMe" name="aboutYou" placeholder="Tell us about yourself..."></textarea>
+    </div>
+
+    <h2>Communication Preferences</h2>
+    <div class="communication-preferences">
+      <label>
+        <input type="checkbox" [(ngModel)]="emailPreference" (change)="toggleEmailInput()"> Email
+      </label>
+      <div *ngIf="showEmailInput">
+        <input type="email" name="emailInput" [(ngModel)]="emailAddress" placeholder="Enter your email">
+      </div>
+
+      <label>
+        <input type="checkbox" [(ngModel)]="textPreference" (change)="toggleTextInput()"> Text
+      </label>
+      <div *ngIf="showTextInput">
+        <input type="text" name="textInput" [(ngModel)]="phoneNumber" placeholder="Enter your phone number">
+      </div>
+
+      <label>
+        <input type="checkbox" [(ngModel)]="bothPreference" (change)="toggleBothInput()"> Both Email and Text
+      </label>
+      <div *ngIf="showBothInput">
+        <input type="email" name="emailInput" [(ngModel)]="emailAddress" placeholder="Enter your email">
+        <input type="text" name="textInput" [(ngModel)]="phoneNumber" placeholder="Enter your phone number">
+      </div>
+    </div>
+
+    <div class="profile-buttons">
+      <button class="cancel-button" (click)="cancelChanges()">Cancel</button>
+      <button class="save-button" (click)="saveChanges()">Save</button>
+      <!--Update html later when the user storage logic is known -->
+    </div>
+  </div>
+</div>
+

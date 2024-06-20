@@ -4,7 +4,8 @@
   align-items: center;
   background-color: #fff;
   padding: 10px 20px;
-  margin-top: 0;
+  padding-top: 0px;
+  margin-top: -24px;
 }
 
 .navbar-left,
@@ -15,16 +16,16 @@
 }
 
 .company-logo {
-  height: 75px; /* Adjust size as needed */
+  height: 75px; 
 }
 
 .company-name {
-  font-size: 48px; /* Adjust font size as needed */
+  font-size: 48px; 
   color: orange; /* Change the color to orange or any color you prefer */
-  font-weight: bold; /* Optionally make the text bold */
+  font-weight: bold; 
 }
 
 .user-profile {
-  height: 75px; /* Adjust size as needed */
+  height: 75px; 
   border-radius: 50%; /* Make the profile picture round */
 }

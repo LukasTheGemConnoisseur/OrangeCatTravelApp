@@ -1,0 +1,19 @@
+.carousel {
+  position: relative;
+  padding: 100px 200px 50px 200px;
+}
+
+.carousel img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 600px;  /*Adjust as needed */
+  margin: auto;
+}
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  filter: invert(1) grayscale(100);
+}
+.carousel-indicators {
+  filter: invert(1) grayscale(100);
+}

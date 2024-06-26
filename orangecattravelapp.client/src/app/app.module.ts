@@ -11,10 +11,13 @@ import { FooterComponent } from './footer/footer.component';
 import { SearchBarComponent } from './search-bar/search-bar.component';
 import { SuggestedTravelDestinationsComponent } from './suggested-travel-destinations/suggested-travel-destinations.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { CarouselComponent } from './carousel/carousel.component';
+import { DestinationOverviewComponent } from './destination-overview/destination-overview.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'user-profile', component: UserProfileComponent }
+  { path: 'user-profile', component: UserProfileComponent },
+  { path: 'destination-overview', component: DestinationOverviewComponent }
 ];
 
 @NgModule({
@@ -25,7 +28,9 @@ const routes: Routes = [
     FooterComponent,
     SearchBarComponent,
     SuggestedTravelDestinationsComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    CarouselComponent,
+    DestinationOverviewComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, RouterModule.forRoot(routes), FormsModule

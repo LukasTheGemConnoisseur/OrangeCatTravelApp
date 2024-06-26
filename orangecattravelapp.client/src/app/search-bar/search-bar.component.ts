@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-bar',
@@ -8,10 +9,13 @@ import { Component } from '@angular/core';
 export class SearchBarComponent {
   searchTerm: string = '';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   search() {
     console.log('Search term:', this.searchTerm);
     // Add your search functionality here (e.g., call a service or update a search results component)
+    // Navigate to the DestinationOverviewComponent
+    this.router.navigate(['/destination-overview']);
+
   }
 }

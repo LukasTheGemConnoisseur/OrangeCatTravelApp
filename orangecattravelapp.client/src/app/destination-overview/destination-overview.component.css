@@ -1,0 +1,146 @@
+.planTripContainer,
+.destinationNameContainer,
+.destinationBriefOverviewAIContainer{
+  display: flex;
+  justify-content: start;
+  margin-left: 250px;
+}
+
+.planTrip {
+  font-size: 24px;
+  color: #050038;
+  font-weight: bold;
+  padding-bottom: 35px;
+  max-width: 800px; /* Set a maximum width to ensure the content doesn't stretch too wide */
+  width: 100%; /* Ensure it takes the full width within the constraints of max-width */
+  text-align: start;
+}
+.destinationName {
+  font-size: 40px;
+  color: #050038;
+  font-weight: bold;
+  padding-bottom: 20px;
+  max-width: 800px; 
+  width: 100%; 
+  text-align: start;
+}
+.destinationBriefOverviewAI {
+  font-size: 18px;
+  color: #050038;
+  padding-bottom: 80px;
+  max-width: 700px; 
+  width: 100%; 
+  text-align: start;
+}
+
+.carousel-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.carousel-sidebar {
+  flex: 0 0 150px; /* Fixed width for the sidebar */
+  text-align: center;
+  margin-top: 75px;
+  margin-left: 250px;
+}
+
+  .carousel-sidebar h2 {
+    font-size: 18px;
+    color: #050038;
+    margin-bottom: 10px;
+  }
+
+  .carousel-sidebar button {
+    background-color: #050038;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+
+    .carousel-sidebar button:hover {
+      background-color: #333;
+    }
+
+.carousel-container {
+  flex: 1; /* Takes up the remaining space */
+  max-width: 1500px; /* Ensures the carousel doesn't stretch too wide */
+  margin: 0 auto; /* Centers the carousel */
+  margin-left: 0px;
+}
+
+.adventureCarousel,
+.hotelCarousel,
+.restaurantCarousel {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 50px;
+}
+
+.adventure-container,
+.hotel-container,
+.restaurant-container {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.adventure,
+.hotel,
+.restaurant {
+  text-align: center;
+  margin: 10px;
+}
+
+  .adventure a,
+  .hotel a,
+  .restaurant a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    position: relative;
+  }
+
+    .adventure a:hover .adventure-name,
+    .hotel a:hover .hotel-name,
+    .restaurant a:hover .restaurant-name {
+      text-decoration: underline;
+    }
+
+.image-container {
+  position: relative;
+  width: 300px;
+  height: 230px;
+}
+
+.adventure img,
+.hotel img,
+.restaurant img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+  transition: box-shadow 0.3s ease;
+}
+
+.adventure a:hover .image-container img,
+.hotel a:hover .image-container img,
+.restaurant a:hover .image-container img {
+  box-shadow: 0 0 0 5px #050038, 0 0 0 10px lightgrey;
+}
+
+.adventure-name,
+.hotel-name,
+.restaurant-name {
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #050038;
+}
+
+

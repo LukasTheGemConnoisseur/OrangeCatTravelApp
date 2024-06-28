@@ -1,5 +1,82 @@
 <div>
   <app-carousel></app-carousel>
-  This is a work in progress
+
+  <div class="destinationNameContainer">
+    <div class="destinationName">{{ destinationName }}</div>
+  </div>
+
+  <div class="destinationBriefOverviewAIContainer">
+    <div class="destinationBriefOverviewAI">{{ destinationBriefOverviewAI }}</div>
+  </div>
+
+  <div class="planTripContainer">
+    <div class="planTrip">Plan Your Trip</div>
+  </div>
+
+  <div class="carousel-wrapper">
+    <div class="carousel-sidebar">
+      <h2>What to do</h2>
+      <button (click)="adventureSeeAll()" class="adventureSeeAll">See All</button>
+    </div>
+    <div class="carousel-container">
+      <div class="adventureCarousel">
+        <div class="adventure-container">
+          <div class="adventure" *ngFor="let adventure of adventures">
+            <a [href]="adventure.link">
+              <div class="image-container">
+                <img [src]="adventure.image" [alt]="adventure.name" />
+              </div>
+              <div class="adventure-name">{{ adventure.name }}</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="carousel-wrapper">
+    <div class="carousel-sidebar">
+      <h2>Where to stay</h2>
+      <button (click)="hotelSeeAll()" class="hotelSeeAll">See All</button>
+    </div>
+    <div class="carousel-container">
+      <div class="hotelCarousel">
+        <div class="hotel-container">
+          <div class="hotel" *ngFor="let hotel of hotels">
+            <a [href]="hotel.link">
+              <div class="image-container">
+                <img [src]="hotel.image" [alt]="hotel.name" />
+              </div>
+              <div class="hotel-name">{{ hotel.name }}</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="carousel-wrapper">
+    <div class="carousel-sidebar">
+      <h2>Where to eat</h2>
+      <button (click)="restaurantSeeAll()" class="restaurantSeeAll">See All</button>
+    </div>
+    <div class="carousel-container">
+      <div class="restaurantCarousel">
+        <div class="restaurant-container">
+          <div class="restaurant" *ngFor="let restaurant of restaurants">
+            <a [href]="restaurant.link">
+              <div class="image-container">
+                <img [src]="restaurant.image" [alt]="restaurant.name" />
+              </div>
+              <div class="restaurant-name">{{ restaurant.name }}</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
 </div>
 

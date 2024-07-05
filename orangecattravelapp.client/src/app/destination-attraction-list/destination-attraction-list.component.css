@@ -1,0 +1,52 @@
+.destinationNameContainer {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 40px;
+  color: #050038;
+  font-weight: bold;
+  padding: 100px 0 50px 250px;
+}
+
+.btn-info {
+  margin-right: 980px;
+  margin-top: 50px;
+  background-color: #050038;
+  color: white;
+  border-radius: 20px; /* Rounded edges */
+  border-color: #050038;
+}
+.header-container {
+  display: flex;
+  justify-content: space-between; /* Distribute items along the main axis */
+  align-items: center; /* Align items vertically centered */
+}
+
+.attractionContainer {
+  margin-top: 20px;
+}
+.row {
+  margin: 50px;
+}
+
+.card {
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+  .card:hover {
+    transform: scale(1.05);
+  }
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.attractionContainer .text-center .btn-secondary {
+  margin-bottom: 15px;
+  background-color: #050038;
+  color: white;
+  border-radius: 20px; /* Rounded edges */
+  border-color: #050038;
+}
+

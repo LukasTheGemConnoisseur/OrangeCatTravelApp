@@ -13,11 +13,14 @@ import { SuggestedTravelDestinationsComponent } from './suggested-travel-destina
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { CarouselComponent } from './carousel/carousel.component';
 import { DestinationOverviewComponent } from './destination-overview/destination-overview.component';
+import { DestinationAttractionListComponent } from './destination-attraction-list/destination-attraction-list.component';
+import { ChunkPipe } from './chunk.pipe';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'user-profile', component: UserProfileComponent },
-  { path: 'destination-overview', component: DestinationOverviewComponent }
+  { path: 'destination-overview', component: DestinationOverviewComponent },
+  { path: 'destination-attraction-list', component: DestinationAttractionListComponent }
 ];
 
 @NgModule({
@@ -30,7 +33,9 @@ const routes: Routes = [
     SuggestedTravelDestinationsComponent,
     UserProfileComponent,
     CarouselComponent,
-    DestinationOverviewComponent
+    DestinationOverviewComponent,
+    DestinationAttractionListComponent,
+    ChunkPipe
   ],
   imports: [
     BrowserModule, HttpClientModule, RouterModule.forRoot(routes), FormsModule

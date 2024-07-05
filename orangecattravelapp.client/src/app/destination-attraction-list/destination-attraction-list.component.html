@@ -1,0 +1,54 @@
+<div class="attractionContainer">
+  <div class="header-container">
+    <div class="destinationNameContainer">
+      <div class="destinationName">Attractions in {{ destinationName }}</div>
+    </div>
+    <div class="filter-container">
+      <button class="btn btn-info" (click)="toggleFilters()">
+        <i class="fas fa-cog"></i> Filters
+      </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12" *ngIf="showFilters">
+      <div class="card p-3 mb-4">
+        <h5>Filters</h5>
+        <!-- Your filter options here -->
+        <input type="checkbox" id="filter1" name="filter1" value="swimming">
+        <label for="filter1">Swimming</label><br>
+        <input type="checkbox" id="filter2" name="filter2" value="park">
+        <label for="filter2"> Park</label><br>
+        <input type="checkbox" id="filter3" name="filter3" value="rollercoaster">
+        <label for="filter3">Rollercoaster</label><br>
+        <div class="form-group">
+          <label for="filterInput1">Filter 1</label>
+          <input type="text" class="form-control" id="filterInput1" [(ngModel)]="filters.filter1">
+        </div>
+        <div class="form-group">
+          <label for="filterInput2">Filter 2</label>
+          <input type="text" class="form-control" id="filterInput2" [(ngModel)]="filters.filter2">
+        </div>
+        <!-- Add more filters as needed -->
+        <button class="btn btn-primary" (click)="applyFilters()">Apply Filters</button>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let attraction of attractions">
+      <div class="card mb-4">
+        <img [src]="attraction.ImageUrl" class="card-img-top" alt="{{ attraction.Name }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ attraction.Name }}</h5>
+          <p class="card-text">{{ attraction.Description }}</p>
+          <a [routerLink]="['/attraction', attraction.Id]" class="btn btn-primary">View Details</a>
+        </div>
+        <div class="card-footer">
+          <small class="text-muted">{{ attraction.Review }}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="text-center mt-4">
+    <button class="btn btn-secondary" (click)="loadMore()">See More</button>
+  </div>
+</div>

@@ -79,7 +79,7 @@ export class DestinationOverviewComponent {
   adventureSeeAll() {
     console.log('Redirecting...');
     // Add your routing functionality here
-    /*this.router.navigate(['/destination-overview']);*/
+    this.router.navigate(['destination-attraction-list']);
   }
   hotelSeeAll() {
     console.log('Redirecting...');

@@ -17,3 +17,12 @@
 .carousel-indicators {
   filter: invert(1) grayscale(100);
 }
+
+/* Specific styles for details page carousel */
+/*.details-carousel .carousel {
+  padding: 50px;
+}
+
+  .details-carousel .carousel img {
+    max-height: 300px;
+  }*/

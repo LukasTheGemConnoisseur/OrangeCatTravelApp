@@ -1,0 +1,33 @@
+.attractionNameContainer {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 40px;
+  color: #050038;
+  font-weight: bold;
+  padding: 100px 0 0 250px;
+}
+.hours {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 20px;
+  color: #050038;
+  padding: 0 0 20px 250px;
+}
+.leaveReview {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 20px;
+  color: #050038;
+  text-decoration: underline;
+  padding: 0 0 0 250px;
+}
+/*.carousel-inner.details-carousel {
+  height: 400px;
+}
+.details-carousel .carousel {
+  width: 10%;
+  max-height: 400px;
+}
+.details-carousel {
+  padding: 100px 400px 400px 200px;
+}*/

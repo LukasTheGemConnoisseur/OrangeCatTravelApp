@@ -1,5 +1,5 @@
 <div>
-  <app-carousel></app-carousel>
+  <app-carousel [images]="attractionImages" customClass="overview-carousel"></app-carousel>
 
   <div class="destinationNameContainer">
     <div class="destinationName">{{ destinationName }}</div>
@@ -22,7 +22,7 @@
       <div class="adventureCarousel">
         <div class="adventure-container">
           <div class="adventure" *ngFor="let adventure of adventures">
-            <a [href]="adventure.link">
+            <a [routerLink]="['/destination-attraction-details']">
               <div class="image-container">
                 <img [src]="adventure.image" [alt]="adventure.name" />
               </div>

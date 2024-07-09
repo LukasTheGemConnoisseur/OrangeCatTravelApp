@@ -42,6 +42,7 @@ export class DestinationAttractionListComponent implements OnInit {
   applyFilters(): void {
     // Add logic to filter attractions based on the filters
     console.log('Applying filters:', this.filters);
+    this.showFilters = !this.showFilters;
     // Example: Filter attractions locally
     // this.attractions = this.attractions.filter(attraction => {
     //   return attraction.name.includes(this.filters.filter1) &&

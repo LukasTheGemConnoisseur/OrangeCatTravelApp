@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-carousel',
@@ -6,5 +6,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./carousel.component.css']
 })
 export class CarouselComponent {
-
+  @Input() images: string[] = [];
+  @Input() customClass: string = '';
 }

@@ -9,6 +9,12 @@ import { Router } from '@angular/router';
 export class DestinationOverviewComponent {
   destinationName: string = 'Wisconsin Dells'; // Default name
   destinationBriefOverviewAI: string = 'Nestled along the banks of the Wisconsin River, Wisconsin Dells is renowned for its stunning natural beauty and family-friendly attractions. Known as the "Waterpark Capital of the World," this vibrant city offers a mix of outdoor adventures, thrilling waterparks, and a rich history, making it a perfect getaway for all ages.'
+  attractionImages: string[] = [
+    'assets/sydney.jpg',
+    'assets/tokyo.jpg',
+    'assets/newyork.jpg'
+  ];
+
   adventures = [
     {
       name: 'Mount Olympus',
@@ -91,4 +97,6 @@ export class DestinationOverviewComponent {
     // Add your routing functionality here
     /*this.router.navigate(['/destination-overview']);*/
   }
+
+
 }

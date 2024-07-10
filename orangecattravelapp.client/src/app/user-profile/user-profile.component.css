@@ -1,32 +1,3 @@
-/*.profilePicture {
-  display: flex;
-  height: 250px;
-  width: auto;
-  border-radius: 50%;*/ /* Make the profile picture round */
-  /*padding-left: 150px;
-  overflow: hidden;*/ /* Ensure the picture stays within its boundaries */
-/*}
-.user-name {
-  font-size: 36px;
-  color: #050038;
-  font-weight: bold;
-  padding-left: 50px;
-  padding-top: 75px;
-}
-.pictureAndName {
-  display: flex;
-  align-items: center;*/ /* Center items vertically */
-/*}
-.profileFields {
-  background-color: #bfe6F4;
-  border-style: groove;
-  margin-left: 200px;
-  margin-right: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding-left: 150px;*/ /* Adjust this value to control how far from the left edge */
-/*}*/
 
 .profile-container {
   display: flex;

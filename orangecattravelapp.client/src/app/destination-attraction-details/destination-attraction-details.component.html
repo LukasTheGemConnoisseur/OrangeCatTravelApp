@@ -5,22 +5,38 @@
 <div class="leaveReview">Write a review</div>
 <app-carousel [images]="attractionImages" customClass="details-carousel"></app-carousel>
 <div class="aboutAndReserve">
-  <div class="about">About</div>
-  <div class="reserve" >
-    <a href="{{attractionWebsite}}">Reserve your spot</a>
+  <div class="row">
+    <div class="col-sm">
+      <div class="about">About</div>
+    </div>
+    <div class="col-sm">
+      <div class="reserve">
+        <a href="{{attractionWebsite}}">Reserve your spot</a>
+      </div>
+    </div>
   </div>
 </div>
 
 <div class="aboutContainer">
-  Located on 70 sprawling acres in the heart of Wisconsin Dells, the Waterpark Capital of the World, Noah's Ark is recognized as both the Largest Water Park in America, and one of the best places to visit in Wisconsin Dells with kids.
+  <!--<div class="col-6">-->
+    Located on 70 sprawling acres in the heart of Wisconsin Dells, the Waterpark Capital of the World, Noah's Ark is recognized as both the Largest Water Park in America, and one of the best places to visit in Wisconsin Dells with kids.
+  <!--</div>-->
 </div>
 
 <div class="localAreaContainer">
-  The Area
-  <div class="attractionAddress">
-    {{attractionAddress}}
+  <div class="row">
+    <div class="col-6">
+      The Area
+      <div class="attractionAddress">
+        {{attractionAddress}}
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="localAreaMap">
+        <!--This is where the map will go-->
+        <img src="../../assets/paris.jpg" />
+      </div>
+    </div>
   </div>
-  <div class="localAreaMap">
-    This is where the map will go
-  </div>
-  </div>
+</div>
+<app-reviews></app-reviews>

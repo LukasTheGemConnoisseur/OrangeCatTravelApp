@@ -16,6 +16,7 @@ import { DestinationOverviewComponent } from './destination-overview/destination
 import { DestinationAttractionListComponent } from './destination-attraction-list/destination-attraction-list.component';
 import { ChunkPipe } from './chunk.pipe';
 import { DestinationAttractionDetailsComponent } from './destination-attraction-details/destination-attraction-details.component';
+import { ReviewsComponent } from './reviews/reviews.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -38,7 +39,8 @@ const routes: Routes = [
     DestinationOverviewComponent,
     DestinationAttractionListComponent,
     ChunkPipe,
-    DestinationAttractionDetailsComponent
+    DestinationAttractionDetailsComponent,
+    ReviewsComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, RouterModule.forRoot(routes), FormsModule

@@ -85,17 +85,19 @@ export class DestinationOverviewComponent {
   adventureSeeAll() {
     console.log('Redirecting...');
     // Add your routing functionality here
-    this.router.navigate(['destination-attraction-list']);
+    this.router.navigate(['/destination-attraction-list']);
   }
   hotelSeeAll() {
     console.log('Redirecting...');
     // Add your routing functionality here
     /*this.router.navigate(['/destination-overview']);*/
+
+
   }
   restaurantSeeAll() {
     console.log('Redirecting...');
     // Add your routing functionality here
-    /*this.router.navigate(['/destination-overview']);*/
+    this.router.navigate(['/destination-restaurant-list']);
   }
 
 

@@ -1,0 +1,86 @@
+.restaurantListTitle, .TopRestaurantsTitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  padding-top: 50px;
+  color: #050038;
+}
+
+.restaurantMap {
+  height: 400px;
+  background-color: #e0e0e0;
+  margin-bottom: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sortButton {
+  background-color: #050038;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 20px;
+  margin-left: 800px;
+  border-radius: 5px;
+}
+
+  .sortButton:hover {
+    background-color: #005f99;
+  }
+
+.restaurantListContentsContainer {
+  display: flex;
+  padding: 0px 250px 50px 250px;
+}
+
+.restaurantFilters {
+  flex: 1;
+  padding: 10px;
+  background-color: #f8f8f8;
+  margin-right: 20px;
+}
+
+.restaurantList {
+  flex: 4;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.restaurantCard {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  margin-bottom: 20px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  width: 100%;
+}
+
+  .restaurantCard img {
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+  }
+
+.restaurantName {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.restaurantReviewRating {
+  color: #ffbf00;
+}
+
+.numberOfRestaurantReviews {
+  color: #757575;
+}
+
+.restaurantOpenOrClosed {
+  color: green;
+}
+
+.restaurantCuisine, .restaurantPriceAverage, .restaurantListReviewPreview {
+  margin-top: 5px;
+}

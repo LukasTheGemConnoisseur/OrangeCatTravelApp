@@ -1,0 +1,67 @@
+<!--<div class="restaurantListTitle">Restaurants in {{destinationName}}</div>
+<div class="restaurantMap">This is where the map will go</div>
+<div class="TopRestaurantsTitle">Top Restaurants in {{destinationName}}</div>
+<div class="sortButton">Sort</div>
+<div class="restaurantListContentsContainer">
+  <div class="restaurantFilters">
+    Cuisine
+    Category
+    Rating
+  </div>
+  <div class="restaurantList">
+    <div class="restaurantCard">
+      picture on the left
+      <div class="restaurantName">{{restaurantName}}</div>
+      <div class="restaurantReviewRating">{{restaurantRating}}</div>
+      <div class="numberOfRestaurantReviews">{{restaurantReviewNumber}}</div>
+      <div class="restaurantOpenOrClosed">
+        Open now-->
+        <!--This is where I think I'll need a boolean and api data to determine whether the restaurant is closed or not-->
+      <!--</div>
+      <div class="restaurantCuisine">{{restaurantCuisine}}</div>
+      <div class="restaurantPriceAverage">{{restaurantPriceAverage}}</div>
+      <div class="restaurantListReviewPreview">
+        {{restaurantReview1}}
+        {{restaurantReview2}}
+      </div>
+    </div>
+  </div>
+</div>-->
+
+<div class="restaurantListTitle">Restaurants in {{destinationName}}</div>
+<div class="restaurantMap">This is where the map will go</div>
+<div class="TopRestaurantsTitle">Top Restaurants in {{destinationName}}</div>
+<button class="sortButton">Sort</button>
+<div class="restaurantListContentsContainer">
+  <div class="restaurantFilters">
+    <h3>Filters</h3>
+    <div>
+      <label>Cuisine</label>
+    </div>
+    <div>
+      <label>Category</label>
+    </div>
+    <div>
+      <label>Rating</label>
+    </div>
+  </div>
+  <div class="restaurantList">
+    <div class="restaurantCard">
+      <img src="https://via.placeholder.com/150" alt="Restaurant Image">
+      <div>
+        <div class="restaurantName">{{restaurantName}}</div>
+        <div class="restaurantReviewRating">{{restaurantRating}} Stars</div>
+        <div class="numberOfRestaurantReviews">{{restaurantReviewNumber}} reviews</div>
+        <div class="restaurantOpenOrClosed">
+          Open now
+        </div>
+        <div class="restaurantCuisine">{{restaurantCuisine}}</div>
+        <div class="restaurantPriceAverage">{{restaurantPriceAverage}}</div>
+        <div class="restaurantListReviewPreview">
+          {{restaurantReview1}}<br>
+          {{restaurantReview2}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

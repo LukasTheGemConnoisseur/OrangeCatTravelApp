@@ -22,7 +22,9 @@
   border: none;
   cursor: pointer;
   margin-bottom: 20px;
-  margin-left: 800px;
+  margin-left: 363px;
+  display: block;
+  text-align: left;
   border-radius: 5px;
 }
 
@@ -56,21 +58,48 @@
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   width: 100%;
+  text-align:start;
 }
 
   .restaurantCard img {
     width: 150px;
     height: 150px;
-    margin-right: 20px;
+    margin-right: 30px;
   }
 
 .restaurantName {
-  font-size: 18px;
+  font-size: 24px;
   font-weight: bold;
 }
+  .restaurantName a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .restaurantName:hover {
+    text-decoration: underline;
+  }
 
 .restaurantReviewRating {
-  color: #ffbf00;
+  font-weight: bold;
+  color: #ff9500;
+  display: flex;
+  align-items: center;
+}
+
+.numberOfRestaurantReviews {
+  margin-left: 6px;
+  font-weight: normal;
+}
+
+.restaurantOpenOrClosed {
+  margin-left: 6px;
+  font-weight: normal;
+}
+
+.separator::before {
+  content: "•"; /* Unicode for bullet */
+  margin: 0 8px;
 }
 
 .numberOfRestaurantReviews {
@@ -83,4 +112,22 @@
 
 .restaurantCuisine, .restaurantPriceAverage, .restaurantListReviewPreview {
   margin-top: 5px;
+}
+
+.restaurantCuisine {
+  display: flex;
+  align-items: center;
+  border-bottom: solid;
+  border-width: thin;
+  border-color: lightgray;
+}
+
+.restaurantPriceAverage {
+  margin-left: 5px;
+
+}
+
+.restaurantListReviewPreview {
+    margin-top: 20px;
+
 }

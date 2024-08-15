@@ -1,0 +1,27 @@
+<div class="restaurantName">{{restaurantName}}</div>
+<div class="restaurantContainer">
+  <div class="restaurantReviewsAndPrice">
+    {{restaurantRating}} stars
+    ({{restaurantReviewNumber}} reviews)
+    {{restaurantPriceAverage}}
+    {{restaurantCuisine}}
+  </div>
+  <div class="restaurantContacts">
+    {{address}}
+    {{phone}}
+    {{website}}
+    {{hours}}
+  </div>
+
+  <div class="imgCarousel">
+    <app-carousel [images]="restaurantImages" customClass="restaurantDetails-carousel"></app-carousel>
+  </div>
+
+  <div class="twoColumnView">
+    <div class="restaurantReviews">reviews</div>
+    <div class="restaurantLocationMap">Map and other contact stuff</div>
+  </div>
+  <div class="restaurantDetails">Details</div>
+  <div class="aboutAndFeatures">about and features</div>
+  <app-reviews></app-reviews>
+</div>

@@ -12,7 +12,7 @@ export class DestinationAttractionDetailsComponent {
   attractionWebsite: string = "https://www.noahsarkwaterpark.com/" // Default website
   attractionAddress: string = "1410 Wisconsin Dells Pkwy, Wisconsin Dells, WI 53965-8445"; // Default address
   attractionImages: string[] = [
-    'assets/sydney.jpg',
+    'assets/paris.jpg',
     'assets/tokyo.jpg',
     'assets/newyork.jpg'
   ];

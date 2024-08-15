@@ -18,6 +18,7 @@ import { ChunkPipe } from './chunk.pipe';
 import { DestinationAttractionDetailsComponent } from './destination-attraction-details/destination-attraction-details.component';
 import { ReviewsComponent } from './reviews/reviews.component';
 import { DestinationRestaurantListComponent } from './destination-restaurant-list/destination-restaurant-list.component';
+import { DestinationRestaurantDetailsComponent } from './destination-restaurant-details/destination-restaurant-details.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -25,7 +26,8 @@ const routes: Routes = [
   { path: 'destination-overview', component: DestinationOverviewComponent },
   { path: 'destination-attraction-list', component: DestinationAttractionListComponent },
   { path: 'destination-attraction-details', component: DestinationAttractionDetailsComponent },
-  { path: 'destination-restaurant-list', component: DestinationRestaurantListComponent }
+  { path: 'destination-restaurant-list', component: DestinationRestaurantListComponent },
+  { path: 'destination-restaurant-details', component: DestinationRestaurantDetailsComponent }
 ];
 
 @NgModule({
@@ -43,7 +45,8 @@ const routes: Routes = [
     ChunkPipe,
     DestinationAttractionDetailsComponent,
     ReviewsComponent,
-    DestinationRestaurantListComponent
+    DestinationRestaurantListComponent,
+    DestinationRestaurantDetailsComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, RouterModule.forRoot(routes), FormsModule

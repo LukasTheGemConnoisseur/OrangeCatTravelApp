@@ -1,0 +1,126 @@
+.restaurantName {
+  font-weight: bold;
+  font-size: 24px;
+  color: #050038;
+  display: block;
+  text-align: left;
+  margin-left: 300px;
+  padding-top:50px;
+}
+.restaurantReviewsAndPrice, .restaurantContacts {
+  display: block;
+  text-align: left;
+  margin-left: 300px;
+  display: flex;
+  align-items: center;
+  color: #050038;
+}
+
+.restaurantReviewNumber {
+  margin-left: 6px;
+  font-weight: normal;
+  color: #757575;
+}
+
+.restaurantOpenOrClosed {
+  margin-left: 6px;
+  color: green;
+  font-weight: bold;
+}
+
+.separator::before {
+  content: "•"; /* Unicode for bullet */
+  margin: 0 8px;
+}
+
+.restaurantRating {
+  font-weight: bold;
+  color: #ff9500;
+}
+
+.restaurantWebsite a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.restaurantWebsite:hover {
+  text-decoration: underline;
+}
+
+.imgCarousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: -70px;
+  width: 100%;
+  height: auto;
+}
+
+.twoColumnView {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  padding: 0 250px; 
+}
+
+.restaurantReviewColumn, .restaurantLocationMapColumn {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-bottom: 50px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: start;
+}
+
+.restaurantReviewsTitle, .restaurantLocationMaptitle {
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #050038
+}
+
+.restaurantOverallRating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ratingsContainer {
+  border-top: solid;
+  border-width: 1px;
+  border-color: #050038;
+  color: #050038;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Space between each rating item */
+}
+
+.ratingItem {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  /*padding: 5px 0;*/
+}
+
+.ratingLabel {
+  font-weight: 600;
+  flex: 1; /* Ensures label takes up necessary space */
+}
+
+.ratingValue {
+  display: flex;
+  align-items: center;
+}
+
+  .ratingValue img {
+    margin-right: 8px; /* Space between image and rating number */
+  }
+
+.restaurantAreaMap img{
+  max-width: 300px;
+  height: auto;
+  border-radius: 10px;
+}

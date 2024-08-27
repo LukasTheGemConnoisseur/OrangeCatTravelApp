@@ -64,7 +64,7 @@
       <div class="restaurantCarousel">
         <div class="restaurant-container">
           <div class="restaurant" *ngFor="let restaurant of restaurants">
-            <a [href]="restaurant.link">
+            <a [routerLink]="['/destination-restaurant-details']">
               <div class="image-container">
                 <img [src]="restaurant.image" [alt]="restaurant.name" />
               </div>

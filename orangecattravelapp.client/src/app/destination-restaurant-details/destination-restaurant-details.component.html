@@ -1,27 +1,116 @@
 <div class="restaurantName">{{restaurantName}}</div>
 <div class="restaurantContainer">
-  <div class="restaurantReviewsAndPrice">
-    {{restaurantRating}} stars
-    ({{restaurantReviewNumber}} reviews)
-    {{restaurantPriceAverage}}
-    {{restaurantCuisine}}
+  <div class="restaurantIntro">
+    <div class="restaurantReviewsAndPrice">
+      <div class="restaurantRating">
+        {{restaurantRating}} stars
+      </div>
+      <div class="separator"></div>
+      <div class="restaurantReviewNumber">
+        ({{restaurantReviewNumber}} reviews)
+      </div>
+      <div class="separator"></div>
+      <div class="restaurantPriceRange">
+        {{restaurantPriceAverage}}
+      </div>
+      <div class="separator"></div>
+      <div class="restaurantCuisine">
+        {{restaurantCuisine}}
+      </div>
+    </div>
+    <div class="restaurantContacts">
+      <div class="restaurantAddress">
+        {{address}}
+      </div>
+      <div class="separator"></div>
+      <div class="restaurantPhone">
+        {{phone}}
+      </div>
+      <div class="separator"></div>
+      <div class="restaurantWebsite">
+        <a href="{{website}}">
+          {{website}}
+        </a>
+      </div>
+      <div class="separator"></div>
+      <div class="restaurantHours">
+        {{hours}}
+      </div>
+      <div class="separator"></div>
+      <div class="restaurantOpenOrClosed">
+        {{restaurantOpenOrClosed}}
+      </div>
+    </div>
   </div>
-  <div class="restaurantContacts">
-    {{address}}
-    {{phone}}
-    {{website}}
-    {{hours}}
-  </div>
+  
 
   <div class="imgCarousel">
     <app-carousel [images]="restaurantImages" customClass="restaurantDetails-carousel"></app-carousel>
   </div>
 
   <div class="twoColumnView">
-    <div class="restaurantReviews">reviews</div>
-    <div class="restaurantLocationMap">Map and other contact stuff</div>
+    <div class="restaurantReviewColumn">
+      <div class="restaurantReviewsTitle">Reviews and ratings</div>
+      <div class="restaurantOverallRating">
+        <div class="restaurantRating">{{restaurantRating}} stars</div>
+        <div class="separator"></div>
+        <div class="restaurantReviewNumber">({{restaurantReviewNumber}} reviews)</div>
+      </div>
+      <div class="ratingsContainer">
+        <div class="ratingItem">
+          <div class="ratingLabel">Food</div>
+          <div class="ratingValue">
+            <img src="path/to/food-rating-image.jpg" alt="Food Rating">
+            {{food}}
+          </div>
+        </div>
+        <div class="ratingItem">
+          <div class="ratingLabel">Service</div>
+          <div class="ratingValue">
+            <img src="path/to/service-rating-image.jpg" alt="Service Rating">
+            {{service}}
+          </div>
+        </div>
+        <div class="ratingItem">
+          <div class="ratingLabel">Value</div>
+          <div class="ratingValue">
+            <img src="path/to/value-rating-image.jpg" alt="Value Rating">
+            {{value}}
+          </div>
+        </div>
+        <div class="ratingItem">
+          <div class="ratingLabel">Atmosphere</div>
+          <div class="ratingValue">
+            <img src="path/to/atmosphere-rating-image.jpg" alt="Atmosphere Rating">
+            {{atmosphere}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="restaurantLocationMapColumn">
+      <div class="restaurantLocationMaptitle">Location and contact</div>
+      <div class="restaurantAreaMap">
+        <!--This is where the map will go-->
+        <img src="../../assets/tokyo.jpg" />
+      </div>
+      <div class="restaurantAddress">
+        <a [href]="'https://www.google.com/maps/search/?api=1&query=' + encodedAddress" target="_blank">
+          {{address}}
+        </a>
+      </div>
+      <div class="restaurantWebsite">
+        <a href="{{website}}">
+          {{website}}
+        </a>
+      </div>
+      <div class="restaurantPhone">
+        {{phone}}
+      </div>
+    </div>
   </div>
   <div class="restaurantDetails">Details</div>
   <div class="aboutAndFeatures">about and features</div>
   <app-reviews></app-reviews>
 </div>
+
+<div class="separator"></div>

@@ -58,9 +58,9 @@
 
 .twoColumnView {
   display: flex;
-  align-items: center;
-  justify-content: space-between; 
-  padding: 0 250px; 
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 0 250px;
 }
 
 .restaurantReviewColumn, .restaurantLocationMapColumn {
@@ -73,25 +73,34 @@
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   text-align: start;
-}
-
-.restaurantReviewsTitle, .restaurantLocationMaptitle {
-  font-weight: bold;
-  font-size: 20px;
-  margin-bottom: 15px;
-  color: #050038
-}
-
-.restaurantOverallRating {
+  flex: 1; /* Ensures both columns take up equal space */
   display: flex;
-  align-items: center;
-  margin-bottom: 10px;
+  flex-direction: column;
 }
+
+  .restaurantReviewsTitle, .restaurantLocationMaptitle {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #050038
+  }
+
+.restaurantReviewsTitle {
+  margin-bottom: 50px;
+}
+
+    .restaurantOverallRating {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      border-bottom: solid;
+      border-width: 1px;
+      border-color: #050038;
+    }
+
 
 .ratingsContainer {
-  border-top: solid;
-  border-width: 1px;
-  border-color: #050038;
+  flex-grow: 1; /* Allow this container to grow */
   color: #050038;
   display: flex;
   flex-direction: column;
@@ -124,3 +133,106 @@
   height: auto;
   border-radius: 10px;
 }
+
+.restaurantAddressPhysical a, restaurantAddressWebsite a {
+  text-decoration: none;
+  color: #050038;
+}
+
+.restaurantAddressPhysical:hover, .restaurantAddressWebsite:hover {
+  text-decoration: underline;
+}
+
+.restaurantAddressPhysical {
+  margin-top: 10px;
+}
+
+.restaurantAddressCategory {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.restaurantAddressPhysical, .restaurantAddressWebsite, .restaurantAddressPhone {
+
+
+}
+.restaurantAddressLabel {
+  font-weight: 600;
+  flex: 1; /* Ensures label takes up necessary space */
+}
+
+.restaurantAddress a,
+.restaurantAddressPhone {
+  display: inline-block;
+}
+
+.restaurantAddressWebsite a {
+  text-decoration: none;
+  color: #050038;
+}
+
+.restaurantAddressWesite:hover {
+  text-decoration: underline;
+}
+
+.restaurantDetailsContainer {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  margin-bottom: 50px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: start;
+}
+
+.restaurantDetailsTitle {
+  border-bottom: 1px solid #050038;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.restaurantDetailsColumns {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.restaurantDetailsAboutColumn {
+  flex: 1; /* Take up available space */
+  padding-right: 20px;
+  border-right: 1px solid #050038;
+}
+
+.restaurantDetailsExtrasColumn {
+  flex: 1;
+  padding-left: 20px;
+}
+
+.restaurantDetailsExtrasColumnTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.restaurantDetailsAboutColumnTitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.restaurantDetailsAboutColumnContent,
+.restaurantDetailsExtrasColumnCuisinesContent,
+.restaurantDetailsExtrasColumnFeaturesContent {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+  .restaurantDetailsExtrasColumnCuisinesContent:not(:last-child) {
+    margin-bottom: 20px; /* Add space between Cuisines and Features */
+  }

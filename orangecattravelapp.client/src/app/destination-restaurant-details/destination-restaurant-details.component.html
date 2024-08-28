@@ -94,23 +94,48 @@
         <img src="../../assets/tokyo.jpg" />
       </div>
       <div class="restaurantAddress">
-        <a [href]="'https://www.google.com/maps/search/?api=1&query=' + encodedAddress" target="_blank">
-          {{address}}
-        </a>
-      </div>
-      <div class="restaurantWebsite">
-        <a href="{{website}}">
-          {{website}}
-        </a>
-      </div>
-      <div class="restaurantPhone">
-        {{phone}}
+        <div class="restaurantAddressCategory">
+          <div class="restaurantAddressPhysical">
+            <div class="restaurantAddressLabel">Address</div>
+            <a [href]="'https://www.google.com/maps/search/?api=1&query=' + encodedAddress" target="_blank">
+              {{address}}
+            </a>
+          </div>
+          <div class="restaurantAddressWebsite">
+            <div class="restaurantAddressLabel">Website</div>
+            <a href="{{website}}">
+              {{website}}
+            </a>
+          </div>
+          <div class="restaurantAddressPhone">
+            <div class="restaurantAddressLabel">Phone</div>
+            {{phone}}
+          </div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="restaurantDetails">Details</div>
-  <div class="aboutAndFeatures">about and features</div>
+  <div class="restaurantDetailsContainer">
+    <div class="restaurantDetailsTitle">Details</div>
+    <div class="restaurantDetailsColumns">
+      <div class="restaurantDetailsAboutColumn">
+        <div class="restaurantDetailsAboutColumnTitle">About</div>
+        <div class="restaurantDetailsAboutColumnContent">
+        {{restaurantAbout}}
+        </div>
+      </div>
+      <div class="restaurantDetailsExtrasColumn">
+        <div class="restaurantDetailsExtrasColumnTitle">Cuisines</div>
+        <div class="restaurantDetailsExtrasColumnCuisinesContent">
+          {{restaurantCuisines}}
+        </div>
+        <div class="restaurantDetailsExtrasColumnTitle">Features</div>
+        <div class="restaurantDetailsExtrasColumnFeaturesContent">
+          {{restaurantFeatures}}
+        </div>
+      </div>
+    </div>
+  </div>
   <app-reviews></app-reviews>
 </div>
 
-<div class="separator"></div>

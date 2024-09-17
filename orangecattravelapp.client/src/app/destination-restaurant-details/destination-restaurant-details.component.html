@@ -1,17 +1,20 @@
-<div class="restaurantName">{{restaurantName}}</div>
 <div class="restaurantContainer">
   <div class="restaurantIntro">
+    <div class="restaurantName">{{restaurantName}}</div>
     <div class="restaurantReviewsAndPrice">
       <div class="restaurantRating">
+        <i class="bi bi-star"></i>
         {{restaurantRating}} stars
       </div>
       <div class="separator"></div>
       <div class="restaurantReviewNumber">
+        <i class="bi bi-file-text"></i>
         ({{restaurantReviewNumber}} reviews)
       </div>
       <div class="separator"></div>
       <div class="restaurantPriceRange">
-        {{restaurantPriceAverage}}
+        <i class="bi bi-currency-dollar"></i>
+        <!--{{restaurantPriceAverage}}-->
       </div>
       <div class="separator"></div>
       <div class="restaurantCuisine">
@@ -20,20 +23,24 @@
     </div>
     <div class="restaurantContacts">
       <div class="restaurantAddress">
+        <i class="bi bi-geo-alt"></i>
         {{address}}
       </div>
       <div class="separator"></div>
       <div class="restaurantPhone">
+        <i class="bi bi-telephone-fill"></i>
         {{phone}}
       </div>
       <div class="separator"></div>
       <div class="restaurantWebsite">
+        <i class="bi bi-laptop"></i>
         <a href="{{website}}">
           {{website}}
         </a>
       </div>
       <div class="separator"></div>
       <div class="restaurantHours">
+        <i class="bi bi-clock-fill"></i>
         {{hours}}
       </div>
       <div class="separator"></div>
@@ -52,13 +59,22 @@
     <div class="restaurantReviewColumn">
       <div class="restaurantReviewsTitle">Reviews and ratings</div>
       <div class="restaurantOverallRating">
-        <div class="restaurantRating">{{restaurantRating}} stars</div>
+        <div class="restaurantRating">
+          <i class="bi bi-star"></i>
+          {{restaurantRating}} stars
+        </div>
         <div class="separator"></div>
-        <div class="restaurantReviewNumber">({{restaurantReviewNumber}} reviews)</div>
+        <div class="restaurantReviewNumber">
+          <i class="bi bi-file-text"></i>
+          ({{restaurantReviewNumber}} reviews)
+        </div>
       </div>
       <div class="ratingsContainer">
         <div class="ratingItem">
-          <div class="ratingLabel">Food</div>
+          <div class="ratingLabel">
+
+            Food
+          </div>
           <div class="ratingValue">
             <img src="path/to/food-rating-image.jpg" alt="Food Rating">
             {{food}}
@@ -96,19 +112,28 @@
       <div class="restaurantAddress">
         <div class="restaurantAddressCategory">
           <div class="restaurantAddressPhysical">
-            <div class="restaurantAddressLabel">Address</div>
+            <div class="restaurantAddressLabel">
+              <i class="bi bi-geo-alt"></i>
+              Address
+            </div>
             <a [href]="'https://www.google.com/maps/search/?api=1&query=' + encodedAddress" target="_blank">
               {{address}}
             </a>
           </div>
           <div class="restaurantAddressWebsite">
-            <div class="restaurantAddressLabel">Website</div>
+            <div class="restaurantAddressLabel">
+              <i class="bi bi-laptop"></i>
+              Website
+            </div>
             <a href="{{website}}">
               {{website}}
             </a>
           </div>
           <div class="restaurantAddressPhone">
-            <div class="restaurantAddressLabel">Phone</div>
+            <div class="restaurantAddressLabel">
+              <i class="bi bi-telephone"></i>
+              Phone
+            </div>
             {{phone}}
           </div>
         </div>

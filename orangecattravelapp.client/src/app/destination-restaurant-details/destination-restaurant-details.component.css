@@ -1,16 +1,25 @@
+.restaurantIntro {
+  width: 100%;
+  max-width: 1050px;
+  margin: 50px auto;
+  margin-bottom: 0px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: start;
+}
+
 .restaurantName {
   font-weight: bold;
   font-size: 24px;
   color: #050038;
   display: block;
   text-align: left;
-  margin-left: 300px;
-  padding-top:50px;
 }
 .restaurantReviewsAndPrice, .restaurantContacts {
   display: block;
   text-align: left;
-  margin-left: 300px;
   display: flex;
   align-items: center;
   color: #050038;
@@ -51,10 +60,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: -70px;
   width: 100%;
   height: auto;
 }
+
 
 .twoColumnView {
   display: flex;

@@ -28,9 +28,10 @@
             {{restaurantName}}
           </a></div>
         <div class="restaurantReviewRating">
-          {{restaurantRating}} Stars
+          <i class="bi bi-star"></i>&nbsp;{{restaurantRating}} Stars
           <div class="separator"></div>
           <div class="numberOfRestaurantReviews">
+            <i class="bi bi-file-text"></i>
             ({{restaurantReviewNumber}} reviews)
           </div>
           <div class="separator"></div>
@@ -42,7 +43,10 @@
         <div class="restaurantCuisine">
           {{restaurantCuisine}}
           <div class="separator"></div>
-          <div class="restaurantPriceAverage">{{restaurantPriceAverage}}</div>
+          <div class="restaurantPriceAverage">
+            <i class="bi bi-currency-dollar"></i>
+            <!--{{restaurantPriceAverage}}-->
+          </div>
         </div>
 
         <div class="restaurantListReviewPreview">

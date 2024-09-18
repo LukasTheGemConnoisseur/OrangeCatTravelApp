@@ -1,0 +1,134 @@
+<div class="hotelListTitle">Places to Stay in {{destinationName}}</div>
+
+<!-- Input form for check-in, check-out, rooms, adults, and children -->
+<div class="hotelSearchForm">
+  <label for="checkInDate">Check-In</label>
+  <input type="date" id="checkInDate" name="checkInDate">
+
+  <label for="checkOutDate">Check-Out</label>
+  <input type="date" id="checkOutDate" name="checkOutDate">
+
+  <label for="rooms">Rooms</label>
+  <input type="number" id="rooms" name="rooms" min="1" value="1">
+
+  <label for="adults">Adults</label>
+  <input type="number" id="adults" name="adults" min="1" value="1">
+
+  <label for="children">Children</label>
+  <input type="number" id="children" name="children" min="0" value="0">
+
+  <button type="button" class="searchButton">Search</button>
+</div>
+
+<div class="hotelBackgroundPhoto">This is where the background photo will go</div>
+
+<div class="TopHotelsTitle">Top Hotels in {{destinationName}}</div>
+<button class="sortButton">Sort</button>
+<div class="hotelListContentsContainer">
+  <!--<div class="hotelFilters">
+    <h3>Filters</h3>
+    <div>
+      <label>Rating</label>
+    </div>
+    <div>
+      <label>Price</label>
+    </div>
+    <div>
+      <label>Amenities</label>
+    </div>
+    <div>
+      <label>Property Type</label>
+    </div>
+  </div>
+  <div class="hotelList">
+    <div class="hotelCard">
+      <div class="hotelImage">
+        <a [routerLink]="['/destination-hotel-details']">
+          <img src="https://via.placeholder.com/150" alt="Hotel Image">
+        </a>
+      </div>
+      <div>
+        <div class="hotelName">
+          <a [routerLink]="['/destination-hotel-details']">
+            {{hotelName}}
+          </a>
+        </div>
+        <div class="hotelReviewRating">
+          <div class="hotelReviewStarRating">
+            <i class="bi bi-star"></i>&nbsp;{{hotelRating}} Stars
+          </div>
+          <div class="separator"></div>
+          <div class="numberOfhotelReviews">
+            <i class="bi bi-file-text"></i>
+            ({{hotelReviewNumber}} reviews)
+          </div>
+        </div>
+        <div class="hotelPrice">
+          <div class="hotelPropertyType">{{hotelPropertyType}}</div>
+          <div class="separator"></div>
+          <div class="hotelPriceAverage">
+            <i class="bi bi-currency-dollar"></i>-->
+  <!--{{hotelPriceAverage}}-->
+  <!--</div>
+        </div>
+
+        <div class="hotelListReviewPreview">
+          "{{ hotelReview1 | slice:0:200 }}..."<br />
+          "{{ hotelReview2 | slice:0:200 }}..."
+        </div>
+      </div>
+    </div>
+  </div>-->
+  <div class="hotelListContentsContainer">
+    <div class="hotelFilters">
+      <h3>Filters</h3>
+      <!-- Filters here -->
+    </div>
+
+    <div class="hotelList">
+      <!-- Use *ngFor to loop over hotelCards array and display cards dynamically -->
+      <div class="hotelCard" *ngFor="let hotel of displayedHotels">
+        <div class="hotelImage">
+          <a [routerLink]="['/destination-hotel-details', hotel.id]">
+            <img [src]="hotel.image" alt="Hotel Image">
+          </a>
+        </div>
+        <div>
+          <div class="hotelName">
+            <a [routerLink]="['/destination-hotel-details', hotel.id]">
+              {{hotel.name}}
+            </a>
+          </div>
+          <div class="hotelReviewRating">
+            <div class="hotelReviewStarRating">
+              <i class="bi bi-star"></i>&nbsp;{{hotel.rating}} Stars
+            </div>
+            <div class="separator"></div>
+            <div class="numberOfhotelReviews">
+              <i class="bi bi-file-text"></i>
+              ({{hotel.reviews}} reviews)
+            </div>
+          </div>
+          <div class="hotelPrice">
+            <div class="hotelPropertyType">{{hotel.propertyType}}</div>
+            <div class="separator"></div>
+            <div class="hotelPriceAverage">
+              <i class="bi bi-currency-dollar"></i>
+              {{hotel.price}}
+            </div>
+          </div>
+          <div class="hotelListReviewPreview">
+            "{{ hotel.review1 | slice:0:200 }}..."<br />
+            "{{ hotel.review2 | slice:0:200 }}..."
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Load More Button -->
+    <div class="loadMoreContainer">
+      <button class="loadMoreButton" (click)="loadMoreHotels()">Load More</button>
+    </div>
+  </div>
+
+</div>

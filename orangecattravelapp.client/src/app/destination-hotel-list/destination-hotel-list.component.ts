@@ -26,8 +26,8 @@ export class DestinationHotelListComponent {
       reviews: 120,
       propertyType: 'Luxury',
       price: '$200',
-      review1: 'Great hotel with amazing services.',
-      review2: 'Will definitely come back!'
+      review1: "The staff was very helpful and accommodating. However the hotel and pools need some loving. The rooms are cleaned, but old so there was mold growing and we could see and smell it(especially in the shower) which made my allergies, and sinuses act up. The carpeting in our room was snagged in multiple places. The pull out couch in our room just needs to go! It sagged in the middle and was not even possiable to sleep on because all you could feel was the metal under you.\nThe pools were in serious need of maintenance and updating.Also not enough towels at the pools and I wasn't there with a lot of other people there. I've stayed in many Choice hotels in the past, this hotel is NOT up to their standards.The staff however was great!", // Default value
+      review2: "They upgraded our room to a larger suite. It was very big. But the jacuzzi tub had grime on the intake filter so we didn't use the jets. Beds were super comfy in this room but my daughter said the beds in her room were too hard. Indoor pool area was perfect for the Littles. One small slide in diar need of repair. We learned a lot for our first time and might be back again." // Default value
     },
     {
       id: 2,
@@ -40,7 +40,39 @@ export class DestinationHotelListComponent {
       review1: 'Good value for money.',
       review2: 'Clean rooms but small.'
     },
-    // Add more hotel objects here following the same structure
+    {
+      id: 4,
+      name: 'Hotel 3',
+      image: 'https://via.placeholder.com/150',
+      rating: 4.0,
+      reviews: 85,
+      propertyType: 'Budget',
+      price: '$100',
+      review1: 'Good value for money.',
+      review2: 'Clean rooms but small.'
+    },
+    {
+      id: 5,
+      name: 'Hotel 4',
+      image: 'https://via.placeholder.com/150',
+      rating: 4.0,
+      reviews: 85,
+      propertyType: 'Budget',
+      price: '$100',
+      review1: 'Good value for money.',
+      review2: 'Clean rooms but small.'
+    },
+    {
+      id: 5,
+      name: 'Hotel 5',
+      image: 'https://via.placeholder.com/150',
+      rating: 4.0,
+      reviews: 85,
+      propertyType: 'Budget',
+      price: '$100',
+      review1: 'Good value for money.',
+      review2: 'Clean rooms but small.'
+    },
   ];
 
   // Define the displayedHotels array using the Hotel type

@@ -23,7 +23,6 @@
 <div class="hotelBackgroundPhoto">This is where the background photo will go</div>
 
 <div class="TopHotelsTitle">Top Hotels in {{destinationName}}</div>
-<button class="sortButton">Sort</button>
 <div class="hotelListContentsContainer">
   <!--<div class="hotelFilters">
     <h3>Filters</h3>
@@ -82,7 +81,56 @@
   <div class="hotelListContentsContainer">
     <div class="hotelFilters">
       <h3>Filters</h3>
-      <!-- Filters here -->
+      <div class="hotelRatingFilter">
+        Rating <br />
+        <div class="ratingFilterSection">
+          <div class="filterItem">
+            <input type="checkbox" id="rating5" name="rating5" value="rating5">
+            <label for="rating5">5 stars</label>
+          </div>
+          <div class="filterItem">
+            <input type="checkbox" id="rating4AndUp" name="rating4AndUp" value="rating4AndUp">
+            <label for="rating4AndUp">4 stars and up</label>
+          </div>
+          <div class="filterItem">
+            <input type="checkbox" id="rating3AndUp" name="rating3AndUp" value="rating3AndUp">
+            <label for="rating3AndUp">3 stars and up</label>
+          </div>
+          <div class="filterItem">
+            <input type="checkbox" id="rating2AndUp" name="rating2AndUp" value="rating2AndUp">
+            <label for="rating2AndUp">2 stars and up</label>
+          </div>
+        </div>
+
+      </div>
+      <div class="hotelPriceFilter">
+        Price <br />
+        <input type="checkbox" id="price" name="price" value="price">
+        <label for="Price">Price</label><br>
+      </div>
+      <div class="hotelAmenitiesFilter">
+        Amenities <br />
+        <input type="checkbox" id="amenitiesFreeWifi" name="amenitiesFreeWifi" value="amenitiesFreeWifi">
+        <label for="amenitiesFreeWifi">Free Wifi</label><br>
+        <input type="checkbox" id="amenitiesPool" name="amenitiesPool" value="amenitiesPool">
+        <label for="amenitiesPool">Pool</label><br>
+        <input type="checkbox" id="amenitiesFreeParking" name="amenitiesFreeParking" value="amenitiesFreeParking">
+        <label for="amenitiesFreeParking">Free Parking</label><br>
+        <input type="checkbox" id="amenitiesRefrigeratorInRoom" name="amenitiesRefrigeratorInRoom" value="amenitiesRefrigeratorInRoom">
+        <label for="amenitiesRefrigeratorInRoom">Refrigerator in room</label><br>
+        <input type="checkbox" id="amenitiesHotTub" name="amenitiesHotTub" value="amenitiesHotTub">
+        <label for="amenitiesHotTub">Hot Tub</label><br>
+      </div>
+      <div class="hotelPropertyTypeFilter">
+        Property Type <br />
+        <input type="checkbox" id="propertyTypeHotel" name="propertyTypeHotel" value="propertyTypeHotel">
+        <label for="propertyTypeHotel">Hotel</label><br>
+        <input type="checkbox" id="propertyTypeMotel" name="propertyTypeMotel" value="propertyTypeMotel">
+        <label for="propertyTypeMotel">Motel</label><br>
+        <input type="checkbox" id="propertyTypeResort" name="propertyTypeResort" value="propertyTypeResort">
+        <label for="propertyTypeResort">Resort</label><br>
+      </div>
+
     </div>
 
     <div class="hotelList">
@@ -118,17 +166,18 @@
             </div>
           </div>
           <div class="hotelListReviewPreview">
-            "{{ hotel.review1 | slice:0:200 }}..."<br />
-            "{{ hotel.review2 | slice:0:200 }}..."
+            "{{ hotel.review1 | slice:0:100 }}..."<br />
+            "{{ hotel.review2 | slice:0:100 }}..."
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Load More Button -->
-    <div class="loadMoreContainer">
-      <button class="loadMoreButton" (click)="loadMoreHotels()">Load More</button>
-    </div>
+
   </div>
 
+</div>
+<!-- Load More Button -->
+<div class="loadMoreContainer">
+  <button class="loadMoreButton" (click)="loadMoreHotels()">Load More</button>
 </div>

@@ -78,9 +78,11 @@
       </div>
     </div>
   </div>-->
+
   <div class="hotelListContentsContainer">
     <div class="hotelFilters">
       <h3>Filters</h3>
+
       <div class="hotelRatingFilter">
         Rating <br />
         <div class="ratingFilterSection">
@@ -101,49 +103,66 @@
             <label for="rating2AndUp">2 stars and up</label>
           </div>
         </div>
+      </div>
 
-      </div>
-      <div class="hotelPriceFilter">
-        Price <br />
-        <input type="checkbox" id="price" name="price" value="price">
-        <label for="Price">Price</label><br>
-      </div>
       <div class="hotelAmenitiesFilter">
         Amenities <br />
-        <input type="checkbox" id="amenitiesFreeWifi" name="amenitiesFreeWifi" value="amenitiesFreeWifi">
-        <label for="amenitiesFreeWifi">Free Wifi</label><br>
-        <input type="checkbox" id="amenitiesPool" name="amenitiesPool" value="amenitiesPool">
-        <label for="amenitiesPool">Pool</label><br>
-        <input type="checkbox" id="amenitiesFreeParking" name="amenitiesFreeParking" value="amenitiesFreeParking">
-        <label for="amenitiesFreeParking">Free Parking</label><br>
-        <input type="checkbox" id="amenitiesRefrigeratorInRoom" name="amenitiesRefrigeratorInRoom" value="amenitiesRefrigeratorInRoom">
-        <label for="amenitiesRefrigeratorInRoom">Refrigerator in room</label><br>
-        <input type="checkbox" id="amenitiesHotTub" name="amenitiesHotTub" value="amenitiesHotTub">
-        <label for="amenitiesHotTub">Hot Tub</label><br>
-      </div>
-      <div class="hotelPropertyTypeFilter">
-        Property Type <br />
-        <input type="checkbox" id="propertyTypeHotel" name="propertyTypeHotel" value="propertyTypeHotel">
-        <label for="propertyTypeHotel">Hotel</label><br>
-        <input type="checkbox" id="propertyTypeMotel" name="propertyTypeMotel" value="propertyTypeMotel">
-        <label for="propertyTypeMotel">Motel</label><br>
-        <input type="checkbox" id="propertyTypeResort" name="propertyTypeResort" value="propertyTypeResort">
-        <label for="propertyTypeResort">Resort</label><br>
+        <div class="amenitiesFilterSection">
+          <div class="filterItem">
+            <input type="checkbox" id="amenitiesFreeWifi" name="amenitiesFreeWifi" value="amenitiesFreeWifi">
+            <label for="amenitiesFreeWifi">Free Wifi</label>
+          </div>
+          <div class="filterItem">
+            <input type="checkbox" id="amenitiesPool" name="amenitiesPool" value="amenitiesPool">
+            <label for="amenitiesPool">Pool</label>
+          </div>
+          <div class="filterItem">
+            <input type="checkbox" id="amenitiesFreeParking" name="amenitiesFreeParking" value="amenitiesFreeParking">
+            <label for="amenitiesFreeParking">Free Parking</label>
+          </div>
+          <div class="filterItem">
+            <input type="checkbox" id="amenitiesRefrigeratorInRoom" name="amenitiesRefrigeratorInRoom" value="amenitiesRefrigeratorInRoom">
+            <label for="amenitiesRefrigeratorInRoom">Refrigerator in room</label>
+          </div>
+          <div class="filterItem">
+            <input type="checkbox" id="amenitiesHotTub" name="amenitiesHotTub" value="amenitiesHotTub">
+            <label for="amenitiesHotTub">Hot Tub</label>
+          </div>
+        </div>
       </div>
 
+      <div class="hotelPropertyTypeFilter">
+        Property Type <br />
+        <div class="propertyTypeFilterSection">
+          <div class="filterItem">
+            <input type="checkbox" id="propertyTypeHotel" name="propertyTypeHotel" value="propertyTypeHotel">
+            <label for="propertyTypeHotel">Hotel</label>
+          </div>
+          <div class="filterItem">
+            <input type="checkbox" id="propertyTypeMotel" name="propertyTypeMotel" value="propertyTypeMotel">
+            <label for="propertyTypeMotel">Motel</label>
+          </div>
+          <div class="filterItem">
+            <input type="checkbox" id="propertyTypeResort" name="propertyTypeResort" value="propertyTypeResort">
+            <label for="propertyTypeResort">Resort</label>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="hotelList">
       <!-- Use *ngFor to loop over hotelCards array and display cards dynamically -->
       <div class="hotelCard" *ngFor="let hotel of displayedHotels">
         <div class="hotelImage">
-          <a [routerLink]="['/destination-hotel-details', hotel.id]">
+          <a [routerLink]="['/destination-hotel-details']">
+            <!-- should be <a [routerLink]="['/destination-hotel-details', hotel.id]"> -->
             <img [src]="hotel.image" alt="Hotel Image">
           </a>
         </div>
         <div>
           <div class="hotelName">
-            <a [routerLink]="['/destination-hotel-details', hotel.id]">
+            <a [routerLink]="['/destination-hotel-details']">
+              <!-- should be <a [routerLink]="['/destination-hotel-details', hotel.id]"> -->
               {{hotel.name}}
             </a>
           </div>
@@ -172,12 +191,11 @@
         </div>
       </div>
     </div>
+  </div>
+</div>
 
-
+  <!-- Load More Button -->
+  <div class="loadMoreContainer">
+    <button class="loadMoreButton" (click)="loadMoreHotels()">Load More</button>
   </div>
 
-</div>
-<!-- Load More Button -->
-<div class="loadMoreContainer">
-  <button class="loadMoreButton" (click)="loadMoreHotels()">Load More</button>
-</div>

@@ -96,7 +96,18 @@
 .filterItem {
   display: flex;
   align-items: center; /* Aligns checkbox and label on the same line */
-  margin-bottom: 10px;  /*Space between each filter item */
+}
+
+.ratingFilterSection > .filterItem:not(:last-child) {
+  margin-bottom: 2px; /* Reduce the space specifically between items */
+}
+
+.amenitiesFilterSection > .filterItem:not(:last-child) {
+  margin-bottom: 2px; /* Reduce the space specifically between items */
+}
+
+.propertyTypeFilterSection > .filterItem:not(:last-child) {
+  margin-bottom: 2px; /* Reduce the space specifically between items */
 }
 
   .filterItem input[type="checkbox"] {

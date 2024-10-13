@@ -1,86 +1,131 @@
-<div class="hotelTitle">{{hotelName}}</div>
-
 <div class="hotelReviewsAndAddress">
+  <div class="hotelTitle">{{hotelName}}</div>
   <div class="hotelRating">
-    <i class="bi bi-star"></i>
-    {{hotelRating}} stars
-  </div>
-  <div class="separator"></div>
-  <div class="hotelReviewNumber">
-    <i class="bi bi-file-text"></i>
-    ({{hotelReviewNumber}} reviews)
-  </div>
-    <div class="hotelAddress">
-      <i class="bi bi-geo-alt"></i>
-      {{hotelAddress}}
+    <div class="hotelStarRating">
+      <i class="bi bi-star"></i>
+      {{hotelRating}} stars
     </div>
+    <div class="separator"></div>
+    <div class="hotelReviewNumber">
+      <i class="bi bi-file-text"></i>
+      ({{hotelReviewNumber}} reviews)
+    </div>
+  </div>
+
+  <div class="hotelAddress">
+    <i class="bi bi-geo-alt"></i>
+    {{hotelAddress}}
+  </div>
 </div>
 
-  <div class="imgCarousel">
-    <app-carousel [images]="hotelImages" customClass="hotelDetails-carousel"></app-carousel>
-  </div>
+<div class="imgCarousel">
+  <app-carousel [images]="hotelImages" customClass="hotelDetails-carousel"></app-carousel>
+</div>
 
-  <div class="twoColumnView">
-    <div class="hotelReviewColumn">
-      <div class="hotelReviewsTitle">Reviews and ratings</div>
-      <div class="hotelOverallRating">
-        <div class="hotelRating">
-          <i class="bi bi-star"></i>
-          {{hotelRating}} stars
-        </div>
-        <div class="separator"></div>
-        <div class="hotelReviewNumber">
-          <i class="bi bi-file-text"></i>
-          ({{hotelReviewNumber}} reviews)
+<div class="hotelSearchFormWrapper">
+  <div class="hotelSearchForm">
+    <div class="hotelSearchFormTitle">View prices for your travel dates</div>
+    <label for="checkInDate">Check-In</label>
+    <input type="date" id="checkInDate" name="checkInDate">
+
+    <label for="checkOutDate">Check-Out</label>
+    <input type="date" id="checkOutDate" name="checkOutDate">
+
+    <label for="rooms">Rooms</label>
+    <input type="number" id="rooms" name="rooms" min="1" value="1">
+
+    <label for="adults">Adults</label>
+    <input type="number" id="adults" name="adults" min="1" value="1">
+
+    <label for="children">Children</label>
+    <input type="number" id="children" name="children" min="0" value="0">
+
+    <button type="button" class="searchButton">Search</button>
+
+    <div class="hotelBookingSites">
+      <div class="expediaBooking">
+        <div class="expediaBookingLogo">Expedia</div>
+        <div class="expediaBookingFeatures">Fully refundable</div>
+        <div class="expediaBookingPrice">$75</div>
+        <div class="expediaBookingButton">View</div>
+      </div>
+      <div class="hotelsBooking">
+        <div class="hotelsBookingLogo">Hotels.com</div>
+        <div class="hotelsBookingFeatures">Fully refundable</div>
+        <div class="hotelsBookingPrice">$70</div>
+        <div class="hotelsBookingButton">View</div>
+      </div>
+      <div class="tripBooking">
+        <div class="tripBookingLogo">Trip.com</div>
+        <div class="tripBookingFeatures">Fully refundable</div>
+        <div class="tripBookingPrice">$72</div>
+        <div class="tripBookingButton">View</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="twoColumnView">
+  <div class="hotelReviewColumn">
+    <div class="hotelReviewsTitle">Reviews and ratings</div>
+    <div class="hotelOverallRating">
+      <div class="hotelRating">
+        <i class="bi bi-star"></i>
+        {{hotelRating}} stars
+      </div>
+      <div class="separator"></div>
+      <div class="hotelReviewNumber">
+        <i class="bi bi-file-text"></i>
+        ({{hotelReviewNumber}} reviews)
+      </div>
+    </div>
+    <div class="ratingsContainer">
+      <div class="ratingItem">
+        <div class="ratingLabel">location</div>
+        <div class="ratingValue">
+          <img src="path/to/location-rating-image.jpg" alt="Location Rating">
+          {{location}}
         </div>
       </div>
-      <div class="ratingsContainer">
-        <div class="ratingItem">
-          <div class="ratingLabel">location</div>
-          <div class="ratingValue">
-            <img src="path/to/location-rating-image.jpg" alt="Location Rating">
-            {{location}}
-          </div>
+      <div class="ratingItem">
+        <div class="ratingLabel">Sleep Quality</div>
+        <div class="ratingValue">
+          <img src="path/to/sleepQuality-rating-image.jpg" alt="Sleep Quality Rating">
+          {{sleepQuality}}
         </div>
-        <div class="ratingItem">
-          <div class="ratingLabel">Sleep Quality</div>
-          <div class="ratingValue">
-            <img src="path/to/sleepQuality-rating-image.jpg" alt="Sleep Quality Rating">
-            {{sleepQuality}}
-          </div>
+      </div>
+      <div class="ratingItem">
+        <div class="ratingLabel">Rooms</div>
+        <div class="ratingValue">
+          <img src="path/to/rooms-rating-image.jpg" alt="Rooms Rating">
+          {{rooms}}
         </div>
-        <div class="ratingItem">
-          <div class="ratingLabel">Rooms</div>
-          <div class="ratingValue">
-            <img src="path/to/rooms-rating-image.jpg" alt="Rooms Rating">
-            {{rooms}}
-          </div>
+      </div>
+      <div class="ratingItem">
+        <div class="ratingLabel">Service</div>
+        <div class="ratingValue">
+          <img src="path/to/service-rating-image.jpg" alt="Service Rating">
+          {{service}}
         </div>
-        <div class="ratingItem">
-          <div class="ratingLabel">Service</div>
-          <div class="ratingValue">
-            <img src="path/to/service-rating-image.jpg" alt="Service Rating">
-            {{service}}
-          </div>
+      </div>
+      <div class="ratingItem">
+        <div class="ratingLabel">Value</div>
+        <div class="ratingValue">
+          <img src="path/to/value-rating-image.jpg" alt="Value Rating">
+          {{value}}
         </div>
-        <div class="ratingItem">
-          <div class="ratingLabel">Value</div>
-          <div class="ratingValue">
-            <img src="path/to/value-rating-image.jpg" alt="Value Rating">
-            {{value}}
-          </div>
-        </div>
-        <div class="ratingItem">
-          <div class="ratingLabel">Cleanliness</div>
-          <div class="ratingValue">
-            <img src="path/to/cleanliness-rating-image.jpg" alt="Cleanliness Rating">
-            {{cleanliness}}
-          </div>
+      </div>
+      <div class="ratingItem">
+        <div class="ratingLabel">Cleanliness</div>
+        <div class="ratingValue">
+          <img src="path/to/cleanliness-rating-image.jpg" alt="Cleanliness Rating">
+          {{cleanliness}}
         </div>
       </div>
     </div>
-    <div class="hotelAboutColumn">
-      <div class="hotelAboutTitle">Amenities</div>
-
-    </div>
   </div>
+  <div class="hotelAboutColumn">
+    <div class="hotelAboutTitle">Amenities</div>
+
+  </div>
+</div>

@@ -14,7 +14,9 @@
 
   <div class="hotelAddress">
     <i class="bi bi-geo-alt"></i>
-    {{hotelAddress}}
+    <a [href]="'https://www.google.com/maps/search/?api=1&query=' + encodedAddress" target="_blank">
+      {{hotelAddress}}
+    </a>
   </div>
 </div>
 
@@ -44,19 +46,25 @@
 
     <div class="hotelBookingSites">
       <div class="expediaBooking">
-        <div class="expediaBookingLogo">Expedia</div>
+        <div class="expediaBookingLogo">
+          <img src="../../assets/expedia_logo.png" />
+        </div>
         <div class="expediaBookingFeatures">Fully refundable</div>
         <div class="expediaBookingPrice">$75</div>
         <div class="expediaBookingButton">View</div>
       </div>
       <div class="hotelsBooking">
-        <div class="hotelsBookingLogo">Hotels.com</div>
+        <div class="hotelsBookingLogo">
+          <img src="../../assets/Trip_Hotels.png" />
+        </div>
         <div class="hotelsBookingFeatures">Fully refundable</div>
         <div class="hotelsBookingPrice">$70</div>
         <div class="hotelsBookingButton">View</div>
       </div>
       <div class="tripBooking">
-        <div class="tripBookingLogo">Trip.com</div>
+        <div class="tripBookingLogo">
+          <img src="../../assets/trip_logo.png" />
+        </div>
         <div class="tripBookingFeatures">Fully refundable</div>
         <div class="tripBookingPrice">$72</div>
         <div class="tripBookingButton">View</div>
@@ -65,67 +73,95 @@
   </div>
 </div>
 
-<div class="twoColumnView">
-  <div class="hotelReviewColumn">
-    <div class="hotelReviewsTitle">Reviews and ratings</div>
-    <div class="hotelOverallRating">
-      <div class="hotelRating">
-        <i class="bi bi-star"></i>
-        {{hotelRating}} stars
+<div class="contentsViewContainer">
+  <div class="twoColumnView">
+    <div class="hotelReviewColumn">
+      <div class="hotelReviewsTitle">Reviews and ratings</div>
+      <div class="hotelOverallRating">
+        <div class="hotelStarRating">
+          <i class="bi bi-star"></i>
+          {{hotelRating}} stars
+        </div>
+        <div class="separator"></div>
+        <div class="hotelReviewNumber">
+          <i class="bi bi-file-text"></i>
+          ({{hotelReviewNumber}} reviews)
+        </div>
       </div>
-      <div class="separator"></div>
-      <div class="hotelReviewNumber">
-        <i class="bi bi-file-text"></i>
-        ({{hotelReviewNumber}} reviews)
+      <div class="ratingsContainer">
+        <div class="ratingItem">
+          <div class="ratingLabel">Location</div>
+          <div class="ratingValue">
+            <img src="path/to/location-rating-image.jpg" alt="Location Rating">
+            {{location}}
+          </div>
+        </div>
+        <div class="ratingItem">
+          <div class="ratingLabel">Sleep Quality</div>
+          <div class="ratingValue">
+            <img src="path/to/sleepQuality-rating-image.jpg" alt="Sleep Quality Rating">
+            {{sleepQuality}}
+          </div>
+        </div>
+        <div class="ratingItem">
+          <div class="ratingLabel">Rooms</div>
+          <div class="ratingValue">
+            <img src="path/to/rooms-rating-image.jpg" alt="Rooms Rating">
+            {{rooms}}
+          </div>
+        </div>
+        <div class="ratingItem">
+          <div class="ratingLabel">Service</div>
+          <div class="ratingValue">
+            <img src="path/to/service-rating-image.jpg" alt="Service Rating">
+            {{service}}
+          </div>
+        </div>
+        <div class="ratingItem">
+          <div class="ratingLabel">Value</div>
+          <div class="ratingValue">
+            <img src="path/to/value-rating-image.jpg" alt="Value Rating">
+            {{value}}
+          </div>
+        </div>
+        <div class="ratingItem">
+          <div class="ratingLabel">Cleanliness</div>
+          <div class="ratingValue">
+            <img src="path/to/cleanliness-rating-image.jpg" alt="Cleanliness Rating">
+            {{cleanliness}}
+          </div>
+        </div>
       </div>
     </div>
-    <div class="ratingsContainer">
-      <div class="ratingItem">
-        <div class="ratingLabel">location</div>
-        <div class="ratingValue">
-          <img src="path/to/location-rating-image.jpg" alt="Location Rating">
-          {{location}}
-        </div>
-      </div>
-      <div class="ratingItem">
-        <div class="ratingLabel">Sleep Quality</div>
-        <div class="ratingValue">
-          <img src="path/to/sleepQuality-rating-image.jpg" alt="Sleep Quality Rating">
-          {{sleepQuality}}
-        </div>
-      </div>
-      <div class="ratingItem">
-        <div class="ratingLabel">Rooms</div>
-        <div class="ratingValue">
-          <img src="path/to/rooms-rating-image.jpg" alt="Rooms Rating">
-          {{rooms}}
-        </div>
-      </div>
-      <div class="ratingItem">
-        <div class="ratingLabel">Service</div>
-        <div class="ratingValue">
-          <img src="path/to/service-rating-image.jpg" alt="Service Rating">
-          {{service}}
-        </div>
-      </div>
-      <div class="ratingItem">
-        <div class="ratingLabel">Value</div>
-        <div class="ratingValue">
-          <img src="path/to/value-rating-image.jpg" alt="Value Rating">
-          {{value}}
-        </div>
-      </div>
-      <div class="ratingItem">
-        <div class="ratingLabel">Cleanliness</div>
-        <div class="ratingValue">
-          <img src="path/to/cleanliness-rating-image.jpg" alt="Cleanliness Rating">
-          {{cleanliness}}
-        </div>
+    <div class="hotelDescriptionColumn">
+      <div class="hotelDescriptionTitle">Description</div>
+      <div class="aboutDescriptionContainer">
+        {{hotelDescription}}
       </div>
     </div>
   </div>
-  <div class="hotelAboutColumn">
-    <div class="hotelAboutTitle">Amenities</div>
-
+  <div class="hotelAmenitiesContainer">
+    <div class="hotelAmenitiesTitle">Amenities</div>
+    <ul>
+      <li *ngFor="let amenity of amenities">{{ amenity }}</li>
+    </ul>
+  </div>
+  <div class="hotelLocationContainer">
+    <div class="hotelLocationTitle">Location</div>
+    <div class="hotelAddress">
+      <i class="bi bi-geo-alt"></i>
+      {{hotelAddress}}
+      <a [href]="'https://www.google.com/maps/search/?api=1&query=' + encodedAddress" target="_blank">
+        {{hotelAddress}}
+      </a>
+    </div>
+    <div class="hotelLocationNearbySearchContainer">
+      <div class="hotelLocationNearbyRestaurants">
+        <div class="hotelLocationNearbyRestaurantsTitle">Restaurants</div>
+      </div>
+      <div class="hotelLocationNearbyAttractions">
+        <div class="hotelLocationNearbyAttractionsTitle">Attractions</div>
+      </div>
+    </div>
   </div>
 </div>

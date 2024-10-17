@@ -157,11 +157,62 @@
     </div>
     <div class="hotelLocationNearbySearchContainer">
       <div class="hotelLocationNearbyRestaurants">
-        <div class="hotelLocationNearbyRestaurantsTitle">Restaurants</div>
+        <div class="hotelLocationNearbyRestaurantsTitle">Nearby Restaurants</div>
+        <div class="hotelLocationNearbyRestaurantsCard" *ngFor="let nearbyRestaurant of displayedRestaurants">
+          <div class="nearbyRestaurantName">{{nearbyRestaurant.nearbyRestaurantName}}</div>
+          <div class="nearbyRestaurantRatingContainer">
+            <div class="nearbyRestaurantRating">
+              <i class="bi bi-star"></i>
+              {{nearbyRestaurant.nearbyRestaurantRating}} Stars
+            </div>
+            <div class="separator"></div>
+            <div class="nearbyRestaurantReviewCount">
+              <i class="bi bi-file-text"></i>
+              {{nearbyRestaurant.nearbyRestaurantReviewCount}} Reviews
+            </div>
+          </div>
+          <div class="nearbyRestaurantInfo">
+            <div class="nearbyRestaurantDistance">
+              <i class="bi bi-person-walking"></i>
+              {{nearbyRestaurant.nearbyRestaurantDistance}} miles
+            </div>
+            <div class="separator"></div>
+            <div class="nearbyRestaurantPriceRange">{{nearbyRestaurant.nearbyRestaurantPriceRange}}</div>
+            <div class="separator"></div>
+            <div class="nearbyRestaurantFoodType">{{nearbyRestaurant.nearbyRestaurantFoodType}}</div>
+          </div>
+        </div>
       </div>
       <div class="hotelLocationNearbyAttractions">
-        <div class="hotelLocationNearbyAttractionsTitle">Attractions</div>
+        <div class="hotelLocationNearbyAttractionsTitle">Nearby Attractions</div>
+        <div class="hotelLocationNearbyAttractionsCard" *ngFor="let nearbyAttraction of displayedAttractions">
+          <div class="nearbyAttractionName">{{nearbyAttraction.nearbyAttractionName}}</div>
+          <div class="nearbyAttractionRatingContainer">
+            <div class="nearbyAttractionRating">
+              <i class="bi bi-star"></i>
+              {{nearbyAttraction.nearbyAttractionRating}} Stars
+            </div>
+            <div class="separator"></div>
+            <div class="nearbyAttractionReviewCount">
+              <i class="bi bi-file-text"></i>
+              {{nearbyAttraction.nearbyAttractionReviewCount}} Reviews
+            </div>
+          </div>
+          <div class="nearbyAttractionInfo">
+            <div class="nearbyAttractionDistance">
+              <i class="bi bi-person-walking"></i>
+              {{nearbyAttraction.nearbyAttractionDistance}} miles
+            </div>
+            <div class="separator"></div>
+            <div class="nearbyAttractionType">{{nearbyAttraction.nearbyAttractionType}}</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+
+  <div class="app-reviewsContainer">
+    <app-reviews></app-reviews>
+  </div>
+
 </div>

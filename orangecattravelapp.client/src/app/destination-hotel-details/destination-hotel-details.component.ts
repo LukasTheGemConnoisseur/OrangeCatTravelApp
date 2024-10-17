@@ -22,12 +22,112 @@ export class DestinationHotelDetailsComponent implements OnInit {
     'assets/tokyo.jpg',
     'assets/newyork.jpg'
   ];
+
   location: number = 4.0; // Default value
   sleepQuality: number = 4.0; // Default value
   rooms: number = 4.0; // Default value
   service: number = 3.5; // Default value
   value: number = 3.0; // Default value
   cleanliness: number = 4.0; // Default value
+
+
+  // Simulating hotel data for now, will be replaced by API data later
+  nearbyRestaurants: Restaurants[] = [
+    {
+      nearbyRestaurantId: 1,
+      nearbyRestaurantName: "High Rock Cafe",
+      nearbyRestaurantRating: 4.7,
+      nearbyRestaurantReviewCount: 955,
+      nearbyRestaurantDistance: 0.16,
+      nearbyRestaurantPriceRange: "$ - $$$",
+      nearbyRestaurantFoodType: "American"
+    },
+    {
+      nearbyRestaurantId: 2,
+      nearbyRestaurantName: "Low Rock Cafe",
+      nearbyRestaurantRating: 4.2,
+      nearbyRestaurantReviewCount: 95,
+      nearbyRestaurantDistance: 0.19,
+      nearbyRestaurantPriceRange: "$ - $$",
+      nearbyRestaurantFoodType: "American"
+    },
+    {
+      nearbyRestaurantId: 3,
+      nearbyRestaurantName: "Plateau Rock Cafe",
+      nearbyRestaurantRating: 4.0,
+      nearbyRestaurantReviewCount: 855,
+      nearbyRestaurantDistance: 0.35,
+      nearbyRestaurantPriceRange: "$$$",
+      nearbyRestaurantFoodType: "American"
+    },
+    {
+      nearbyRestaurantId: 4,
+      nearbyRestaurantName: "High Rock Cafe",
+      nearbyRestaurantRating: 4.7,
+      nearbyRestaurantReviewCount: 955,
+      nearbyRestaurantDistance: 0.16,
+      nearbyRestaurantPriceRange: "$ - $$$",
+      nearbyRestaurantFoodType: "American"
+    },
+    {
+      nearbyRestaurantId: 5,
+      nearbyRestaurantName: "High Rock Cafe",
+      nearbyRestaurantRating: 4.7,
+      nearbyRestaurantReviewCount: 955,
+      nearbyRestaurantDistance: 0.16,
+      nearbyRestaurantPriceRange: "$ - $$$",
+      nearbyRestaurantFoodType: "American"
+    },
+  ];
+
+  nearbyAttractions: Attractions[] = [
+    {
+      nearbyAttractionId: 1,
+      nearbyAttractionName: "Mt. Olympus",
+      nearbyAttractionRating: 4.7,
+      nearbyAttractionReviewCount: 955,
+      nearbyAttractionDistance: 0.16,
+      nearbyAttractionType: "Water Park"
+    },
+    {
+      nearbyAttractionId: 2,
+      nearbyAttractionName: "Mt. Olympus",
+      nearbyAttractionRating: 4.7,
+      nearbyAttractionReviewCount: 955,
+      nearbyAttractionDistance: 0.16,
+      nearbyAttractionType: "Water Park"
+    },
+    {
+      nearbyAttractionId: 3,
+      nearbyAttractionName: "Mt. Olympus",
+      nearbyAttractionRating: 4.7,
+      nearbyAttractionReviewCount: 955,
+      nearbyAttractionDistance: 0.16,
+      nearbyAttractionType: "Water Park"
+    },
+    {
+      nearbyAttractionId: 4,
+      nearbyAttractionName: "Mt. Olympus",
+      nearbyAttractionRating: 4.7,
+      nearbyAttractionReviewCount: 955,
+      nearbyAttractionDistance: 0.16,
+      nearbyAttractionType: "Water Park"
+    },
+    {
+      nearbyAttractionId: 5,
+      nearbyAttractionName: "Mt. Olympus",
+      nearbyAttractionRating: 4.7,
+      nearbyAttractionReviewCount: 955,
+      nearbyAttractionDistance: 0.16,
+      nearbyAttractionType: "Water Park"
+    },
+  ];
+
+  // Define the displayedRestaurants array using the Restaurants type
+  displayedRestaurants: Restaurants[] = [];
+  restaurantsToDisplay = 5; // Number of restaurants to display initially
+  displayedAttractions: Attractions[] = [];
+  attractionsToDisplay = 5; // Number of restaurants to display initially
 
   ngOnInit(): void {
     // Fetch amenities from API and assign it to the amenities array
@@ -99,7 +199,27 @@ export class DestinationHotelDetailsComponent implements OnInit {
 
   constructor() {
     this.encodedAddress = encodeURIComponent(this.hotelAddress);
+    this.displayedRestaurants = this.nearbyRestaurants.slice(0, this.restaurantsToDisplay);
+    this.displayedAttractions = this.nearbyAttractions.slice(0, this.attractionsToDisplay);
   }
 
 }
 
+interface Restaurants {
+  nearbyRestaurantId: number;
+  nearbyRestaurantName: string;
+  nearbyRestaurantRating: number;
+  nearbyRestaurantReviewCount: number;
+  nearbyRestaurantDistance: number;
+  nearbyRestaurantPriceRange: string;
+  nearbyRestaurantFoodType: string;
+}
+
+interface Attractions {
+  nearbyAttractionId: number;
+  nearbyAttractionName: string;
+  nearbyAttractionRating: number;
+  nearbyAttractionReviewCount: number;
+  nearbyAttractionDistance: number;
+  nearbyAttractionType: string;
+}

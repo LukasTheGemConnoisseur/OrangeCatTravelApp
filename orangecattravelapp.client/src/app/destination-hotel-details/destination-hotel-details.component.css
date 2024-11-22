@@ -1,12 +1,24 @@
+@media (max-width: 768px) {
+  .twoColumnView {
+    flex-direction: column; /* Stack columns */
+    padding: 0;
+  }
+
+  .hotelSearchForm input {
+    width: 100%; /* Make inputs full-width */
+  }
+}
+
+
 .hotelTitle {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
   color: #050038;
 }
 
 .hotelReviewsAndAddress {
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
   margin: 40px auto;
   margin-bottom: 0px;
   padding: 20px;
@@ -14,6 +26,9 @@
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   text-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Add spacing between child elements */
 }
 
 .separator::before {
@@ -22,12 +37,15 @@
 }
 
 .hotelRating {
-display: block;
-text-align: left;
-display: flex;
-align-items: center;
-color: #050038;
+  display: flex;
+  align-items: center;
+  text-align: left;
+  color: #050038;
 }
+
+  .hotelRating .separator {
+    color: #ccc; /* Lighten the separator bullet */
+  }
 
 .hotelStarRating, .nearbyRestaurantRating, .nearbyAttractionRating {
   font-weight: bold;
@@ -53,12 +71,13 @@ color: #050038;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 20px;
   justify-content: center;
   align-items: center;
   max-width: 850px;
   color: #050038;
 }
+
 
 .hotelSearchFormTitle {
   width: 100%; /* Make the title take up the full width */
@@ -127,6 +146,7 @@ color: #050038;
   border: none;
   border-radius: 4px;
   cursor: pointer;
+
 }
 
   .searchButton:hover{
@@ -148,6 +168,7 @@ color: #050038;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   max-width: 1200px; /* or 80%, for a responsive layout */
   margin: 0 auto; /* Centers the container */
+  margin-bottom: 50px;
 }
 
 .twoColumnView {
@@ -156,7 +177,8 @@ color: #050038;
   justify-content: space-between;
   padding: 0 50px;
   padding-top: 10px;
-  gap: 40px;
+  gap: 20px;
+  flex-wrap: wrap; /* Stack columns on smaller screens */
 }
 
 .hotelReviewColumn, .hotelDescriptionColumn {
@@ -164,7 +186,7 @@ color: #050038;
   max-width: 600px;
   margin: 0 auto;
   padding: 20px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -282,6 +304,8 @@ color: #050038
 }
 
 .hotelLocationNearbyRestaurantsCard, .hotelLocationNearbyAttractionsCard {
+  display: flex;
+  flex-direction: column;
   padding: 10px 15px;
   margin-bottom: 10px;
   border-radius: 8px;

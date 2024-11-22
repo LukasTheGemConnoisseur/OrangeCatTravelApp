@@ -22,6 +22,7 @@ export class DestinationHotelDetailsComponent implements OnInit {
     'assets/tokyo.jpg',
     'assets/newyork.jpg'
   ];
+  hotelLocationImage: string = 'https://via.placeholder.com/150';
 
   location: number = 4.0; // Default value
   sleepQuality: number = 4.0; // Default value
@@ -129,6 +130,36 @@ export class DestinationHotelDetailsComponent implements OnInit {
   displayedAttractions: Attractions[] = [];
   attractionsToDisplay = 5; // Number of restaurants to display initially
 
+  sortedAmenities: { [key: string]: string[] } = {};
+  categories: { [key: string]: string[] } = {
+    "Rooms": [
+      "Suites", "Non-smoking rooms", "Air conditioning", "Accessible rooms",
+      "Microwave", "Refrigerator in room", "Safe", "Private Bathrooms",
+      "Sofa", "Sofa Bed", "Telephone", "Wardrobe / Closet"
+    ],
+    "Facilities": [
+      "Pool", "Heated pool", "Indoor pool", "Outdoor pool", "Hot Tub",
+      "Parking", "Free parking", "Wheelchair access", "ATM On Site",
+      "Facilities for Disabled Guests", "Self-Serve Laundry"
+    ],
+    "Entertainment": [
+      "Game Room", "Water Park", "Waterslide", "Kids pool",
+      "Kids Activities", "Children's Television Networks"
+    ],
+    "Technology": [
+      "Internet", "Free Internet", "Public Wifi", "Free Wifi", "Flatscreen TV"
+    ],
+    "Miscellaneous": [
+      "Non-smoking hotel", "Housekeeping", "Outdoor Furniture", "Picnic Area",
+      "BBQ Facilities", "Complimentary Toiletries", "24-Hour Front Desk",
+      "Sun Loungers / Beach Chairs"
+    ]
+  };
+
+  get sortedAmenityCategories(): string[] {
+    return Object.keys(this.sortedAmenities);
+  }
+
   ngOnInit(): void {
     // Fetch amenities from API and assign it to the amenities array
     this.amenities = [
@@ -195,6 +226,21 @@ export class DestinationHotelDetailsComponent implements OnInit {
       "Waterslide",
       "Whirlpool Bathtub"
     ];
+
+
+    // Sort amenities into categories
+    this.sortedAmenities = {};
+    for (const [category, items] of Object.entries(this.categories)) {
+      this.sortedAmenities[category] = this.amenities
+        .filter(amenity => items.includes(amenity))
+        .sort(); // Sort alphabetically within the category
+    }
+
+    // Add uncategorized amenities
+    this.sortedAmenities["Other"] = this.amenities
+      .filter(amenity => !Object.values(this.categories).flat().includes(amenity))
+      .sort();
+
   }
 
   constructor() {

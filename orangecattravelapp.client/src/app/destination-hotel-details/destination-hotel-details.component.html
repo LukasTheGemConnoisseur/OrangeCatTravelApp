@@ -141,16 +141,22 @@
     </div>
   </div>
   <div class="hotelAmenitiesContainer">
-    <div class="hotelAmenitiesTitle">Amenities</div>
-    <ul>
-      <li *ngFor="let amenity of amenities">{{ amenity }}</li>
-    </ul>
+    <div class="hotelAmenitiesTitle">
+      <h3>Amenities</h3></div>
+    <div *ngFor="let category of sortedAmenityCategories">
+      <h4>{{ category }}</h4>
+      <ul>
+        <li *ngFor="let amenity of sortedAmenities[category]">{{ amenity }}</li>
+      </ul>
+    </div>
   </div>
   <div class="hotelLocationContainer">
     <div class="hotelLocationTitle">Location</div>
     <div class="hotelAddress">
+      <div class="hotelLocationImage">
+          <img [src]="hotelLocationImage" alt="Hotel Location Image">
+      </div>
       <i class="bi bi-geo-alt"></i>
-      {{hotelAddress}}
       <a [href]="'https://www.google.com/maps/search/?api=1&query=' + encodedAddress" target="_blank">
         {{hotelAddress}}
       </a>

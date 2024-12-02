@@ -1,13 +1,19 @@
 img {
   max-width: 100%;
   height: auto;
-  display: block; /* Ensures no extra space below the image */
-  margin: 0 auto; /* Centers the image inside its container */
+  display: block;
+  margin: 0 auto;
+  border-radius: 12px;
+  transition: transform 0.3s ease-in-out;
 }
+
+  img:hover {
+    transform: scale(1.05); /* Subtle zoom on hover */
+  }
 
 .homePhoto {
   max-width: 1000px; 
-  width: 40%; /* Ensures the container is responsive */
+  width: 40%;
   margin: 0 auto; /* Centers the container horizontally */
   padding: 20px; 
   box-sizing: border-box; 
@@ -25,11 +31,42 @@ img {
   color: #050038; 
   font-weight: bold; 
   padding-top: 40px;
+  margin-bottom: 10px;
 }
 .topDestinationPicks {
   font-size: 24px; 
   color: #050038; 
-  font-weight: bold; 
-  padding-top: 250px;
-  padding-bottom: 50px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.content {
+  background-color: rgba(255, 255, 255, 0.90);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  max-width: 1200px;
+  margin: 20px auto;
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+}
+
+  .content:hover {
+    transform: translateY(-5px);
+  }
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .homePhoto {
+    width: 90%;
+  }
+
+  .whereTo,
+  .dreamAdventure {
+    font-size: 2rem;
+  }
+
+  .content {
+    padding: 20px;
+    margin: 10px auto;
+  }
 }

@@ -49,4 +49,8 @@ export class DestinationAttractionListComponent implements OnInit {
     //          attraction.description.includes(this.filters.filter2);
     // });
   }
+  resetFilters(): void {
+    this.filters = { filter1: '', filter2: '' };
+  }
+
 }

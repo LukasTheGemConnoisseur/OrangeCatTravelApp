@@ -8,17 +8,18 @@
 }
 
 .btn-info {
-  margin-right: 980px;
-  margin-top: 50px;
+  align-self: flex-end;
+  min-width: 120px;
   background-color: #050038;
   color: white;
-  border-radius: 20px; /* Rounded edges */
+  border-radius: 20px;
   border-color: #050038;
 }
 .header-container {
   display: flex;
-  justify-content: space-between; /* Distribute items along the main axis */
-  align-items: center; /* Align items vertically centered */
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 50px 20px 50px;
 }
 
 .attractionContainer {
@@ -31,9 +32,9 @@
 }
 
 .list-card {
-  cursor: pointer;
   transition: transform 0.2s;
   color: #050038;
+  overflow: hidden;
 }
 
   .list-card:hover {
@@ -45,6 +46,28 @@
   color: white;
   border-radius: 20px;
   border-color: #050038;
+}
+
+.card-body {
+  padding: 20px;
+  height: 150px; /* Consistent card height */
+}
+
+.card-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #050038;
+}
+
+.card-text {
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .attractionContainer .row .btn-primary {
@@ -68,11 +91,35 @@
   border-color: #050038;
 }
 
+.seeMoreButton .btn-secondary {
+  background-color: #050038;
+  padding: 10px 30px;
+  font-size: 16px;
+  color: white;
+  border-radius: 25px;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+  .seeMoreButton .btn-secondary:hover {
+    background-color: #0056b3;
+  }
+
+
 .filters {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 10px;
-  gap: 10px;
+  flex-direction: column;
+  gap: 15px;
+}
+
+  .filters label {
+    margin-left: 10px;
+    font-weight: bold;
+  }
+
+.filter-card {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .filter-button {
@@ -80,9 +127,26 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  transition: transform 0.2s;
+  gap: 10px;
 }
 
-.filter-button:hover {
-  transform: scale(1.05);
+  .filter-button .btn-primary:hover,
+  .filter-button .btn-outline-secondary:hover {
+    transform: scale(1.05);
+  }
+
+  .filter-button .btn-primary,
+  .filter-button .btn-outline-secondary {
+    transition: transform 0.2s;
+  }
+
+  .filter-button .btn-outline-secondary {
+    border-radius: 20px;
+    border-color: #050038;
+    background-color: #f8f9fa;
+    color: black;
+  }
+
+.filters input[type="checkbox"]:checked + label {
+  color: #007bff;
 }

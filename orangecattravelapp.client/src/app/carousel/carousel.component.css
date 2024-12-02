@@ -3,13 +3,15 @@
   padding: 20px 200px 50px 200px;
 }
 
-.carousel img {
-  display: block;
-  width: 100%;
-  height: auto;
-  max-height: 600px;  /*Adjust as needed */
-  margin: auto;
-}
+  .carousel img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 600px; /*Adjust as needed */
+    margin: auto;
+    border-radius: 16px;
+    border: 2px solid #e0e0e0;
+  }
 .carousel-control-next-icon,
 .carousel-control-prev-icon {
   filter: invert(1) grayscale(100);

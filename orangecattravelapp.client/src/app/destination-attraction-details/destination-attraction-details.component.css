@@ -34,19 +34,25 @@
   color: #757575;
 }
 
-.attractionAddress a {
+.attractionAddressTitle a {
   text-decoration: none;
   color: #050038;
 }
 
-.attractionAddress:hover {
+.attractionAddressTitle:hover {
   text-decoration: underline;
 }
 
-.attractionNameContainer {
+.attractionNameContainer{
   font-size: 40px;
   color: #050038;
   font-weight: bold;
+}
+
+.attractionSubCategoryContainer {
+  font-size: 28px;
+  color: #050038;
+  font-weight: 500;
 }
 
 .hours {
@@ -79,7 +85,7 @@
   flex-wrap: wrap; /* Stack columns on smaller screens */
 }
 
-.about {
+.about, .contact {
   font-size: 28px;
   color: #050038;
   font-weight: bold;
@@ -92,11 +98,8 @@
   text-decoration: none;
 }
 
-  .reserve:hover {
-    text-decoration: underline;
-  }
-
-.aboutContainer {
+.aboutContainer, .contactContainer {
+  margin-top: 10px;
   padding: 20px;
   max-width: 400px;
   background-color: whitesmoke;
@@ -105,7 +108,51 @@
   color: #050038;
 }
 
-.localAreaContainer {
+.contactContainer {
+  text-align: start;
+}
+
+  .attractionAreaMap img {
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+  }
+
+.attractionAddressPhysical a, attractionAddressWebsite a {
+  text-decoration: none;
+  color: #050038;
+}
+
+.attractionAddressPhysical:hover, .attractionAddressWebsite:hover {
+  text-decoration: underline;
+}
+
+.attractionAddressPhysical {
+  margin-top: 10px;
+}
+
+.attractionAddressCategory {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.attractionAddressLabel {
+  font-weight: 600;
+  flex: 1; /* Ensures label takes up necessary space */
+}
+
+.attractionAddress a,
+.attractionAddressPhone {
+  display: inline-block;
+}
+
+.attractionAddressWebsite a {
+  text-decoration: none;
+  color: #050038;
+}
+
+/*.localAreaContainer {
     margin-top: 100px;
 }
 
@@ -115,18 +162,15 @@
   font-weight: bold;
 }
 
-.attractionAddress {
-  font-weight:normal;
-}
-
-.imgCarousel {
-    margin: auto;
-    width: 50%;
-    height: auto; 
-}
 .localAreaMap img {
   max-width: 500px;
   height: auto;
   padding-top: 50px;
   padding-bottom: 100px;
+}*/
+
+.imgCarousel {
+  margin: auto;
+  width: 50%;
+  height: auto;
 }

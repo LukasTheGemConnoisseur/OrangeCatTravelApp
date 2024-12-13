@@ -3,11 +3,11 @@
     <div class="destinationNameContainer">
       <div class="destinationName">Attractions in {{ destinationName }}</div>
     </div>
-    <div class="filter-container">
-      <button class="btn btn-info" (click)="toggleFilters()">
-        <i class="fas fa-cog"></i> Filters
-      </button>
-    </div>
+  </div>
+  <div class="filter-container">
+    <button class="btn btn-info" (click)="toggleFilters()">
+      <i class="fas fa-cog"></i> Filters
+    </button>
   </div>
   <div class="row">
     <div class="col-12" *ngIf="showFilters">
@@ -24,12 +24,12 @@
             <label for="filter3">Theme Parks</label><br>
             <!--<div class="form-group">-->
             <!--<label for="filterInput1">Filter 1</label>
-      <input type="text" class="form-control" id="filterInput1" [(ngModel)]="filters.filter1">
-       </div>
-      <div class="form-group">
-        <label for="filterInput2">Filter 2</label>
-        <input type="text" class="form-control" id="filterInput2" [(ngModel)]="filters.filter2">
-      </div>-->
+            <input type="text" class="form-control" id="filterInput1" [(ngModel)]="filters.filter1">
+             </div>
+            <div class="form-group">
+              <label for="filterInput2">Filter 2</label>
+              <input type="text" class="form-control" id="filterInput2" [(ngModel)]="filters.filter2">
+            </div>-->
             <!-- Add more filters as needed -->
           </div>
           <div class="filter-button">
@@ -38,7 +38,7 @@
           </div>
         </div>
       </div>
-      
+
     </div>
   </div>
   <div class="row">
@@ -50,13 +50,13 @@
             <h5 class="card-title">{{ attraction.Name }}</h5>
             <p class="card-text">{{ attraction.Description }}</p>
             <a [routerLink]="['/destination-attraction-details']" class="btn btn-primary">View Details</a> <!--'/attraction', attraction.Id-->
-          </div> 
+          </div>
           <div class="card-footer">
             <small class="text-muted">{{ attraction.Review }}</small>
           </div>
         </div>
       </div>
-      
+
     </div>
   </div>
   <div class="seeMoreButton">

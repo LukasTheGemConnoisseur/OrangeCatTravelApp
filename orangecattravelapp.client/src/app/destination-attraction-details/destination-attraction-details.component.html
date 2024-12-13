@@ -1,6 +1,11 @@
-<div class="hotelDetailsIntro">
+<div class="attractionDetailsIntro">
   <div class="attractionNameContainer">
     <div class="atractionName">{{ attractionName }}</div>
+  </div>
+  <div class="attractionSubCategoryContainer">
+    <div class="attractionSubCategory">
+      {{attractionSubCategory}}
+    </div>
   </div>
   <div class="hours">{{businessHoursOpening}} - {{businessHoursClosing}}</div>
   <div class="attractionRating">
@@ -14,7 +19,7 @@
       ({{attractionReviewNumber}} reviews)
     </div>
   </div>
-  <div class="attractionAddress">
+  <div class="attractionAddressTitle">
     <i class="bi bi-geo-alt"></i>
     <a [href]="'https://www.google.com/maps/search/?api=1&query=' + encodedAddress" target="_blank">
       {{attractionAddress}}
@@ -38,27 +43,110 @@
         </div>
     </div>
     <div class="ContactColumn">
-      <div class="reserve">
-        <a href="{{attractionWebsite}}">Reserve your spot</a>
-      </div>
+      <div class="contact">Contact</div>
+        <div class="contactContainer">
+          <div class="attractionAreaMap">
+            <!--This is where the map will go-->
+            <img src="../../assets/tokyo.jpg" />
+          </div>
+          <div class="attractionAddress">
+            <div class="attractionAddressCategory">
+              <div class="attractionAddressPhysical">
+                <div class="attractionAddressLabel">
+                  <i class="bi bi-geo-alt"></i>
+                  Address
+                </div>
+                <a [href]="'https://www.google.com/maps/search/?api=1&query=' + encodedAddress" target="_blank">
+                  {{attractionAddress}}
+                </a>
+              </div>
+              <div class="attractionAddressWebsite">
+                <div class="attractionAddressLabel">
+                  <i class="bi bi-laptop"></i>
+                  Website
+                </div>
+                <a href="{{attractionWebsite}}">
+                  {{attractionWebsite}}
+                </a>
+              </div>
+              <div class="attractionAddressPhone">
+                <div class="attractionAddressLabel">
+                  <i class="bi bi-telephone"></i>
+                  Phone
+                </div>
+                {{attractionPhone}}
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
 
-    <div class="localAreaContainer">
-      <div class="row">
-        <div class="col-6">
-          The Area
-          <div class="attractionAddress">
-            {{attractionAddress}}
+    <!--<div class="attractionLocationContainer">
+      <div class="attractionLocationTitle">Location</div>
+      <div class="attractionAddress">
+        <div class="attractionLocationImage">
+          <img [src]="attractionLocationImage" alt="attraction Location Image">
+        </div>
+        <i class="bi bi-geo-alt"></i>
+        <a [href]="'https://www.google.com/maps/search/?api=1&query=' + encodedAddress" target="_blank">
+          {{attractionAddress}}
+        </a>
+      </div>
+      <div class="attractionLocationNearbySearchContainer">
+        <div class="attractionLocationNearbyRestaurants">
+          <div class="attractionLocationNearbyRestaurantsTitle">Nearby Restaurants</div>
+          <div class="attractionLocationNearbyRestaurantsCard" *ngFor="let nearbyRestaurant of displayedRestaurants">
+            <div class="nearbyRestaurantName">{{nearbyRestaurant.nearbyRestaurantName}}</div>
+            <div class="nearbyRestaurantRatingContainer">
+              <div class="nearbyRestaurantRating">
+                <i class="bi bi-star"></i>
+                {{nearbyRestaurant.nearbyRestaurantRating}} Stars
+              </div>
+              <div class="separator"></div>
+              <div class="nearbyRestaurantReviewCount">
+                <i class="bi bi-file-text"></i>
+                {{nearbyRestaurant.nearbyRestaurantReviewCount}} Reviews
+              </div>
+            </div>
+            <div class="nearbyRestaurantInfo">
+              <div class="nearbyRestaurantDistance">
+                <i class="bi bi-person-walking"></i>
+                {{nearbyRestaurant.nearbyRestaurantDistance}} miles
+              </div>
+              <div class="separator"></div>
+              <div class="nearbyRestaurantPriceRange">{{nearbyRestaurant.nearbyRestaurantPriceRange}}</div>
+              <div class="separator"></div>
+              <div class="nearbyRestaurantFoodType">{{nearbyRestaurant.nearbyRestaurantFoodType}}</div>
+            </div>
           </div>
         </div>
-        <div class="col-6">
-          <div class="localAreaMap">
-            <!--This is where the map will go-->
-            <img src="../../assets/paris.jpg" />
+        <div class="attractionLocationNearbyHotels">
+          <div class="attractionLocationNearbyHotelsTitle">Nearby Hotels</div>
+          <div class="attractionLocationNearbyHotelsCard" *ngFor="let nearbyHotel of displayedHotels">
+            <div class="nearbyHotelName">{{nearbyHotel.nearbyHotelName}}</div>
+            <div class="nearbyHotelRatingContainer">
+              <div class="nearbyHotelRating">
+                <i class="bi bi-star"></i>
+                {{nearbyHotel.nearbyHotelRating}} Stars
+              </div>
+              <div class="separator"></div>
+              <div class="nearbyHotelReviewCount">
+                <i class="bi bi-file-text"></i>
+                {{nearbyHotel.nearbyHotelReviewCount}} Reviews
+              </div>
+            </div>
+            <div class="nearbyHotelInfo">
+              <div class="nearbyHotelDistance">
+                <i class="bi bi-person-walking"></i>
+                {{nearbyHotel.nearbyHotelDistance}} miles
+              </div>
+              <div class="separator"></div>
+              <div class="nearbyHotelType">{{nearbyHotel.nearbyHotelType}}</div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 
   <app-reviews></app-reviews>

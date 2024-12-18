@@ -22,21 +22,21 @@
       <label>
         <input type="checkbox" [(ngModel)]="emailPreference" (change)="toggleEmailInput()"> Email
       </label>
-      <div *ngIf="showEmailInput">
+      <div class="emailPreference" *ngIf="showEmailInput">
         <input type="email" name="emailInput" [(ngModel)]="emailAddress" placeholder="Enter your email">
       </div>
 
       <label>
         <input type="checkbox" [(ngModel)]="textPreference" (change)="toggleTextInput()"> Text
       </label>
-      <div *ngIf="showTextInput">
+      <div class="phonePreference" *ngIf="showTextInput">
         <input type="text" name="textInput" [(ngModel)]="phoneNumber" placeholder="Enter your phone number">
       </div>
 
       <label>
         <input type="checkbox" [(ngModel)]="bothPreference" (change)="toggleBothInput()"> Both Email and Text
       </label>
-      <div *ngIf="showBothInput">
+      <div class="bothPreference" *ngIf="showBothInput">
         <input type="email" name="emailInput" [(ngModel)]="emailAddress" placeholder="Enter your email">
         <input type="text" name="textInput" [(ngModel)]="phoneNumber" placeholder="Enter your phone number">
       </div>

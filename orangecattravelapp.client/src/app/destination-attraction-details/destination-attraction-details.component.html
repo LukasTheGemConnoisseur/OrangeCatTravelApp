@@ -35,53 +35,54 @@
 <div class="contentsViewContainer">
   <div class="twoColumnView">
     <div class="aboutColumn">
-        <div class="about">About</div>
-        <div class="aboutContainer">
-          <!--<div class="col-6">-->
-          Located on 70 sprawling acres in the heart of Wisconsin Dells, the Waterpark Capital of the World, Noah's Ark is recognized as both the Largest Water Park in America, and one of the best places to visit in Wisconsin Dells with kids.
-          <!--</div>-->
-        </div>
+      <div class="about">About</div>
+      <div class="aboutContainer">
+        <!--<div class="col-6">-->
+        Located on 70 sprawling acres in the heart of Wisconsin Dells, the Waterpark Capital of the World, Noah's Ark is recognized as both the Largest Water Park in America, and one of the best places to visit in Wisconsin Dells with kids.
+        <!--</div>-->
+      </div>
     </div>
     <div class="ContactColumn">
       <div class="contact">Contact</div>
-        <div class="contactContainer">
-          <div class="attractionAreaMap">
-            <!--This is where the map will go-->
-            <img src="../../assets/tokyo.jpg" />
-          </div>
-          <div class="attractionAddress">
-            <div class="attractionAddressCategory">
-              <div class="attractionAddressPhysical">
-                <div class="attractionAddressLabel">
-                  <i class="bi bi-geo-alt"></i>
-                  Address
-                </div>
-                <a [href]="'https://www.google.com/maps/search/?api=1&query=' + encodedAddress" target="_blank">
-                  {{attractionAddress}}
-                </a>
+      <div class="contactContainer">
+        <div class="attractionAreaMap">
+          <!--This is where the map will go-->
+          <img src="../../assets/tokyo.jpg" />
+        </div>
+        <div class="attractionAddress">
+          <div class="attractionAddressCategory">
+            <div class="attractionAddressPhysical">
+              <div class="attractionAddressLabel">
+                <i class="bi bi-geo-alt"></i>
+                Address
               </div>
-              <div class="attractionAddressWebsite">
-                <div class="attractionAddressLabel">
-                  <i class="bi bi-laptop"></i>
-                  Website
-                </div>
-                <a href="{{attractionWebsite}}">
-                  {{attractionWebsite}}
-                </a>
+              <a [href]="'https://www.google.com/maps/search/?api=1&query=' + encodedAddress" target="_blank">
+                {{attractionAddress}}
+              </a>
+            </div>
+            <div class="attractionAddressWebsite">
+              <div class="attractionAddressLabel">
+                <i class="bi bi-laptop"></i>
+                Website
               </div>
-              <div class="attractionAddressPhone">
-                <div class="attractionAddressLabel">
-                  <i class="bi bi-telephone"></i>
-                  Phone
-                </div>
-                {{attractionPhone}}
+              <a href="{{attractionWebsite}}">
+                {{attractionWebsite}}
+              </a>
+            </div>
+            <div class="attractionAddressPhone">
+              <div class="attractionAddressLabel">
+                <i class="bi bi-telephone"></i>
+                Phone
               </div>
+              {{attractionPhone}}
             </div>
           </div>
         </div>
+      </div>
     </div>
+  </div>
 
-    <!--<div class="attractionLocationContainer">
+    <div class="attractionLocationContainer">
       <div class="attractionLocationTitle">Location</div>
       <div class="attractionAddress">
         <div class="attractionLocationImage">
@@ -146,9 +147,8 @@
           </div>
         </div>
       </div>
-    </div>-->
-  </div>
-
-  <app-reviews></app-reviews>
-
+    </div>
+    <div class="app-reviewsContainer">
+      <app-reviews></app-reviews>
+    </div>
 </div>

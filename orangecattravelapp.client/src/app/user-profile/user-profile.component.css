@@ -62,10 +62,28 @@
 
 .communication-preferences {
   margin-top: 10px;
+  font-size: 16px;
 }
 
   .communication-preferences label {
     margin-right: 15px;
+    margin-bottom: 10px;
+  }
+
+.bothPreference, .emailPreference, .phonePreference {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: auto;
+  align-items: center; /* Centers input fields horizontally */
+  justify-content: center; /* Optional: Centers input fields vertically if needed */
+}
+
+  .bothPreference input, .emailPreference input, .phonePreference input {
+    width: 300px; /* Set a specific width for the input fields */
+    max-width: 100%; /* Ensure they don't exceed the container width */
+    padding: 10px; /* Optional: Add padding for better aesthetics */
+    box-sizing: border-box; /* Ensures padding doesn't increase total width */
   }
 
 .profile-buttons {

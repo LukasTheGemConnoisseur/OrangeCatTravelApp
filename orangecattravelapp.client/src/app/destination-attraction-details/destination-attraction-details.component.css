@@ -1,4 +1,4 @@
-.hotelDetailsIntro {
+.attractionDetailsIntro {
   width: 100%;
   max-width: 600px;
   margin: 40px auto;
@@ -17,7 +17,7 @@
   margin: 0 8px;
 }
 
-.attractionStarRating{
+.attractionStarRating, .nearbyRestaurantRating, .nearbyHotelRating {
   font-weight: bold;
   color: #ff9500;
 }
@@ -29,7 +29,7 @@
   color: #050038;
 }
 
-.attractionReviewNumber{
+.attractionReviewNumber, .nearbyRestaurantReviewCount, .nearbyHotelReviewCount {
   font-weight: normal;
   color: #757575;
 }
@@ -44,13 +44,13 @@
 }
 
 .attractionNameContainer{
-  font-size: 40px;
+  font-size: 28px;
   color: #050038;
   font-weight: bold;
 }
 
 .attractionSubCategoryContainer {
-  font-size: 28px;
+  font-size: 22px;
   color: #050038;
   font-weight: 500;
 }
@@ -85,7 +85,7 @@
   flex-wrap: wrap; /* Stack columns on smaller screens */
 }
 
-.about, .contact {
+.about, .contact, .attractionLocationTitle {
   font-size: 28px;
   color: #050038;
   font-weight: bold;
@@ -152,25 +152,76 @@
   color: #050038;
 }
 
-/*.localAreaContainer {
-    margin-top: 100px;
+.attractionLocationContainer {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.localAreaContainer .col-6 {
-  font-size: 18px;
+.attractionLocationImage {
+    margin-bottom: 10px;
+}
+
+.attractionAddress a {
+  text-decoration: none;
   color: #050038;
-  font-weight: bold;
 }
 
-.localAreaMap img {
-  max-width: 500px;
-  height: auto;
-  padding-top: 50px;
-  padding-bottom: 100px;
-}*/
+.attractionLocationNearbySearchContainer {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding-top: 10px;
+  gap: 100px; /* Adjust the horizontal gap */
+}
+
+.attractionLocationNearbyRestaurantsTitle, .attractionLocationNearbyHotelsTitle {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #050038
+}
+
+.attractionLocationNearbyRestaurantsCard, .attractionLocationNearbyHotelsCard {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid #e0e0e0;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+  .attractionLocationNearbyRestaurantsCard:hover, .attractionLocationNearbyHotelsCard:hover {
+    background-color: #ececec;
+    transition: background-color 0.3s ease;
+  }
+
+.nearbyRestaurantName, .nearbyHotelName {
+  font-size: 16px;
+  font-weight: bold;
+  color: #050038;
+}
+
+.nearbyRestaurantRatingContainer,
+.nearbyHotelRatingContainer,
+.nearbyRestaurantInfo,
+.nearbyHotelInfo,
+.nearbyRestaurantName,
+.nearbyHotelName {
+  display: flex;
+  align-items: start;
+}
+
+.app-reviewsContainer {
+  margin-top: 50px;
+}
 
 .imgCarousel {
   margin: auto;
-  width: 50%;
+  width: 75%;
   height: auto;
 }

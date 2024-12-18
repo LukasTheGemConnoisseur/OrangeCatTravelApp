@@ -20,24 +20,60 @@ export class UserProfileComponent {
   phoneNumber: string = '';
 
   toggleEmailInput() {
-    this.showEmailInput = this.emailPreference;
-    if (!this.emailPreference) {
-      this.emailAddress = ''; // Reset email input value if checkbox is unchecked
+    if (!this.showEmailInput) {
+      // Show email input and reset others
+      this.showEmailInput = true;
+      this.showTextInput = false;
+      this.showBothInput = false;
+
+      // Update preferences
+      this.emailPreference = true;
+      this.textPreference = false;
+      this.bothPreference = false;
+    } else {
+      // Hide email input and reset preference
+      this.showEmailInput = false;
+      this.emailPreference = false;
+      this.emailAddress = ''; // Reset email value
     }
   }
 
   toggleTextInput() {
-    this.showTextInput = this.textPreference;
-    if (!this.textPreference) {
-      this.phoneNumber = ''; // Reset text input value if checkbox is unchecked
+    if (!this.showTextInput) {
+      // Show text input and reset others
+      this.showTextInput = true;
+      this.showEmailInput = false;
+      this.showBothInput = false;
+
+      // Update preferences
+      this.textPreference = true;
+      this.emailPreference = false;
+      this.bothPreference = false;
+    } else {
+      // Hide text input and reset preference
+      this.showTextInput = false;
+      this.textPreference = false;
+      this.phoneNumber = ''; // Reset text value
     }
   }
 
   toggleBothInput() {
-    this.showBothInput = this.bothPreference;
-    if (!this.bothPreference) {
-      this.emailAddress = ''; // Reset email input value if checkbox is unchecked
-      this.phoneNumber = ''; // Reset text input value if checkbox is unchecked
+    if (!this.showBothInput) {
+      // Show both inputs and reset others
+      this.showBothInput = true;
+      this.showEmailInput = false;
+      this.showTextInput = false;
+
+      // Update preferences
+      this.bothPreference = true;
+      this.emailPreference = false;
+      this.textPreference = false;
+    } else {
+      // Hide both inputs and reset preferences
+      this.showBothInput = false;
+      this.bothPreference = false;
+      this.emailAddress = ''; // Reset email value
+      this.phoneNumber = ''; // Reset text value
     }
   }
 

@@ -64,11 +64,22 @@
   height: auto;
 }
 
+.contentsViewContainer {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  max-width: 1200px; /* or 80%, for a responsive layout */
+  margin: 0 auto; /* Centers the container */
+  margin-bottom: 50px;
+}
+
 .twoColumnView {
   display: flex;
   align-items: stretch;
   justify-content: space-between;
-  padding: 0 250px;
+  gap: 30px;
+  flex-wrap: wrap; /* Stack columns on smaller screens */
 }
 
 .restaurantReviewColumn, .restaurantLocationMapColumn {

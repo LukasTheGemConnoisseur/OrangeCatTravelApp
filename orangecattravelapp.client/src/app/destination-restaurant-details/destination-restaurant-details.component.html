@@ -55,112 +55,116 @@
     <app-carousel [images]="restaurantImages" customClass="restaurantDetails-carousel"></app-carousel>
   </div>
 
-  <div class="twoColumnView">
-    <div class="restaurantReviewColumn">
-      <div class="restaurantReviewsTitle">Reviews and ratings</div>
-      <div class="restaurantOverallRating">
-        <div class="restaurantRating">
-          <i class="bi bi-star"></i>
-          {{restaurantRating}} stars
-        </div>
-        <div class="separator"></div>
-        <div class="restaurantReviewNumber">
-          <i class="bi bi-file-text"></i>
-          ({{restaurantReviewNumber}} reviews)
-        </div>
-      </div>
-      <div class="ratingsContainer">
-        <div class="ratingItem">
-          <div class="ratingLabel">
 
-            Food
+  <div class="contentsViewContainer">
+    <div class="twoColumnView">
+      <div class="restaurantReviewColumn">
+        <div class="restaurantReviewsTitle">Reviews and ratings</div>
+        <div class="restaurantOverallRating">
+          <div class="restaurantRating">
+            <i class="bi bi-star"></i>
+            {{restaurantRating}} stars
           </div>
-          <div class="ratingValue">
-            <img src="path/to/food-rating-image.jpg" alt="Food Rating">
-            {{food}}
-          </div>
-        </div>
-        <div class="ratingItem">
-          <div class="ratingLabel">Service</div>
-          <div class="ratingValue">
-            <img src="path/to/service-rating-image.jpg" alt="Service Rating">
-            {{service}}
-          </div>
-        </div>
-        <div class="ratingItem">
-          <div class="ratingLabel">Value</div>
-          <div class="ratingValue">
-            <img src="path/to/value-rating-image.jpg" alt="Value Rating">
-            {{value}}
+          <div class="separator"></div>
+          <div class="restaurantReviewNumber">
+            <i class="bi bi-file-text"></i>
+            ({{restaurantReviewNumber}} reviews)
           </div>
         </div>
-        <div class="ratingItem">
-          <div class="ratingLabel">Atmosphere</div>
-          <div class="ratingValue">
-            <img src="path/to/atmosphere-rating-image.jpg" alt="Atmosphere Rating">
-            {{atmosphere}}
+        <div class="ratingsContainer">
+          <div class="ratingItem">
+            <div class="ratingLabel">
+
+              Food
+            </div>
+            <div class="ratingValue">
+              <img src="path/to/food-rating-image.jpg" alt="Food Rating">
+              {{food}}
+            </div>
+          </div>
+          <div class="ratingItem">
+            <div class="ratingLabel">Service</div>
+            <div class="ratingValue">
+              <img src="path/to/service-rating-image.jpg" alt="Service Rating">
+              {{service}}
+            </div>
+          </div>
+          <div class="ratingItem">
+            <div class="ratingLabel">Value</div>
+            <div class="ratingValue">
+              <img src="path/to/value-rating-image.jpg" alt="Value Rating">
+              {{value}}
+            </div>
+          </div>
+          <div class="ratingItem">
+            <div class="ratingLabel">Atmosphere</div>
+            <div class="ratingValue">
+              <img src="path/to/atmosphere-rating-image.jpg" alt="Atmosphere Rating">
+              {{atmosphere}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="restaurantLocationMapColumn">
+        <div class="restaurantLocationMaptitle">Location and contact</div>
+        <div class="restaurantAreaMap">
+          <!--This is where the map will go-->
+          <img src="../../assets/tokyo.jpg" />
+        </div>
+        <div class="restaurantAddress">
+          <div class="restaurantAddressCategory">
+            <div class="restaurantAddressPhysical">
+              <div class="restaurantAddressLabel">
+                <i class="bi bi-geo-alt"></i>
+                Address
+              </div>
+              <a [href]="'https://www.google.com/maps/search/?api=1&query=' + encodedAddress" target="_blank">
+                {{address}}
+              </a>
+            </div>
+            <div class="restaurantAddressWebsite">
+              <div class="restaurantAddressLabel">
+                <i class="bi bi-laptop"></i>
+                Website
+              </div>
+              <a href="{{website}}">
+                {{website}}
+              </a>
+            </div>
+            <div class="restaurantAddressPhone">
+              <div class="restaurantAddressLabel">
+                <i class="bi bi-telephone"></i>
+                Phone
+              </div>
+              {{phone}}
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="restaurantLocationMapColumn">
-      <div class="restaurantLocationMaptitle">Location and contact</div>
-      <div class="restaurantAreaMap">
-        <!--This is where the map will go-->
-        <img src="../../assets/tokyo.jpg" />
-      </div>
-      <div class="restaurantAddress">
-        <div class="restaurantAddressCategory">
-          <div class="restaurantAddressPhysical">
-            <div class="restaurantAddressLabel">
-              <i class="bi bi-geo-alt"></i>
-              Address
-            </div>
-            <a [href]="'https://www.google.com/maps/search/?api=1&query=' + encodedAddress" target="_blank">
-              {{address}}
-            </a>
+    <div class="restaurantDetailsContainer">
+      <div class="restaurantDetailsTitle">Details</div>
+      <div class="restaurantDetailsColumns">
+        <div class="restaurantDetailsAboutColumn">
+          <div class="restaurantDetailsAboutColumnTitle">About</div>
+          <div class="restaurantDetailsAboutColumnContent">
+            {{restaurantAbout}}
           </div>
-          <div class="restaurantAddressWebsite">
-            <div class="restaurantAddressLabel">
-              <i class="bi bi-laptop"></i>
-              Website
-            </div>
-            <a href="{{website}}">
-              {{website}}
-            </a>
+        </div>
+        <div class="restaurantDetailsExtrasColumn">
+          <div class="restaurantDetailsExtrasColumnTitle">Cuisines</div>
+          <div class="restaurantDetailsExtrasColumnCuisinesContent">
+            {{restaurantCuisines}}
           </div>
-          <div class="restaurantAddressPhone">
-            <div class="restaurantAddressLabel">
-              <i class="bi bi-telephone"></i>
-              Phone
-            </div>
-            {{phone}}
+          <div class="restaurantDetailsExtrasColumnTitle">Features</div>
+          <div class="restaurantDetailsExtrasColumnFeaturesContent">
+            {{restaurantFeatures}}
           </div>
         </div>
       </div>
     </div>
+    <app-reviews></app-reviews>
   </div>
-  <div class="restaurantDetailsContainer">
-    <div class="restaurantDetailsTitle">Details</div>
-    <div class="restaurantDetailsColumns">
-      <div class="restaurantDetailsAboutColumn">
-        <div class="restaurantDetailsAboutColumnTitle">About</div>
-        <div class="restaurantDetailsAboutColumnContent">
-        {{restaurantAbout}}
-        </div>
-      </div>
-      <div class="restaurantDetailsExtrasColumn">
-        <div class="restaurantDetailsExtrasColumnTitle">Cuisines</div>
-        <div class="restaurantDetailsExtrasColumnCuisinesContent">
-          {{restaurantCuisines}}
-        </div>
-        <div class="restaurantDetailsExtrasColumnTitle">Features</div>
-        <div class="restaurantDetailsExtrasColumnFeaturesContent">
-          {{restaurantFeatures}}
-        </div>
-      </div>
-    </div>
-  </div>
-  <app-reviews></app-reviews>
+
 </div>
 

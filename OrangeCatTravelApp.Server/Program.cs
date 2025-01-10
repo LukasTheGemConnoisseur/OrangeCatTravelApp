@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient();
 builder.Services.AddRazorPages();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -53,6 +54,13 @@ app.MapControllers();
 
 app.MapFallbackToFile("/index.html");
 
+app.UseRouting();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();  // Ensure your API controllers are correctly mapped
+});
+
 // Configure the SPA
 app.UseSpa(spa =>
 {
@@ -60,8 +68,10 @@ app.UseSpa(spa =>
 
     if (app.Environment.IsDevelopment())
     {
+        // Only proxy SPA requests, not API requests
         spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
     }
 });
+
 
 app.Run();

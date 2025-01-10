@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-destination-overview',
   templateUrl: './destination-overview.component.html',
   styleUrls: ['./destination-overview.component.css']
 })
-export class DestinationOverviewComponent {
+export class DestinationOverviewComponent implements OnInit {
   destinationName: string = 'Wisconsin Dells'; // Default name
   destinationBriefOverviewAI: string = 'Nestled along the banks of the Wisconsin River, Wisconsin Dells is renowned for its stunning natural beauty and family-friendly attractions. Known as the "Waterpark Capital of the World," this vibrant city offers a mix of outdoor adventures, thrilling waterparks, and a rich history, making it a perfect getaway for all ages.'
   attractionImages: string[] = [
@@ -81,7 +81,18 @@ export class DestinationOverviewComponent {
       link: '#'
     }
   ];
-  constructor(private router: Router) { }
+
+  searchResults: any;
+  constructor
+    (private router: Router,
+    private route: ActivatedRoute
+  ) { }
+
+  ngOnInit() {
+    this.searchResults = history.state.searchResults || [];
+    console.log('Loaded search results:', this.searchResults);
+  }
+
   adventureSeeAll() {
     console.log('Redirecting...');
     // Add your routing functionality here

@@ -26,9 +26,13 @@ public class ProxyController : ControllerBase
 
         var encodedSearchQuery = Uri.EscapeDataString(searchQuery);
 
-        var apiUrl = $"https://api.content.tripadvisor.com/api/v1/location/search?key=3ED8A95286CA4B0A90F2E60E06308D6B&query={encodedSearchQuery}&language=en";
+        Console.WriteLine($"Encoded search query: {encodedSearchQuery}");
+
+        var apiUrl = $"https://api.content.tripadvisor.com/api/v1/location/search?key=3ED8A95286CA4B0A90F2E60E06308D6B&searchQuery={encodedSearchQuery}&language=en";
         var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
         request.Headers.Add("accept", "application/json");
+        request.Headers.Add("referer", "http://localhost:4200");  // Add localhost since you're developing locally
+        request.Headers.Add("origin", "http://localhost:4200");
 
         var response = await _httpClient.SendAsync(request);
 

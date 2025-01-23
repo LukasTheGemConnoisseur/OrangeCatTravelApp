@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TripAdvisorApiService {
-  private proxyUrl = 'http://localhost:7000/api/proxy'; // Backend proxy URL
+  private proxyUrl = 'https://localhost:7000/api/proxy'; // Backend proxy URL
 
 
   constructor(private http: HttpClient) { }

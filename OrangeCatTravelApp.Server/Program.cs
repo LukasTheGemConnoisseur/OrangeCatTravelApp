@@ -20,9 +20,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
-        builder => builder.WithOrigins("http://localhost:4200")
+        builder => builder.WithOrigins("https://localhost:4200")
                           .AllowAnyHeader()
-                          .AllowAnyMethod());
+                          .AllowAnyMethod()
+                           .AllowCredentials());
 });
 
 // Add SPA static files support
@@ -41,9 +42,10 @@ app.UseSpaStaticFiles();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseCors("AllowSpecificOrigin");
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.UseCors("AllowSpecificOrigin");
+    
 }
 
 app.UseHttpsRedirection();
@@ -69,7 +71,7 @@ app.UseSpa(spa =>
     if (app.Environment.IsDevelopment())
     {
         // Only proxy SPA requests, not API requests
-        spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
+        spa.UseProxyToSpaDevelopmentServer("https://localhost:4200");
     }
 });
 

@@ -24,8 +24,7 @@ interface Photo {
   styleUrls: ['./suggested-travel-destinations.component.css'],
 })
 export class SuggestedTravelDestinationsComponent implements OnInit {
-  minTravelId: number = 28974;
-  maxTravelId: number = 60899;
+  travelIdArray: number[] = [35805, 42139, 45963, 60403, 37835, 60750, 60898, 60763, 60713, 34515, 34438, 60982, 32655, 60878, 54171, 60864, 60745, 55229, 55197, 30196, 60811, 60922, 60097, 33388, 60933, 31310, 60974, 60360, 43323, 44881];
   destinations: any[] = []; // Stores the final combined data
 
   constructor(
@@ -38,68 +37,60 @@ export class SuggestedTravelDestinationsComponent implements OnInit {
   }
 
   getRandomTravelId(): number {
-    return Math.floor(
-      Math.random() * (this.maxTravelId - this.minTravelId + 1) + this.minTravelId
-    );
+    const index: number = Math.floor(Math.random() * this.travelIdArray.length);
+    const result: number = this.travelIdArray[index];
+    return result;
   }
 
   suggested() {
     const destinationRequests: Promise<Destination>[] = [];
     const photoRequests: Promise<Photo>[] = [];
+    const randomIdArray: number[] = [];
 
     for (let i = 0; i < 4; i++) {
       const randomId = this.getRandomTravelId();
-      console.log('Fetching data for Location ID:', randomId);
 
-      const destinationRequest = this.tripAdvisorApi
-        .displaySuggestedDestinations(randomId)
-        .toPromise();
-      destinationRequests.push(destinationRequest);
+      if (randomIdArray.includes(randomId)) {
+        i--
+        continue;
 
-      this.tripAdvisorApi
-        .displaySuggestedDestinationsPhotos(randomId)
-        .toPromise()
-        .then((photoResult) => {
-          const photoUrl = photoResult?.data?.[0]?.images?.large?.url;
-          if (photoUrl) {
-            photoRequests.push(Promise.resolve(photoResult));
-          } else {
-            console.warn('Photo is missing, retrying...');
-            destinationRequests.pop();
-            i--; // Retry the current iteration
-          }
-        })
-        .catch((error) => {
-          console.error('Error fetching photo:', error);
-          destinationRequests.pop();
-          i--; // Retry the current iteration
-        });
+      }
+      else {
+        randomIdArray.push(randomId)
+        const destinationRequest = this.tripAdvisorApi
+          .displaySuggestedDestinations(randomId)
+          .toPromise();
+
+        const photoRequest = this.tripAdvisorApi
+          .displaySuggestedDestinationsPhotos(randomId)
+          .toPromise()
+          .catch((error) => {
+            console.error("Error fetching photo:", error);
+            return { data: [] }; // Return an empty data array to prevent errors
+          });
+        destinationRequests.push(destinationRequest);
+        photoRequests.push(photoRequest);
+      }
     }
+    console.log(randomIdArray);
 
     // Wait for all requests to finish
     Promise.all([Promise.all(destinationRequests), Promise.all(photoRequests)])
+
       .then(([destinationResults, photoResults]) => {
+
         // Combine destination data with photo data
         this.destinations = destinationResults.map((result, index) => ({
           name: result.name || 'Unknown Destination',
           image:
-            photoResults[index]?.data?.[0]?.images?.large?.url ||
+            photoResults[index]?.data[0]?.images?.large?.url ||
             'assets/tokyo.jpg',
           link: result.web_url || '#',
+          
         }));
-
-        console.log('All destinations with photos loaded:', this.destinations);
       })
       .catch((error) => {
         console.error('Error fetching search results or photos:', error);
       });
-  }
-
-  retryFetchPhoto() {
-    const newRandomId = this.getRandomTravelId();
-    console.log('Retrying fetch for new Location ID:', newRandomId);
-    return this.tripAdvisorApi
-      .displaySuggestedDestinationsPhotos(newRandomId)
-      .toPromise();
   }
 }

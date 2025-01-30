@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
@@ -71,9 +72,9 @@ public class ProxyController : ControllerBase
         request.Headers.Add("origin", "http://localhost:4200");
 
         var response = await _httpClient.SendAsync(request);
-
         if (response.IsSuccessStatusCode)
         {
+            
             var data = await response.Content.ReadAsStringAsync();
             return Content(data, "application/json");
         }

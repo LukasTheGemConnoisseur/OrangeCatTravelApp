@@ -20,13 +20,11 @@ export class TripAdvisorApiService {
 
   displaySuggestedDestinations(randomID: number): Observable<any> {
     const params = { locationId: randomID };
-    console.log('Request parameters:', params);
     return this.http.get<any>(`${this.proxyUrl}/suggested`, { params });
   }
 
   displaySuggestedDestinationsPhotos(randomID: number): Observable<any> {
     const params = { locationId: randomID };
-    console.log('Request parameters:', params);
     return this.http.get<any>(`${this.proxyUrl}/suggestedPhoto`, { params });
   }
 }

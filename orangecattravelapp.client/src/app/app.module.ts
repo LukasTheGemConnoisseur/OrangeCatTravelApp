@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router'; // Import RouterModule and Routes
+import { AppRoutingModule } from './app-routing.module';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -22,17 +22,6 @@ import { DestinationRestaurantDetailsComponent } from './destination-restaurant-
 import { DestinationHotelListComponent } from './destination-hotel-list/destination-hotel-list.component';
 import { DestinationHotelDetailsComponent } from './destination-hotel-details/destination-hotel-details.component';
 
-const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'user-profile', component: UserProfileComponent },
-  { path: 'destination-overview', component: DestinationOverviewComponent },
-  { path: 'destination-attraction-list', component: DestinationAttractionListComponent },
-  { path: 'destination-attraction-details', component: DestinationAttractionDetailsComponent },
-  { path: 'destination-restaurant-list', component: DestinationRestaurantListComponent },
-  { path: 'destination-restaurant-details', component: DestinationRestaurantDetailsComponent },
-  { path: 'destination-hotel-list', component: DestinationHotelListComponent },
-  { path: 'destination-hotel-details', component: DestinationHotelDetailsComponent }
-];
 
 @NgModule({
   declarations: [
@@ -55,9 +44,8 @@ const routes: Routes = [
     DestinationHotelDetailsComponent
   ],
   imports: [
-    BrowserModule, HttpClientModule, RouterModule.forRoot(routes), FormsModule
+    BrowserModule, HttpClientModule, FormsModule, AppRoutingModule
   ],
-  exports: [RouterModule],
   providers: [],
   bootstrap: [AppComponent]
 })

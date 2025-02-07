@@ -68,7 +68,11 @@
               "browserTarget": "orangecattravelapp.client:build:production"
             },
             "development": {
-              "browserTarget": "orangecattravelapp.client:build:development"
+              "browserTarget": "orangecattravelapp.client:build:development",
+              "ssl": true,
+              "sslCert": "C:/Windows/System32/127.0.0.1+1.pem",
+              "sslKey": "C:/Windows/System32/127.0.0.1+1-key.pem",
+              "host": "127.0.0.1"
             }
           },
           "defaultConfiguration": "development",

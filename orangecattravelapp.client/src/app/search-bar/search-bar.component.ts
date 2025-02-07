@@ -16,11 +16,14 @@ export class SearchBarComponent {
 
   search() {
     console.log('Search term:', this.searchTerm);
+    //Formats the search term to a url friendly form, removing the whitespace, pretty cool.
+    const formattedTerm = this.searchTerm.replace(/\s+/g, '-').toLowerCase();
+
     this.tripAdvisorApi.searchDestinations(this.searchTerm).subscribe(
       (results) => {
         console.log('Search results:', results);
         // Navigate to the results page with the results
-        this.router.navigate(['/destination-overview'], { state: { searchResults: results }
+        this.router.navigate(['/destination-overview', formattedTerm], { state: { searchResults: results }
         });
       },
       (error) => {

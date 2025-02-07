@@ -14,7 +14,6 @@ export class TripAdvisorApiService {
   searchDestinations(searchTerm: string): Observable<any> {
     const encodedSearchTerm = encodeURIComponent(searchTerm);
     const params = { searchQuery: encodedSearchTerm };
-    console.log('Request parameters:', params);
     return this.http.get<any>(`${this.proxyUrl}/search`, {params });
   }
 
@@ -27,4 +26,34 @@ export class TripAdvisorApiService {
     const params = { locationId: randomID };
     return this.http.get<any>(`${this.proxyUrl}/suggestedPhoto`, { params });
   }
+
+  //displayDestinationPhotos(destinationID: number): Observable<any> {
+  //  const params = { locationId: destinationID };
+  //}
+
+  displayDestinationDescription(destinationID: number): Observable<any> {
+    const params = { locationId: destinationID };
+    return this.http.get<any>(`${this.proxyUrl}/destinationDescription`, { params });
+  }
+  displayDestinationAttractions(latLong: string, category: string): Observable<any> {
+    const params = { latLong: latLong, category : category };
+    return this.http.get<any>(`${this.proxyUrl}/destinationAttractions`, { params });
+  }
+  //Lat long
+  //displayDestinationHotels(destinationID: number): Observable<any> {
+  //  const params = { locationId: destinationID };
+  //Lat long
+  //displayDestinationRestaurants(destinationID: number): Observable<any> {
+  //  const params = { locationId: destinationID };
+  //}
+  //}
+  //displayDestinationAttractionsPhotos(destinationID: number): Observable<any> {
+  //  const params = { locationId: destinationID };
+  //}
+  //displayDestinationHotelsPhotos(destinationID: number): Observable<any> {
+  //  const params = { locationId: destinationID };
+  //displayDestinationRestaurantsPhotos(destinationID: number): Observable<any> {
+  //  const params = { locationId: destinationID };
+  //}
+  //}
 }

@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TripAdvisorApiService } from '../services/tripadvisor-api.service';
+import { forkJoin } from 'rxjs';
+export interface Place {
+  name: string;
+  image: string;
+  link: string;
+}
 
 @Component({
   selector: 'app-destination-overview',
@@ -20,71 +26,46 @@ export class DestinationOverviewComponent implements OnInit {
   nearbyPlaces: string[] = ["attractions", "hotels", "restaurants"];
   nearby: any[] = [];
 
-  adventures = [
-    {
-      name: 'Mount Olympus',
-      image: 'assets/paris.jpg',
-      link: '#'
-    },
-    {
-      name: 'Kalahari Indoor Waterpark',
-      image: 'assets/newyork.jpg',
-      link: '#'
-    },
-    {
-      name: 'Wilderness Territory',
-      image: 'assets/tokyo.jpg',
-      link: '#'
-    },
-    {
-      name: 'Timbavati Wildlife Park',
-      image: 'assets/sydney.jpg',
-      link: '#'
-    }
+  adventures: Place[] = [
+    { name: 'Mount Olympus', image: 'assets/paris.jpg', link: '#' },
+    { name: 'Kalahari Indoor Waterpark', image: 'assets/newyork.jpg', link: '#' },
+    { name: 'Wilderness Territory', image: 'assets/tokyo.jpg', link: '#' },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' }
   ];
-  hotels = [
-    {
-      name: 'Black Hawk Motel & Suites',
-      image: 'assets/paris.jpg',
-      link: '#'
-    },
-    {
-      name: 'Ambers Inn & Suites',
-      image: 'assets/newyork.jpg',
-      link: '#'
-    },
-    {
-      name: 'Cedar Lodge & Settlement',
-      image: 'assets/tokyo.jpg',
-      link: '#'
-    },
-    {
-      name: 'All Star Inn & Suites',
-      image: 'assets/sydney.jpg',
-      link: '#'
-    }
+
+  hotels: Place[] = [
+    { name: 'Mount Olympus', image: 'assets/paris.jpg', link: '#' },
+    { name: 'Kalahari Indoor Waterpark', image: 'assets/newyork.jpg', link: '#' },
+    { name: 'Wilderness Territory', image: 'assets/tokyo.jpg', link: '#' },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' }
   ];
-  restaurants = [
-    {
-      name: 'Dells Pizza Lab',
-      image: 'assets/paris.jpg',
-      link: '#'
-    },
-    {
-      name: "Kaminski's Chop House",
-      image: 'assets/newyork.jpg',
-      link: '#'
-    },
-    {
-      name: 'High Rock Cafe',
-      image: 'assets/tokyo.jpg',
-      link: '#'
-    },
-    {
-      name: 'Hot Dog Avenue',
-      image: 'assets/sydney.jpg',
-      link: '#'
-    }
+
+  restaurants: Place[] = [
+    { name: 'Mount Olympus', image: 'assets/paris.jpg', link: '#' },
+    { name: 'Kalahari Indoor Waterpark', image: 'assets/newyork.jpg', link: '#' },
+    { name: 'Wilderness Territory', image: 'assets/tokyo.jpg', link: '#' },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' }
+  ];
+
+  attractionImages: string[] = [
+    'assets/sydney.jpg',
+    'assets/tokyo.jpg',
+    'assets/newyork.jpg'
   ];
 
   constructor
@@ -103,6 +84,10 @@ export class DestinationOverviewComponent implements OnInit {
     this.locationId = this.searchResults.data?.[0]?.location_id;
     console.log('location Id:', this.locationId);
     this.displayData();
+  }
+
+  truncateText(text: string, maxLength: number): string {
+    return text.length > maxLength ? text.slice(0, maxLength) + "..." : text;
   }
 
   displayData() {
@@ -129,33 +114,33 @@ export class DestinationOverviewComponent implements OnInit {
   loadNearbyPlaces() {
     this.latLong = this.lat + ',' + this.long;
     console.log("Latitude + longitude:", this.latLong)
-    for (let i = 0; i < 3; i++) {
-      this.tripAdvisorApi.displayDestinationAttractions(this.latLong, this.nearbyPlaces[i]).subscribe(
-        (results) => {
-          console.log(`nearby ${this.nearbyPlaces[i]}:`, results);
-          this.nearby[i] = results;
-        },
-        (error) => {
-          console.error(`Error fetching nearby ${this.nearbyPlaces[i]}:`, error);
+
+    const apiCalls = this.nearbyPlaces.map((placeType) =>
+      this.tripAdvisorApi.displayDestinationAttractions(this.latLong, placeType)
+     /* this.tripAdvisorApi.displaySuggestedDestinationsPhotos()*/
+    );
+
+    forkJoin(apiCalls).subscribe(
+      (responses) => {
+        // Store responses in `this.nearby` array
+        this.nearby = responses;
+        console.log("nearby array:", this.nearby);
+
+        // Now that all data is available, process the arrays
+        for (let j = 0; j < 9; j++) {
+          this.adventures[j].name = this.nearby[0]?.data?.[j]?.name || 'N/A';
+          this.hotels[j].name = this.nearby[1]?.data?.[j]?.name || 'N/A';
+          this.restaurants[j].name = this.nearby[2]?.data?.[j]?.name || 'N/A';
         }
-      )
-    }
-    console.log("nearby array:", this.nearby);
-
-    //for (let j = 0; j < 5; j++) {
-    //  this.adventures[j].name = this.nearby[0].data[j].name;
-    //  console.log("adventures name:", this.adventures[j].name)
-    //  this.hotels[j].name = this.nearby[1].data[j].name;
-    //  this.restaurants[j].name = this.nearby[2].data[j].name;
-    //}
+        console.log("adventures name:", this.adventures);
+        console.log("hotels name:", this.hotels);
+        console.log("restaurants name:", this.restaurants);
+      },
+      (error) => {
+        console.error("Error fetching nearby places:", error);
+      }
+    );
   }
-
-
-  attractionImages: string[] = [
-    'assets/sydney.jpg',
-    'assets/tokyo.jpg',
-    'assets/newyork.jpg'
-  ];
 
   adventureSeeAll() {
     console.log('Redirecting...');

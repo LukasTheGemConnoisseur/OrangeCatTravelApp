@@ -103,7 +103,7 @@
 
 .carousel-container {
   flex: 1; /* Takes up the remaining space */
-  max-width: 1400px; /* Ensures the carousel doesn't stretch too wide */
+  max-width: 1200px; /* Ensures the carousel doesn't stretch too wide */
   margin: 0;
 }
 
@@ -147,8 +147,8 @@
 
 .image-container {
   position: relative;
-  width: 300px;
-  height: 230px;
+  width: 375px;
+  height: 288px;
 }
 
 .adventure img,

@@ -106,7 +106,7 @@ public class ProxyController : ControllerBase
     public async Task<IActionResult> DestinationAttractions([FromQuery] string latLong, string category)
     {
 
-        var apiUrl = $"https://api.content.tripadvisor.com/api/v1/location/nearby_search?latLong={latLong}&key=3ED8A95286CA4B0A90F2E60E06308D6B&category={category}&language=en";
+        var apiUrl = $"https://api.content.tripadvisor.com/api/v1/location/nearby_search?latLong={latLong}&key=3ED8A95286CA4B0A90F2E60E06308D6B&category={category}&radius=10&radiusUnit=mi&language=en";
         var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
         request.Headers.Add("accept", "application/json");
         request.Headers.Add("referer", "http://localhost:4200");

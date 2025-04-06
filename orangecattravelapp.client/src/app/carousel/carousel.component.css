@@ -1,16 +1,19 @@
 .carousel {
   position: relative;
-  padding: 20px 200px 50px 200px;
+  display: block;
+  margin: auto;
+  width: 50%;
+  padding: 20px 0 0 0;
 }
 
   .carousel img {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: 600px; /*Adjust as needed */
-    margin: auto;
+    padding: 10px;
+    max-height: 500px;
+    min-height: 500px;
+    object-fit: contain;
     border-radius: 16px;
     border: 2px solid #e0e0e0;
+    background: #fff; /* optional background to show behind letterboxed areas */
   }
 .carousel-control-next-icon,
 .carousel-control-prev-icon {
@@ -19,12 +22,3 @@
 .carousel-indicators {
   filter: invert(1) grayscale(100);
 }
-
-/* Specific styles for details page carousel */
-/*.details-carousel .carousel {
-  padding: 50px;
-}
-
-  .details-carousel .carousel img {
-    max-height: 300px;
-  }*/

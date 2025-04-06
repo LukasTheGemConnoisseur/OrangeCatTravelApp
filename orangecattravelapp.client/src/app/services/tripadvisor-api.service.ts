@@ -27,9 +27,10 @@ export class TripAdvisorApiService {
     return this.http.get<any>(`${this.proxyUrl}/suggestedPhoto`, { params });
   }
 
-  //displayDestinationPhotos(destinationID: number): Observable<any> {
-  //  const params = { locationId: destinationID };
-  //}
+  displayDestinationPhotos(destinationID: number): Observable<any> {
+    const params = { locationId: destinationID };
+    return this.http.get<any>(`${this.proxyUrl}/destinationPhoto`, { params });
+  }
 
   displayDestinationDescription(destinationID: number): Observable<any> {
     const params = { locationId: destinationID };

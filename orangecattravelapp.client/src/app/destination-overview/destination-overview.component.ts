@@ -62,11 +62,7 @@ export class DestinationOverviewComponent implements OnInit {
     { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' }
   ];
 
-  attractionImages: string[] = [
-    'assets/sydney.jpg',
-    'assets/tokyo.jpg',
-    'assets/newyork.jpg'
-  ];
+  attractionImages: string[] = [];
 
   constructor
     (private router: Router,
@@ -91,14 +87,34 @@ export class DestinationOverviewComponent implements OnInit {
   }
 
   displayData() {
+    const locationData = this.searchResults.data?.[0];
+    this.locationId = locationData.location_id;
     this.destinationName = this.searchResults.data?.[0]?.name;
+
+
     this.loadDescription();
+    this.loadDestinationPhotos();
+  }
+
+  loadDestinationPhotos() {
+    this.tripAdvisorApi.displayDestinationPhotos(this.locationId).subscribe(
+      (results) => {
+        console.log('destination photo results:', results);
+        for (let index = 0; index < 5; index++) {
+          this.attractionImages.push(results.data[index].images.original.url || 'assets/tokyo.jpg')
+        }
+
+      },
+      (error) => {
+        console.error('Error fetching destination photos:', error);
+      }
+    )
   }
 
   loadDescription() {
     this.tripAdvisorApi.displayDestinationDescription(this.locationId).subscribe(
       (results) => {
-        console.log('Search results:', results);
+        /*console.log('Search results:', results);*/
         this.destinationBriefOverview = results.description;
         this.lat = results.latitude;
         this.long = results.longitude;
@@ -113,7 +129,7 @@ export class DestinationOverviewComponent implements OnInit {
 
   loadNearbyPlaces() {
     this.latLong = this.lat + ',' + this.long;
-    console.log("Latitude + longitude:", this.latLong)
+    /*console.log("Latitude + longitude:", this.latLong)*/
 
     const apiCalls = this.nearbyPlaces.map((placeType) =>
       this.tripAdvisorApi.displayDestinationAttractions(this.latLong, placeType)
@@ -122,7 +138,7 @@ export class DestinationOverviewComponent implements OnInit {
 
     forkJoin(apiCalls).subscribe(
       (responses) => {
-        // Store responses in `this.nearby` array
+        // Store responses in `this.nearby array
         this.nearby = responses;
         console.log("nearby array:", this.nearby);
 

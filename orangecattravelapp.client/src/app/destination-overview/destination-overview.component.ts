@@ -97,34 +97,34 @@ export class DestinationOverviewComponent implements OnInit {
   }
 
   loadDestinationPhotos() {
-    this.tripAdvisorApi.displayDestinationPhotos(this.locationId).subscribe(
-      (results) => {
+    this.tripAdvisorApi.displayDestinationPhotos(this.locationId).subscribe({
+      next: (results) => {
         console.log('destination photo results:', results);
         for (let index = 0; index < 5; index++) {
-          this.attractionImages.push(results.data[index].images.original.url || 'assets/tokyo.jpg')
+          const photo = results.data?.[index]?.images?.original?.url;
+          const photo_backup = results.data?.[index]?.images?.large?.url;
+          this.attractionImages.push(photo || photo_backup || 'assets/picture_failed.png');
         }
-
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching destination photos:', error);
       }
-    )
+    });
   }
 
   loadDescription() {
-    this.tripAdvisorApi.displayDestinationDescription(this.locationId).subscribe(
-      (results) => {
-        /*console.log('Search results:', results);*/
+    this.tripAdvisorApi.displayDestinationDescription(this.locationId).subscribe({
+      next: (results) => {
         this.destinationBriefOverview = results.description;
         this.lat = results.latitude;
         this.long = results.longitude;
 
         this.loadNearbyPlaces();
       },
-      (error) => {
+      error: (error) => {
         console.error('Error fetching destination description:', error);
       }
-    )
+    });
   }
 
   loadNearbyPlaces() {
@@ -136,13 +136,11 @@ export class DestinationOverviewComponent implements OnInit {
      /* this.tripAdvisorApi.displaySuggestedDestinationsPhotos()*/
     );
 
-    forkJoin(apiCalls).subscribe(
-      (responses) => {
-        // Store responses in `this.nearby array
+    forkJoin(apiCalls).subscribe({
+      next: (responses) => {
         this.nearby = responses;
         console.log("nearby array:", this.nearby);
 
-        // Now that all data is available, process the arrays
         for (let j = 0; j < 9; j++) {
           this.adventures[j].name = this.nearby[0]?.data?.[j]?.name || 'N/A';
           this.hotels[j].name = this.nearby[1]?.data?.[j]?.name || 'N/A';
@@ -152,10 +150,10 @@ export class DestinationOverviewComponent implements OnInit {
         console.log("hotels name:", this.hotels);
         console.log("restaurants name:", this.restaurants);
       },
-      (error) => {
+      error: (error) => {
         console.error("Error fetching nearby places:", error);
       }
-    );
+    });
   }
 
   adventureSeeAll() {

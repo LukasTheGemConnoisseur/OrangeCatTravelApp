@@ -16,9 +16,10 @@
     background: #fff; /* optional background to show behind letterboxed areas */
   }
 .carousel-control-next-icon,
-.carousel-control-prev-icon {
+.carousel-control-prev-icon{
   filter: invert(1) grayscale(100);
 }
-.carousel-indicators {
-  filter: invert(1) grayscale(100);
+.carousel-indicators button{
+  background-color: gray;
+  mix-blend-mode: difference;
 }

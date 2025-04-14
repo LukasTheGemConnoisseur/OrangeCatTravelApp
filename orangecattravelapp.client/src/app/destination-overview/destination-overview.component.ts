@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TripAdvisorApiService } from '../services/tripadvisor-api.service';
-import { forkJoin } from 'rxjs';
+import { forkJoin, from } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
+
 export interface Place {
   name: string;
   image: string;
   link: string;
+  location_id: number;
 }
 
 @Component({
@@ -27,39 +30,39 @@ export class DestinationOverviewComponent implements OnInit {
   nearby: any[] = [];
 
   adventures: Place[] = [
-    { name: 'Mount Olympus', image: 'assets/paris.jpg', link: '#' },
-    { name: 'Kalahari Indoor Waterpark', image: 'assets/newyork.jpg', link: '#' },
-    { name: 'Wilderness Territory', image: 'assets/tokyo.jpg', link: '#' },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' }
+    { name: 'Mount Olympus', image: 'assets/paris.jpg', link: '#', location_id: 0 },
+    { name: 'Kalahari Indoor Waterpark', image: 'assets/newyork.jpg', link: '#', location_id: 0 },
+    { name: 'Wilderness Territory', image: 'assets/tokyo.jpg', link: '#', location_id: 0 },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0},
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 }
   ];
 
   hotels: Place[] = [
-    { name: 'Mount Olympus', image: 'assets/paris.jpg', link: '#' },
-    { name: 'Kalahari Indoor Waterpark', image: 'assets/newyork.jpg', link: '#' },
-    { name: 'Wilderness Territory', image: 'assets/tokyo.jpg', link: '#' },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' }
+    { name: 'Mount Olympus', image: 'assets/paris.jpg', link: '#', location_id: 0 },
+    { name: 'Kalahari Indoor Waterpark', image: 'assets/newyork.jpg', link: '#', location_id: 0 },
+    { name: 'Wilderness Territory', image: 'assets/tokyo.jpg', link: '#', location_id: 0 },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 }
   ];
 
   restaurants: Place[] = [
-    { name: 'Mount Olympus', image: 'assets/paris.jpg', link: '#' },
-    { name: 'Kalahari Indoor Waterpark', image: 'assets/newyork.jpg', link: '#' },
-    { name: 'Wilderness Territory', image: 'assets/tokyo.jpg', link: '#' },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#' }
+    { name: 'Mount Olympus', image: 'assets/paris.jpg', link: '#', location_id: 0},
+    { name: 'Kalahari Indoor Waterpark', image: 'assets/newyork.jpg', link: '#', location_id: 0},
+    { name: 'Wilderness Territory', image: 'assets/tokyo.jpg', link: '#', location_id: 0 },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
+    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 }
   ];
 
   attractionImages: string[] = [];
@@ -75,9 +78,11 @@ export class DestinationOverviewComponent implements OnInit {
 
     if (history.state.searchResults) {
       this.searchResults = history.state.searchResults;
+      console.log('Search results:', this.searchResults);
+    } else {
+      console.error('No search results found in state.');
     }
-    console.log('Search results:', this.searchResults);
-    this.locationId = this.searchResults.data?.[0]?.location_id;
+    this.locationId = this.searchResults.data?.[0]?.location_id || this.searchResults?.location_id;
     console.log('location Id:', this.locationId);
     this.displayData();
   }
@@ -87,9 +92,9 @@ export class DestinationOverviewComponent implements OnInit {
   }
 
   displayData() {
-    const locationData = this.searchResults.data?.[0];
+    const locationData = this.searchResults.data?.[0] || this.searchResults;
     this.locationId = locationData.location_id;
-    this.destinationName = this.searchResults.data?.[0]?.name;
+    this.destinationName = this.searchResults.data?.[0]?.name || locationData.name;
 
 
     this.loadDescription();
@@ -99,7 +104,7 @@ export class DestinationOverviewComponent implements OnInit {
   loadDestinationPhotos() {
     this.tripAdvisorApi.displayDestinationPhotos(this.locationId).subscribe({
       next: (results) => {
-        console.log('destination photo results:', results);
+        /*console.log('destination photo results:', results);*/
         for (let index = 0; index < 5; index++) {
           const photo = results.data?.[index]?.images?.original?.url;
           const photo_backup = results.data?.[index]?.images?.large?.url;
@@ -129,11 +134,10 @@ export class DestinationOverviewComponent implements OnInit {
 
   loadNearbyPlaces() {
     this.latLong = this.lat + ',' + this.long;
-    /*console.log("Latitude + longitude:", this.latLong)*/
+    console.log("Latitude + longitude:", this.latLong)
 
     const apiCalls = this.nearbyPlaces.map((placeType) =>
       this.tripAdvisorApi.displayDestinationAttractions(this.latLong, placeType)
-     /* this.tripAdvisorApi.displaySuggestedDestinationsPhotos()*/
     );
 
     forkJoin(apiCalls).subscribe({
@@ -141,14 +145,60 @@ export class DestinationOverviewComponent implements OnInit {
         this.nearby = responses;
         console.log("nearby array:", this.nearby);
 
+        const photoApiCalls = [];
+
         for (let j = 0; j < 9; j++) {
+          /*assigning nearby location names to our arrays for easy access*/
           this.adventures[j].name = this.nearby[0]?.data?.[j]?.name || 'N/A';
           this.hotels[j].name = this.nearby[1]?.data?.[j]?.name || 'N/A';
           this.restaurants[j].name = this.nearby[2]?.data?.[j]?.name || 'N/A';
+
+          /*assigning nearby location location_ids to our arrays for easy access*/
+          this.adventures[j].location_id = this.nearby[0]?.data?.[j]?.location_id || 0;
+          this.hotels[j].location_id = this.nearby[1]?.data?.[j]?.location_id || 0;
+          this.restaurants[j].location_id = this.nearby[2]?.data?.[j]?.location_id || 0;
+
+          /* Only push API calls if location_id is valid */
+          if (this.adventures[j].location_id) {
+            photoApiCalls.push(this.tripAdvisorApi.displayDestinationPhotos(this.adventures[j].location_id));
+          }
+          if (this.hotels[j].location_id) {
+            photoApiCalls.push(this.tripAdvisorApi.displayDestinationPhotos(this.hotels[j].location_id));
+          }
+          if (this.restaurants[j].location_id) {
+            photoApiCalls.push(this.tripAdvisorApi.displayDestinationPhotos(this.restaurants[j].location_id));
+          }
         }
-        console.log("adventures name:", this.adventures);
-        console.log("hotels name:", this.hotels);
-        console.log("restaurants name:", this.restaurants);
+
+        forkJoin(photoApiCalls).subscribe({
+          next: (photos) => {
+            for (let k = 0; k < 9; k++) {
+              if (this.adventures[k].location_id) {
+                this.adventures[k].image = photos[0].data?.[k]?.images?.original?.url ||
+                  photos[0].data?.[k]?.images?.large?.url ||
+                  'assets/picture_failed.png';
+              }
+              if (this.hotels[k].location_id) {
+                this.hotels[k].image = photos[1].data?.[k]?.images?.original?.url ||
+                  photos[1].data?.[k]?.images?.large?.url ||
+                  'assets/picture_failed.png';
+              }
+              if (this.restaurants[k].location_id) {
+                this.restaurants[k].image = photos[2].data?.[k]?.images?.original?.url ||
+                  photos[2].data?.[k]?.images?.large?.url ||
+                  'assets/picture_failed.png';
+              }
+            }
+
+            console.log("adventures name:", this.adventures);
+            console.log("hotels name:", this.hotels);
+            console.log("restaurants name:", this.restaurants);
+
+          },
+          error: (error) => {
+            console.error("Error fetching nearby place photos:", error);
+          }
+          });
       },
       error: (error) => {
         console.error("Error fetching nearby places:", error);

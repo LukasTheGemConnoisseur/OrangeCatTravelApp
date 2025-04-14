@@ -72,11 +72,9 @@ export class SuggestedTravelDestinationsComponent implements OnInit {
         photoRequests.push(photoRequest);
       }
     }
-    console.log(randomIdArray);
 
     // Wait for all requests to finish
     Promise.all([Promise.all(destinationRequests), Promise.all(photoRequests)])
-
       .then(([destinationResults, photoResults]) => {
 
         // Combine destination data with photo data
@@ -84,9 +82,14 @@ export class SuggestedTravelDestinationsComponent implements OnInit {
           name: result.name || 'Unknown Destination',
           image:
             photoResults[index]?.data[0]?.images?.large?.url ||
-            'assets/tokyo.jpg',
-          link: result.web_url || '#',
-          
+            'assets/picture_failed.png',
+          navigate: () => {
+            console.log('Navigating to:', result.name); // Debugging log
+            console.log('State being passed:', result); // Debugging log
+            this.router.navigate(['/destination-overview', result.name.replace(/\s+/g, '-').toLowerCase()], {
+              state: { searchResults: result }
+            });
+          }
         }));
       })
       .catch((error) => {

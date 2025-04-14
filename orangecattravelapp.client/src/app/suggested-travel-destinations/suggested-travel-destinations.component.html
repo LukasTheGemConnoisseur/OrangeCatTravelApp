@@ -1,6 +1,6 @@
 <div class="destinations-container" *ngIf="destinations.length > 0">
   <div class="destination" *ngFor="let destination of destinations">
-    <a [href]="destination.link" target="_blank">
+    <a (click)="destination.navigate()" style="cursor: pointer;">
       <div class="image-container">
         <img [src]="destination.image" [alt]="destination.name" />
       </div>

@@ -30,39 +30,38 @@ export class DestinationOverviewComponent implements OnInit {
   nearby: any[] = [];
 
   adventures: Place[] = [
-    { name: 'Mount Olympus', image: 'assets/paris.jpg', link: '#', location_id: 0 },
-    { name: 'Kalahari Indoor Waterpark', image: 'assets/newyork.jpg', link: '#', location_id: 0 },
-    { name: 'Wilderness Territory', image: 'assets/tokyo.jpg', link: '#', location_id: 0 },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0},
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 }
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0},
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 }
   ];
 
   hotels: Place[] = [
-    { name: 'Mount Olympus', image: 'assets/paris.jpg', link: '#', location_id: 0 },
-    { name: 'Kalahari Indoor Waterpark', image: 'assets/newyork.jpg', link: '#', location_id: 0 },
-    { name: 'Wilderness Territory', image: 'assets/tokyo.jpg', link: '#', location_id: 0 },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 }
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 }
   ];
-
   restaurants: Place[] = [
-    { name: 'Mount Olympus', image: 'assets/paris.jpg', link: '#', location_id: 0},
-    { name: 'Kalahari Indoor Waterpark', image: 'assets/newyork.jpg', link: '#', location_id: 0},
-    { name: 'Wilderness Territory', image: 'assets/tokyo.jpg', link: '#', location_id: 0 },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 },
-    { name: 'Timbavati Wildlife Park', image: 'assets/sydney.jpg', link: '#', location_id: 0 }
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 }
   ];
 
   attractionImages: string[] = [];
@@ -74,6 +73,7 @@ export class DestinationOverviewComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.destinationParam = this.route.snapshot.paramMap.get('destination') || '';
 
     if (history.state.searchResults) {
@@ -203,6 +203,18 @@ export class DestinationOverviewComponent implements OnInit {
       error: (error) => {
         console.error("Error fetching nearby places:", error);
       }
+    });
+  }
+
+  slugify(name: string): string {
+    return name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  }
+
+  navigateToRestaurantDetails(restaurant: any): void {
+    const slug = this.slugify(restaurant.name);
+    console.log('Redirecting to', slug);
+    this.router.navigate(['/destination-restaurant-details', slug], {
+      state: { restaurant }
     });
   }
 

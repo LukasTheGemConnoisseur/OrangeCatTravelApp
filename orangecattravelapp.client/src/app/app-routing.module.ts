@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'destination-attraction-list', component: DestinationAttractionListComponent },
   { path: 'destination-attraction-details', component: DestinationAttractionDetailsComponent },
   { path: 'destination-restaurant-list', component: DestinationRestaurantListComponent },
-  { path: 'destination-restaurant-details', component: DestinationRestaurantDetailsComponent },
+  { path: 'destination-restaurant-details/:slug', component: DestinationRestaurantDetailsComponent },
   { path: 'destination-hotel-list', component: DestinationHotelListComponent },
   { path: 'destination-hotel-details', component: DestinationHotelDetailsComponent }
 ];

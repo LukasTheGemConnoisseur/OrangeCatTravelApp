@@ -1,6 +1,6 @@
 .restaurantIntro {
   width: 100%;
-  max-width: 1050px;
+  max-width: 1400px;
   margin: 50px auto;
   margin-bottom: 0px;
   padding: 20px;
@@ -29,12 +29,6 @@
   margin-left: 6px;
   font-weight: normal;
   color: #757575;
-}
-
-.restaurantOpenOrClosed {
-  margin-left: 6px;
-  color: green;
-  font-weight: bold;
 }
 
 .separator::before {

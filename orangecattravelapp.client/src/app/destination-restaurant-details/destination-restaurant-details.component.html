@@ -13,8 +13,7 @@
       </div>
       <div class="separator"></div>
       <div class="restaurantPriceRange">
-        <i class="bi bi-currency-dollar"></i>
-        <!--{{restaurantPriceAverage}}-->
+        {{restaurantPriceAverage}}
       </div>
       <div class="separator"></div>
       <div class="restaurantCuisine">
@@ -41,11 +40,9 @@
       <div class="separator"></div>
       <div class="restaurantHours">
         <i class="bi bi-clock-fill"></i>
-        {{hours}}
-      </div>
-      <div class="separator"></div>
-      <div class="restaurantOpenOrClosed">
-        {{restaurantOpenOrClosed}}
+        <span *ngIf="restaurantStatus" [ngStyle]="{ color: restaurantStatus.isOpen ? 'green' : 'red', 'font-weight': 'bold' }">
+          {{ restaurantStatus.message }}
+        </span>
       </div>
     </div>
   </div>

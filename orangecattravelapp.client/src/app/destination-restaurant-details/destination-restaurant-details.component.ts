@@ -2,11 +2,23 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TripAdvisorApiService } from '../services/tripadvisor-api.service';
 
+interface Period {
+  open: {
+    day: number;
+    time: string; // e.g., "1100"
+  };
+  close: {
+    day: number;
+    time: string;
+  };
+}
+
 @Component({
   selector: 'app-destination-restaurant-details',
   templateUrl: './destination-restaurant-details.component.html',
   styleUrls: ['./destination-restaurant-details.component.css']
 })
+
 export class DestinationRestaurantDetailsComponent {
 
   restaurant: any;
@@ -16,21 +28,23 @@ export class DestinationRestaurantDetailsComponent {
   restaurantName: string = "Placeholder"; //Default Value
   restaurantRating: number = 0 // Default value
   restaurantReviewNumber: number = 0 // Default value
-  restaurantPriceAverage: string = "$$" // Default value
+  restaurantPriceAverage: string = "" // Default value
   restaurantReview1: string = "This restaurant had great pancakes and even better chicken strips!" // Default value
   restaurantReview2: string = "Although the wait time was over an hour, we did get some incredible filet mignon! Worth every dollar." // Default value
-  phone: string = "+1 608-254-5677" // Default value
-  website: string = "http://www.highrockcafe.com" // Default value
-  address: string = "232 Broadway, Wisconsin Dells, WI 53965-1565" // Default value
-  encodedAddress: string =""
-  hours: string = "10AM - 6PM" // Default value
-  restaurantOpenOrClosed: string = "Open now" // Default value
+  phone: string = "" // Default value
+  website: string = "" // Default value
+  address: string = "" // Default value
+  encodedAddress: string = ""
+  hours: any = "" // Default value
+  periods: any[] = [];
+  restaurantStatus: any;
   food: string = "4.5" // Default value
   service: string = "4.5" // Default value
   value: string = "4.0" // Default value
   atmosphere: string = "5" // Default value
   restaurantAbout: string = "In a state where Eating Meat is a religion, there’s only one place to fill up on your favorite fare: Kaminski’s Chop House, voted #1 Best Steakhouse in Wisconsin by EatThis.com in 2021 AND 2022! Treat yourself to the sublime pleasures of hand-cut, dry-aged beef, a variety of seafood delights, well-paired wines, and extraordinary service. Think that isn’t enough? Our view can top it! Request a table by the window and enjoy breathtaking views of the scenic beauty the Wisconsin River provides. Locally owned and operated for over 15 years, the Kaminski Family opened Chop House in 2006 with one goal in mind - offer the best quality product, with even better service. Join us for a dining experience that celebrates the best of the best." // Default value
-  restaurantCuisines: string = "Placeholder" // Default value
+  restaurantCuisines: string = "" // Default value
+  restaurantCuisineArray: any[] = []
   restaurantFeatures: string = "Takeout, Reservations, Private Dining, Seating, Parking Available, Highchairs Available, Wheelchair Accessible, Serves Alcohol, Full Bar, Free Wifi, Accepts Credit Cards, Table Service, Live Music, Gift Cards Available" // Default value
   restaurantImages: string[] = [
     'assets/paris.jpg',
@@ -79,29 +93,77 @@ export class DestinationRestaurantDetailsComponent {
 
   loadRestaurantDescription() {
     this.tripAdvisorApi.displayDestinationDescription(this.locationId).subscribe({
-      next: (results) => {
-        console.log('restaurant details:', results)
+      next: (results: any) => {
+        console.log('restaurant details:', results);
         this.restaurantName = results.name;
         this.restaurantRating = results.rating;
         this.restaurantReviewNumber = results.num_reviews;
-        /*this.restaurantCuisines = */
-
+        this.restaurantPriceAverage = results.price_level;
+        this.restaurantCuisineArray = results.cuisine ? [...results.cuisine] : [];
+        this.restaurantCuisines = this.restaurantCuisineArray.map((c: any) => c.localized_name).join(', ');
+        this.address = results.address_obj.address_string;
+        this.phone = results.phone;
+        this.website = results.website;
+        this.periods = results.hours.periods;
+        this.restaurantStatus = this.getRestaurantStatus(this.periods)
+        this.hours = this.restaurantStatus.message;
+        console.log('status:', this.restaurantStatus);
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error fetching destination description:', error);
       }
     });
-  };
-}
-//this.tripAdvisorApi.displayDestinationDescription(this.locationId).subscribe({
-//  next: (results) => {
-//    this.destinationBriefOverview = results.description;
-//    this.lat = results.latitude;
-//    this.long = results.longitude;
+  }
 
-//    this.loadNearbyPlaces();
-//  },
-//  error: (error) => {
-//    console.error('Error fetching destination description:', error);
-//  }
-//});
+  getRestaurantStatus(periods: Period[]): { isOpen: boolean; message: string } {
+    const now = new Date();
+    const currentDay = now.getDay() === 0 ? 7 : now.getDay(); // Sunday = 7
+    const currentTime = now.getHours().toString().padStart(2, '0') +
+      now.getMinutes().toString().padStart(2, '0');
+
+    const todayPeriod = periods.find(p => p.open.day === currentDay);
+
+    if (todayPeriod && currentTime >= todayPeriod.open.time && currentTime < todayPeriod.close.time) {
+      return {
+        isOpen: true,
+        message: `Open now - Closes at ${this.formatTime(todayPeriod.close.time)}`
+      };
+    }
+
+    for (let i = 0; i < 7; i++) {
+      const nextDay = ((currentDay + i - 1) % 7) + 1;
+      const period = periods.find(p => p.open.day === nextDay);
+
+      if (!period) continue;
+
+      if (i === 0 && currentTime < period.open.time) {
+        return {
+          isOpen: false,
+          message: `Closed - Opens today at ${this.formatTime(period.open.time)}`
+        };
+      }
+
+      if (i > 0) {
+        const weekday = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        return {
+          isOpen: false,
+          message: `Closed - Opens ${weekday[nextDay - 1]} at ${this.formatTime(period.open.time)}`
+        };
+      }
+    }
+
+    return {
+      isOpen: false,
+      message: "Closed - Opening hours not available"
+    };
+  }
+
+  formatTime(t: string): string {
+    const hour = parseInt(t.slice(0, 2), 10);
+    const minute = t.slice(2);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const displayHour = ((hour + 11) % 12 + 1);
+    return `${displayHour}:${minute} ${ampm}`;
+  }
+
+};

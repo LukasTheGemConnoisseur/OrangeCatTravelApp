@@ -135,9 +135,9 @@ export class DestinationOverviewComponent implements OnInit {
   loadNearbyPlaces() {
     this.latLong = this.lat + ',' + this.long;
     console.log("Latitude + longitude:", this.latLong)
-
+    console.log (this.destinationName)
     const apiCalls = this.nearbyPlaces.map((placeType) =>
-      this.tripAdvisorApi.displayDestinationAttractions(this.latLong, placeType)
+      this.tripAdvisorApi.displayDestinationAttractions(this.destinationName, placeType)
     );
 
     forkJoin(apiCalls).subscribe({
@@ -172,20 +172,24 @@ export class DestinationOverviewComponent implements OnInit {
 
         forkJoin(photoApiCalls).subscribe({
           next: (photos) => {
+            let photoIndex = 0;
             for (let k = 0; k < 9; k++) {
               if (this.adventures[k].location_id) {
-                this.adventures[k].image = photos[0].data?.[k]?.images?.original?.url ||
-                  photos[0].data?.[k]?.images?.large?.url ||
+                const photoData = photos[photoIndex++];
+                this.adventures[k].image = photoData.data?.[0]?.images?.original?.url ||
+                  photoData.data?.[0]?.images?.large?.url ||
                   'assets/picture_failed.png';
               }
               if (this.hotels[k].location_id) {
-                this.hotels[k].image = photos[1].data?.[k]?.images?.original?.url ||
-                  photos[1].data?.[k]?.images?.large?.url ||
+                const photoData = photos[photoIndex++];
+                this.hotels[k].image = photoData.data?.[0]?.images?.original?.url ||
+                  photoData.data?.[0]?.images?.large?.url ||
                   'assets/picture_failed.png';
               }
               if (this.restaurants[k].location_id) {
-                this.restaurants[k].image = photos[2].data?.[k]?.images?.original?.url ||
-                  photos[2].data?.[k]?.images?.large?.url ||
+                const photoData = photos[photoIndex++];
+                this.restaurants[k].image = photoData.data?.[0]?.images?.original?.url ||
+                  photoData.data?.[0]?.images?.large?.url ||
                   'assets/picture_failed.png';
               }
             }
@@ -197,8 +201,7 @@ export class DestinationOverviewComponent implements OnInit {
           },
           error: (error) => {
             console.error("Error fetching nearby place photos:", error);
-          }
-          });
+          }          });
       },
       error: (error) => {
         console.error("Error fetching nearby places:", error);

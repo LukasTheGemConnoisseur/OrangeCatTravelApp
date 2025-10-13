@@ -123,10 +123,12 @@ public class ProxyController : ControllerBase
         return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
     }
     [HttpGet("destinationAttractions")]
-    public async Task<IActionResult> DestinationAttractions([FromQuery] string latLong, string category)
+    public async Task<IActionResult> DestinationAttractions([FromQuery] string searchQuery, string category)
     {
 
-        var apiUrl = $"https://api.content.tripadvisor.com/api/v1/location/nearby_search?latLong={latLong}&key=3ED8A95286CA4B0A90F2E60E06308D6B&category={category}&radius=10&radiusUnit=mi&language=en";
+        var encodedSearchQuery = Uri.EscapeDataString(searchQuery);
+
+        var apiUrl = $"https://api.content.tripadvisor.com/api/v1/location/search?key=3ED8A95286CA4B0A90F2E60E06308D6B&searchQuery={encodedSearchQuery}&category={category}&language=en";
         var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
         request.Headers.Add("accept", "application/json");
         request.Headers.Add("referer", "http://localhost:4200");

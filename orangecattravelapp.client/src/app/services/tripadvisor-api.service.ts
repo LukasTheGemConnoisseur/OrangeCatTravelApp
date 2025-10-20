@@ -46,7 +46,7 @@ export class TripAdvisorApiService {
 
     /*console.log(`Cache miss for ${cacheKey}`);*/
     return of(null).pipe(
-      delay(10),
+      delay(200),
       concatMap(() => this.http.get(`${this.proxyUrl}/destinationPhoto/`, { params })),
       tap((data) => this.cache.set(cacheKey, data)) // Cache the response
     );
@@ -80,6 +80,21 @@ export class TripAdvisorApiService {
       tap((data) => this.cache.set(cacheKey, data)) // Cache the response
     );
   }
+
+  displayDestinationAttractionDetails(locationId: number): Observable<any> {
+    const params = { locationId: locationId };
+    const cacheKey = `descriptions-${locationId}`;
+    if (this.cache.has(cacheKey)) {
+      console.log(`Cache hit for ${cacheKey}`);
+      return of(this.cache.get(cacheKey)); // Return cached data
+    }
+
+    console.log(`Cache miss for ${cacheKey}`);
+    return this.http.get(`${this.proxyUrl}/destinationDescription/`, { params }).pipe(
+      tap((data) => this.cache.set(cacheKey, data)) // Cache the response
+    );
+  }
+
   //Lat long
   //displayDestinationHotels(destinationID: number): Observable<any> {
   //  const params = { locationId: destinationID };

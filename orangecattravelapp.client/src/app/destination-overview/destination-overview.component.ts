@@ -37,7 +37,7 @@ export class DestinationOverviewComponent implements OnInit {
     { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
     { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
     { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
-    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0},
+    { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 },
     { name: 'N/A', image: 'assets/picture_failed.png', link: '#', location_id: 0 }
   ];
 
@@ -222,10 +222,14 @@ export class DestinationOverviewComponent implements OnInit {
   }
 
   adventureSeeAll() {
-    console.log('Redirecting...');
-    // Add your routing functionality here
-    this.router.navigate(['/destination-attraction-list']);
+    const slug = this.slugify(this.destinationName);
+    console.log('Redirecting to', slug, 'attraction list');
+    // routing functionality
+    this.router.navigate(['/destination-attraction-list', slug], {
+      state: { destinationName: this.destinationName, attractions: this.adventures }
+    });
   }
+
   hotelSeeAll() {
     console.log('Redirecting...');
     // Add your routing functionality here

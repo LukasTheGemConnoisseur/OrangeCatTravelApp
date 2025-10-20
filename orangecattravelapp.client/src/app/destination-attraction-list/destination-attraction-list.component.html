@@ -42,17 +42,23 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-md-4" *ngFor="let attraction of attractions">
+    <div class="col-md-4" *ngFor="let adventure of adventures; let i = index">
       <div class="list-card">
         <div class="card mb-4">
-          <img [src]="attraction.ImageUrl" class="card-img-top" alt="{{ attraction.Name }}">
+          <img [src]="adventure?.image || 'assets/picture_failed.png'" class="card-img-top" alt="{{ adventure?.name || 'Attraction' }}">
           <div class="card-body">
-            <h5 class="card-title">{{ attraction.Name }}</h5>
-            <p class="card-text">{{ attraction.Description }}</p>
-            <a [routerLink]="['/destination-attraction-details']" class="btn btn-primary">View Details</a> <!--'/attraction', attraction.Id-->
+            <h5 class="card-title">{{ adventure?.name || 'N/A' }}</h5>
+            <p class="card-text">{{ adventure?.rating}} {{ adventure?.num_reviews}}</p>
+            <a [routerLink]="['/destination-attraction-details']" class="btn btn-primary">View Details</a>
           </div>
           <div class="card-footer">
-            <small class="text-muted">{{ attraction.Review }}</small>
+            <small class="text-muted">
+              {{
+            (adventure?.description?.length || 0) > 120
+     ? ((adventure?.description || '') | slice:0:120) + '...'
+     : adventure?.description
+              }}
+            </small>
           </div>
         </div>
       </div>

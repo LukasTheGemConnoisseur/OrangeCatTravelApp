@@ -2,12 +2,14 @@
   position: relative;
   display: block;
   margin: auto;
-  width: 50%;
+  margin-bottom: 40px;
+  width: 889px;
+  height: 500px;
   padding: 20px 0 0 0;
 }
 
   .carousel img {
-    padding: 10px;
+    padding: 20px;
     max-height: 500px;
     min-height: 500px;
     object-fit: contain;

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TripAdvisorApiService } from '../services/tripadvisor-api.service';
-import { forkJoin, from } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { forkJoin, from, lastValueFrom, Observable, timer, throwError } from 'rxjs';
+import { mergeMap, retryWhen, concatMap, delay } from 'rxjs/operators';
 
 export interface Place {
   name: string;
@@ -101,112 +101,131 @@ export class DestinationOverviewComponent implements OnInit {
     this.loadDestinationPhotos();
   }
 
-  loadDestinationPhotos() {
-    this.tripAdvisorApi.displayDestinationPhotos(this.locationId).subscribe({
-      next: (results) => {
-        /*console.log('destination photo results:', results);*/
-        for (let index = 0; index < 5; index++) {
-          const photo = results.data?.[index]?.images?.original?.url;
-          const photo_backup = results.data?.[index]?.images?.large?.url;
-          this.attractionImages.push(photo || photo_backup || 'assets/picture_failed.png');
-        }
-      },
-      error: (error) => {
-        console.error('Error fetching destination photos:', error);
-      }
-    });
+  private createRetryStrategy() {
+    return (attempts: Observable<any>) =>
+      attempts.pipe(
+        concatMap((error, index) => {
+          const retryAttempt = index + 1;
+          if (retryAttempt > 3 || error.status !== 429) {
+            return throwError(() => error);
+          }
+          const delayMs = retryAttempt * 250;
+          console.log(`Retrying request after ${delayMs}ms`);
+          return timer(delayMs);
+        })
+      );
   }
 
-  loadDescription() {
-    this.tripAdvisorApi.displayDestinationDescription(this.locationId).subscribe({
-      next: (results) => {
-        this.destinationBriefOverview = results.description;
-        this.lat = results.latitude;
-        this.long = results.longitude;
-
-        this.loadNearbyPlaces();
-      },
-      error: (error) => {
-        console.error('Error fetching destination description:', error);
-      }
-    });
+  private async fetchWithRetry(observable: Observable<any>): Promise<any> {
+    return lastValueFrom(observable.pipe(
+      retryWhen(this.createRetryStrategy())
+    ));
   }
 
-  loadNearbyPlaces() {
+  async loadDestinationPhotos() {
+    try {
+      const results = await this.fetchWithRetry(
+        this.tripAdvisorApi.displayDestinationPhotos(this.locationId)
+      );
+
+      for (let index = 0; index < 5; index++) {
+        const photo = results.data?.[index]?.images?.original?.url;
+        const photo_backup = results.data?.[index]?.images?.large?.url;
+        this.attractionImages.push(photo || photo_backup || 'assets/picture_failed.png');
+      }
+    } catch (error) {
+      console.error('Error fetching destination photos:', error);
+    }
+  }
+
+  async loadDescription() {
+    try {
+      const results = await this.fetchWithRetry(
+        this.tripAdvisorApi.displayDestinationDescription(this.locationId)
+      );
+
+      this.destinationBriefOverview = results.description;
+      this.lat = results.latitude;
+      this.long = results.longitude;
+
+      await this.loadNearbyPlaces();
+    } catch (error) {
+      console.error('Error fetching destination description:', error);
+    }
+  }
+
+  async loadNearbyPlaces() {
     this.latLong = this.lat + ',' + this.long;
-    console.log("Latitude + longitude:", this.latLong)
-    console.log (this.destinationName)
-    const apiCalls = this.nearbyPlaces.map((placeType) =>
-      this.tripAdvisorApi.displayDestinationAttractions(this.destinationName, placeType)
-    );
 
-    forkJoin(apiCalls).subscribe({
-      next: (responses) => {
-        this.nearby = responses;
-        console.log("nearby array:", this.nearby);
+    try {
+      // Load nearby places sequentially instead of in parallel
+      for (let i = 0; i < this.nearbyPlaces.length; i++) {
+        const placeType = this.nearbyPlaces[i];
+        await new Promise(resolve => setTimeout(resolve, 250)); // Add delay between requests
 
-        const photoApiCalls = [];
+        const response = await this.fetchWithRetry(
+          this.tripAdvisorApi.displayDestinationAttractions(this.destinationName, placeType)
+        );
+        this.nearby[i] = response;
+      }
 
-        for (let j = 0; j < 9; j++) {
-          /*assigning nearby location names to our arrays for easy access*/
-          this.adventures[j].name = this.nearby[0]?.data?.[j]?.name || 'N/A';
-          this.hotels[j].name = this.nearby[1]?.data?.[j]?.name || 'N/A';
-          this.restaurants[j].name = this.nearby[2]?.data?.[j]?.name || 'N/A';
+      // Process the results
+      for (let j = 0; j < 9; j++) {
+        this.adventures[j].name = this.nearby[0]?.data?.[j]?.name || 'N/A';
+        this.hotels[j].name = this.nearby[1]?.data?.[j]?.name || 'N/A';
+        this.restaurants[j].name = this.nearby[2]?.data?.[j]?.name || 'N/A';
 
-          /*assigning nearby location location_ids to our arrays for easy access*/
-          this.adventures[j].location_id = this.nearby[0]?.data?.[j]?.location_id || 0;
-          this.hotels[j].location_id = this.nearby[1]?.data?.[j]?.location_id || 0;
-          this.restaurants[j].location_id = this.nearby[2]?.data?.[j]?.location_id || 0;
+        this.adventures[j].location_id = this.nearby[0]?.data?.[j]?.location_id || 0;
+        this.hotels[j].location_id = this.nearby[1]?.data?.[j]?.location_id || 0;
+        this.restaurants[j].location_id = this.nearby[2]?.data?.[j]?.location_id || 0;
+      }
 
-          /* Only push API calls if location_id is valid */
-          if (this.adventures[j].location_id) {
-            photoApiCalls.push(this.tripAdvisorApi.displayDestinationPhotos(this.adventures[j].location_id));
-          }
-          if (this.hotels[j].location_id) {
-            photoApiCalls.push(this.tripAdvisorApi.displayDestinationPhotos(this.hotels[j].location_id));
-          }
-          if (this.restaurants[j].location_id) {
-            photoApiCalls.push(this.tripAdvisorApi.displayDestinationPhotos(this.restaurants[j].location_id));
+      // Load photos sequentially
+      for (let k = 0; k < 9; k++) {
+        await new Promise(resolve => setTimeout(resolve, 250)); // Add delay between requests
+
+        if (this.adventures[k].location_id) {
+          try {
+            const photoData = await this.fetchWithRetry(
+              this.tripAdvisorApi.displayDestinationPhotos(this.adventures[k].location_id)
+            );
+            this.adventures[k].image = photoData.data?.[0]?.images?.original?.url ||
+              photoData.data?.[0]?.images?.large?.url ||
+              'assets/picture_failed.png';
+          } catch (error) {
+            console.error(`Error fetching photo for adventure ${k}:`, error);
           }
         }
 
-        forkJoin(photoApiCalls).subscribe({
-          next: (photos) => {
-            let photoIndex = 0;
-            for (let k = 0; k < 9; k++) {
-              if (this.adventures[k].location_id) {
-                const photoData = photos[photoIndex++];
-                this.adventures[k].image = photoData.data?.[0]?.images?.original?.url ||
-                  photoData.data?.[0]?.images?.large?.url ||
-                  'assets/picture_failed.png';
-              }
-              if (this.hotels[k].location_id) {
-                const photoData = photos[photoIndex++];
-                this.hotels[k].image = photoData.data?.[0]?.images?.original?.url ||
-                  photoData.data?.[0]?.images?.large?.url ||
-                  'assets/picture_failed.png';
-              }
-              if (this.restaurants[k].location_id) {
-                const photoData = photos[photoIndex++];
-                this.restaurants[k].image = photoData.data?.[0]?.images?.original?.url ||
-                  photoData.data?.[0]?.images?.large?.url ||
-                  'assets/picture_failed.png';
-              }
-            }
+        if (this.hotels[k].location_id) {
+          try {
+            const photoData = await this.fetchWithRetry(
+              this.tripAdvisorApi.displayDestinationPhotos(this.hotels[k].location_id)
+            );
+            this.hotels[k].image = photoData.data?.[0]?.images?.original?.url ||
+              photoData.data?.[0]?.images?.large?.url ||
+              'assets/picture_failed.png';
+          } catch (error) {
+            console.error(`Error fetching photo for hotel ${k}:`, error);
+          }
+        }
 
-            console.log("adventures name:", this.adventures);
-            console.log("hotels name:", this.hotels);
-            console.log("restaurants name:", this.restaurants);
-
-          },
-          error: (error) => {
-            console.error("Error fetching nearby place photos:", error);
-          }          });
-      },
-      error: (error) => {
-        console.error("Error fetching nearby places:", error);
+        if (this.restaurants[k].location_id) {
+          try {
+            const photoData = await this.fetchWithRetry(
+              this.tripAdvisorApi.displayDestinationPhotos(this.restaurants[k].location_id)
+            );
+            this.restaurants[k].image = photoData.data?.[0]?.images?.original?.url ||
+              photoData.data?.[0]?.images?.large?.url ||
+              'assets/picture_failed.png';
+          } catch (error) {
+            console.error(`Error fetching photo for restaurant ${k}:`, error);
+          }
+        }
       }
-    });
+    } catch (error) {
+      console.error("Error in loadNearbyPlaces:", error);
+    }
   }
 
   slugify(name: string): string {
@@ -226,7 +245,7 @@ export class DestinationOverviewComponent implements OnInit {
     console.log('Redirecting to', slug, 'attraction list');
     // routing functionality
     this.router.navigate(['/destination-attraction-list', slug], {
-      state: { destinationName: this.destinationName, attractions: this.adventures }
+      state: { destinationName: this.destinationName, attractions: this.adventures, location_id: this.locationId }
     });
   }
 

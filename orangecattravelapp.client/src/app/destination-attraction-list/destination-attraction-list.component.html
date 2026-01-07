@@ -4,43 +4,42 @@
       <div class="destinationName">Attractions in {{ destinationName }}</div>
     </div>
   </div>
-  <div class="filter-container">
+  <!--<div class="filter-container">
     <button class="btn btn-info" (click)="toggleFilters()">
       <i class="fas fa-cog"></i> Filters
     </button>
-  </div>
-  <div class="row">
-    <div class="col-12" *ngIf="showFilters">
-      <div class="filter-card">
-        <div class="card p-3 mb-4">
-          <h5>Filters</h5>
-          <div class="filters">
-            <!-- Your filter options here -->
-            <input type="checkbox" id="filter1" name="filter1" value="Water Parks" />
-            <label for="filter1">Water Parks</label><br>
-            <input type="checkbox" id="filter2" name="filter2" value="Nature & Wildlife Areas" />
-            <label for="filter2">Nature & Wildlife Areas</label><br>
-            <input type="checkbox" id="filter3" name="filter3" value="Theme Parks">
-            <label for="filter3">Theme Parks</label><br>
-            <!--<div class="form-group">-->
-            <!--<label for="filterInput1">Filter 1</label>
-            <input type="text" class="form-control" id="filterInput1" [(ngModel)]="filters.filter1">
-             </div>
-            <div class="form-group">
-              <label for="filterInput2">Filter 2</label>
-              <input type="text" class="form-control" id="filterInput2" [(ngModel)]="filters.filter2">
-            </div>-->
-            <!-- Add more filters as needed -->
-          </div>
-          <div class="filter-button">
-            <button class="btn btn-primary" (click)="applyFilters()">Apply Filters</button>
-            <button class="btn btn-outline-secondary" (click)="resetFilters()">Clear Filters</button>
-          </div>
-        </div>
+  </div>-->
+  <!--<div class="row">-->
+  <!--<div class="col-12" *ngIf="showFilters">
+    <div class="filter-card">
+      <div class="card p-3 mb-4">
+        <h5>Filters</h5>
+        <div class="filters">-->
+  <!-- Your filter options here -->
+  <!--<input type="checkbox" id="filter1" name="filter1" value="Water Parks" />
+  <label for="filter1">Water Parks</label><br>
+  <input type="checkbox" id="filter2" name="filter2" value="Nature & Wildlife Areas" />
+  <label for="filter2">Nature & Wildlife Areas</label><br>
+  <input type="checkbox" id="filter3" name="filter3" value="Theme Parks">
+  <label for="filter3">Theme Parks</label><br>-->
+  <!--<div class="form-group">-->
+  <!--<label for="filterInput1">Filter 1</label>
+  <input type="text" class="form-control" id="filterInput1" [(ngModel)]="filters.filter1">
+   </div>
+  <div class="form-group">
+    <label for="filterInput2">Filter 2</label>
+    <input type="text" class="form-control" id="filterInput2" [(ngModel)]="filters.filter2">
+  </div>-->
+  <!-- Add more filters as needed -->
+  <!--</div>
+      <div class="filter-button">
+        <button class="btn btn-primary" (click)="applyFilters()">Apply Filters</button>
+        <button class="btn btn-outline-secondary" (click)="resetFilters()">Clear Filters</button>
       </div>
-
     </div>
-  </div>
+  </div>-->
+  <!--</div>-->
+  <!--</div>-->
   <div class="row">
     <div class="col-md-4" *ngFor="let adventure of adventures; let i = index">
       <div class="list-card">
@@ -48,8 +47,15 @@
           <img [src]="adventure?.image || 'assets/picture_failed.png'" class="card-img-top" alt="{{ adventure?.name || 'Attraction' }}">
           <div class="card-body">
             <h5 class="card-title">{{ adventure?.name || 'N/A' }}</h5>
-            <p class="card-text">{{ adventure?.rating}} {{ adventure?.num_reviews}}</p>
-            <a [routerLink]="['/destination-attraction-details']" class="btn btn-primary">View Details</a>
+            <p class="card-text">
+              <i class="bi bi-star"></i>
+              {{ adventure?.rating}}
+              <i class="bi bi-file-text"></i>
+              ({{ adventure?.num_reviews}})
+              <br />
+              {{ adventure?.group}}
+            </p>
+            <button (click)="viewAttractionDetails(adventure)" class="btn btn-primary">View Details</button>
           </div>
           <div class="card-footer">
             <small class="text-muted">
@@ -66,6 +72,8 @@
     </div>
   </div>
   <div class="seeMoreButton">
-    <button class="btn btn-secondary" (click)="loadMore()">See More</button>
+    <button class="btn btn-secondary" (click)="loadMore()" [disabled]="isLoading">
+      {{ isLoading ? 'Loading...' : 'See More' }}
+    </button>
   </div>
 </div>

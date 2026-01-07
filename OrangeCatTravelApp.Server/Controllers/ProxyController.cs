@@ -144,4 +144,47 @@ public class ProxyController : ControllerBase
 
         return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
     }
+
+    [HttpGet("searchNearbyAttractions")]
+    public async Task<IActionResult> searchNearbyAttractions([FromQuery] string searchQuery, string category, string latLong)
+    {
+
+        var encodedSearchQuery = Uri.EscapeDataString(searchQuery);
+
+        var apiUrl = $"https://api.content.tripadvisor.com/api/v1/location/search?key=3ED8A95286CA4B0A90F2E60E06308D6B&searchQuery={encodedSearchQuery}&category={category}&latLong={latLong}&language=en";
+        var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
+        request.Headers.Add("accept", "application/json");
+        request.Headers.Add("referer", "http://localhost:4200");
+        request.Headers.Add("origin", "http://localhost:4200");
+
+        var response = await _httpClient.SendAsync(request);
+
+        if (response.IsSuccessStatusCode)
+        {
+            var data = await response.Content.ReadAsStringAsync();
+            return Content(data, "application/json");
+        }
+
+        return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+    }
+
+    [HttpGet("searchNearbyQuery")]
+    public async Task<IActionResult> searchNearbyQuery([FromQuery] string latLong, string category)
+    {
+        var apiUrl = $"https://api.content.tripadvisor.com/api/v1/location/nearby_search?latLong={latLong}&key=3ED8A95286CA4B0A90F2E60E06308D6B&category={category}&language=en";
+        var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
+        request.Headers.Add("accept", "application/json");
+        request.Headers.Add("referer", "http://localhost:4200");
+        request.Headers.Add("origin", "http://localhost:4200");
+
+        var response = await _httpClient.SendAsync(request);
+
+        if (response.IsSuccessStatusCode)
+        {
+            var data = await response.Content.ReadAsStringAsync();
+            return Content(data, "application/json");
+        }
+
+        return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+    }
 }

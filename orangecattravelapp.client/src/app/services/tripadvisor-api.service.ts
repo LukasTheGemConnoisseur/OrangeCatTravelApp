@@ -1,23 +1,32 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { tap, concatMap, delay } from 'rxjs/operators';
+import { tap, delay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TripAdvisorApiService {
-
-  private cache = new Map<string, any>(); // In-memory cache
-  private proxyUrl = 'https://localhost:7000/api/proxy'; // Backend proxy URL
-
+  private cache = new Map<string, any>();
+  private proxyUrl = 'https://localhost:7000/api/proxy';
 
   constructor(private http: HttpClient) { }
 
   searchDestinations(searchTerm: string): Observable<any> {
     const encodedSearchTerm = encodeURIComponent(searchTerm);
     const params = { searchQuery: encodedSearchTerm };
-    return this.http.get<any>(`${this.proxyUrl}/search`, {params });
+    return this.http.get<any>(`${this.proxyUrl}/search`, { params });
+  }
+
+  searchNearbyAttractions(searchTerm: string, latLong: string): Observable<any> {
+    const encodedSearchTerm = encodeURIComponent(searchTerm);
+    const params = { searchQuery: encodedSearchTerm, category: "attractions", latLong: latLong };
+    return this.http.get<any>(`${this.proxyUrl}/searchNearbyAttractions`, { params });
+  }
+
+  searchNearbyQuery(latLong: string, category: string): Observable<any> {
+    const params = {latLong: latLong, category: category};
+    return this.http.get<any>(`${this.proxyUrl}/searchNearbyQuery`, { params });
   }
 
   searchRestaurants(searchTerm: string): Observable<any> {
@@ -40,44 +49,34 @@ export class TripAdvisorApiService {
     const params = { locationId: locationId };
     const cacheKey = `photos-${locationId}`;
     if (this.cache.has(cacheKey)) {
-      /*console.log(`Cache hit for ${cacheKey}`);*/
-      return of(this.cache.get(cacheKey)); // Return cached data
+      return of(this.cache.get(cacheKey));
     }
-
-    /*console.log(`Cache miss for ${cacheKey}`);*/
-    return of(null).pipe(
-      delay(200),
-      concatMap(() => this.http.get(`${this.proxyUrl}/destinationPhoto/`, { params })),
-      tap((data) => this.cache.set(cacheKey, data)) // Cache the response
+    return this.http.get(`${this.proxyUrl}/destinationPhoto/`, { params }).pipe(
+      delay(250),  // Add a small delay between requests
+      tap(data => this.cache.set(cacheKey, data))
     );
   }
 
-  // Example: Fetch destination description with caching
   displayDestinationDescription(locationId: number): Observable<any> {
     const params = { locationId: locationId };
     const cacheKey = `description-${locationId}`;
     if (this.cache.has(cacheKey)) {
-      console.log(`Cache hit for ${cacheKey}`);
-      return of(this.cache.get(cacheKey)); // Return cached data
+      return of(this.cache.get(cacheKey));
     }
-
-    console.log(`Cache miss for ${cacheKey}`);
-    return this.http.get(`${this.proxyUrl}/destinationDescription/`, {params}).pipe(
-      tap((data) => this.cache.set(cacheKey, data)) // Cache the response
+    return this.http.get(`${this.proxyUrl}/destinationDescription/`, { params }).pipe(
+      tap(data => this.cache.set(cacheKey, data))
     );
   }
+
   displayDestinationAttractions(searchTerm: string, placeType: string): Observable<any> {
     const encodedSearchTerm = encodeURIComponent(searchTerm);
     const params = { searchQuery: encodedSearchTerm, category: placeType };
     const cacheKey = `attractions-${encodedSearchTerm}-${placeType}`;
     if (this.cache.has(cacheKey)) {
-      console.log(`Cache hit for ${cacheKey}`);
-      return of(this.cache.get(cacheKey)); // Return cached data
+      return of(this.cache.get(cacheKey));
     }
-
-    console.log(`Cache miss for ${cacheKey}`);
     return this.http.get(`${this.proxyUrl}/destinationAttractions/`, { params }).pipe(
-      tap((data) => this.cache.set(cacheKey, data)) // Cache the response
+      tap(data => this.cache.set(cacheKey, data))
     );
   }
 
@@ -85,15 +84,14 @@ export class TripAdvisorApiService {
     const params = { locationId: locationId };
     const cacheKey = `descriptions-${locationId}`;
     if (this.cache.has(cacheKey)) {
-      console.log(`Cache hit for ${cacheKey}`);
-      return of(this.cache.get(cacheKey)); // Return cached data
+      return of(this.cache.get(cacheKey));
     }
-
-    console.log(`Cache miss for ${cacheKey}`);
     return this.http.get(`${this.proxyUrl}/destinationDescription/`, { params }).pipe(
-      tap((data) => this.cache.set(cacheKey, data)) // Cache the response
+      delay(250),  // Add a small delay between requests
+      tap(data => this.cache.set(cacheKey, data))
     );
   }
+}
 
   //Lat long
   //displayDestinationHotels(destinationID: number): Observable<any> {
@@ -108,4 +106,3 @@ export class TripAdvisorApiService {
   //  const params = { locationId: destinationID };
   //}
   //}
-}

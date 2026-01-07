@@ -75,6 +75,10 @@
   -webkit-box-orient: vertical;
 }
 
+.card-footer {
+    margin-top: 10px;
+}
+
 .attractionContainer .row .btn-primary {
   background-color: #050038;
   color: white;
@@ -110,7 +114,7 @@
     background-color: #0056b3;
   }
 
-.filter-container {
+/*.filter-container {
 
 }
 
@@ -157,4 +161,4 @@
 
 .filters input[type="checkbox"]:checked + label {
   color: #007bff;
-}
+}*/

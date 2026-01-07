@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'user-profile', component: UserProfileComponent },
   { path: 'destination-overview/:destination', component: DestinationOverviewComponent },
   { path: 'destination-attraction-list/:slug', component: DestinationAttractionListComponent },
-  { path: 'destination-attraction-details', component: DestinationAttractionDetailsComponent },
+  { path: 'destination-attraction-details/:slug', component: DestinationAttractionDetailsComponent },
   { path: 'destination-restaurant-list', component: DestinationRestaurantListComponent },
   { path: 'destination-restaurant-details/:slug', component: DestinationRestaurantDetailsComponent },
   { path: 'destination-hotel-list', component: DestinationHotelListComponent },

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TripAdvisorApiService } from '../services/tripadvisor-api.service';
-import { forkJoin, from, lastValueFrom, Observable, timer, throwError } from 'rxjs';
-import { mergeMap, retryWhen, concatMap, delay } from 'rxjs/operators';
+import { forkJoin, from, Observable } from 'rxjs';
+import { mergeMap, map, concatMap, toArray } from 'rxjs/operators';
+import { ViewportScroller } from '@angular/common';
 
 interface Restaurants {
   nearbyRestaurantId: number;
@@ -35,18 +36,18 @@ interface Hotels {
   styleUrls: ['./destination-attraction-details.component.css']
 })
 export class DestinationAttractionDetailsComponent implements OnInit {
-  attractionLocationID: number = 0; // Default location ID
-  attractionName: string = ""; // Default name
-  attractionSubCategory: string = ""; // Default sub category
-  businessHoursOpening: string = "10:00 AM"; // Default opening hours
-  businessHoursClosing: string = "5:00 PM"; // Default closing hours
+  attractionLocationID: number = 0;
+  attractionName: string = "";
+  attractionSubCategory: string = "";
+  businessHoursOpening: string = "10:00 AM";
+  businessHoursClosing: string = "5:00 PM";
   businessHours: string = ""
-  attractionWebsite: string = "" // Default website
-  attractionAddress: string = ""; // Default address
-  attractionPhone: string = ""; // Default phone number
+  attractionWebsite: string = ""
+  attractionAddress: string = "";
+  attractionPhone: string = "";
   encodedAddress: string = ""
-  attractionRating: number = 4.0 // Default value
-  attractionReviewNumber: number = 152 // Default value
+  attractionRating: number = 4.0
+  attractionReviewNumber: number = 152
   attractionImages: string[] = [];
   attractionLocationImage: string = 'https://via.placeholder.com/150';
   attractionDescription: string = ''
@@ -55,262 +56,24 @@ export class DestinationAttractionDetailsComponent implements OnInit {
   long: string = '';
   latLong: string = '';
 
-  // Define the displayedRestaurants array using the Restaurants type
   displayedRestaurants: Restaurants[] = [];
-  restaurantsToDisplay = 10; // Number of restaurants to display initially
+  restaurantsToDisplay = 10;
   displayedHotels: Hotels[] = [];
-  hotelsToDisplay = 10; // Number of restaurants to display initially
+  hotelsToDisplay = 10;
 
-  nearbyRestaurants: Restaurants[] = [
-    {
-      nearbyRestaurantId: 0,
-      nearbyRestaurantLatitude: "",
-      nearbyRestaurantLongitude: "",
-      nearbyRestaurantLatLong: "",
-      nearbyRestaurantName: "",
-      nearbyRestaurantRating: 0,
-      nearbyRestaurantReviewCount: 0,
-      nearbyRestaurantDistance: 0,
-      nearbyRestaurantPriceRange: "",
-      nearbyRestaurantFoodType: ""
-    },
-    {
-      nearbyRestaurantId: 0,
-      nearbyRestaurantLatitude: "",
-      nearbyRestaurantLongitude: "",
-      nearbyRestaurantLatLong: "",
-      nearbyRestaurantName: "",
-      nearbyRestaurantRating: 0,
-      nearbyRestaurantReviewCount: 0,
-      nearbyRestaurantDistance: 0,
-      nearbyRestaurantPriceRange: "",
-      nearbyRestaurantFoodType: ""
-    },
-    {
-      nearbyRestaurantId: 0,
-      nearbyRestaurantLatitude: "",
-      nearbyRestaurantLongitude: "",
-      nearbyRestaurantLatLong: "",
-      nearbyRestaurantName: "",
-      nearbyRestaurantRating: 0,
-      nearbyRestaurantReviewCount: 0,
-      nearbyRestaurantDistance: 0,
-      nearbyRestaurantPriceRange: "",
-      nearbyRestaurantFoodType: ""
-    },
-    {
-      nearbyRestaurantId: 0,
-      nearbyRestaurantLatitude: "",
-      nearbyRestaurantLongitude: "",
-      nearbyRestaurantLatLong: "",
-      nearbyRestaurantName: "",
-      nearbyRestaurantRating: 0,
-      nearbyRestaurantReviewCount: 0,
-      nearbyRestaurantDistance: 0,
-      nearbyRestaurantPriceRange: "",
-      nearbyRestaurantFoodType: ""
-    },
-    {
-      nearbyRestaurantId: 0,
-      nearbyRestaurantLatitude: "",
-      nearbyRestaurantLongitude: "",
-      nearbyRestaurantLatLong: "",
-      nearbyRestaurantName: "",
-      nearbyRestaurantRating: 0,
-      nearbyRestaurantReviewCount: 0,
-      nearbyRestaurantDistance: 0,
-      nearbyRestaurantPriceRange: "",
-      nearbyRestaurantFoodType: ""
-    },
-    {
-      nearbyRestaurantId: 0,
-      nearbyRestaurantLatitude: "",
-      nearbyRestaurantLongitude: "",
-      nearbyRestaurantLatLong: "",
-      nearbyRestaurantName: "",
-      nearbyRestaurantRating: 0,
-      nearbyRestaurantReviewCount: 0,
-      nearbyRestaurantDistance: 0,
-      nearbyRestaurantPriceRange: "",
-      nearbyRestaurantFoodType: ""
-    },
-    {
-      nearbyRestaurantId: 0,
-      nearbyRestaurantLatitude: "",
-      nearbyRestaurantLongitude: "",
-      nearbyRestaurantLatLong: "",
-      nearbyRestaurantName: "",
-      nearbyRestaurantRating: 0,
-      nearbyRestaurantReviewCount: 0,
-      nearbyRestaurantDistance: 0,
-      nearbyRestaurantPriceRange: "",
-      nearbyRestaurantFoodType: ""
-    },
-    {
-      nearbyRestaurantId: 0,
-      nearbyRestaurantLatitude: "",
-      nearbyRestaurantLongitude: "",
-      nearbyRestaurantLatLong: "",
-      nearbyRestaurantName: "",
-      nearbyRestaurantRating: 0,
-      nearbyRestaurantReviewCount: 0,
-      nearbyRestaurantDistance: 0,
-      nearbyRestaurantPriceRange: "",
-      nearbyRestaurantFoodType: ""
-    },
-    {
-      nearbyRestaurantId: 0,
-      nearbyRestaurantLatitude: "",
-      nearbyRestaurantLongitude: "",
-      nearbyRestaurantLatLong: "",
-      nearbyRestaurantName: "",
-      nearbyRestaurantRating: 0,
-      nearbyRestaurantReviewCount: 0,
-      nearbyRestaurantDistance: 0,
-      nearbyRestaurantPriceRange: "",
-      nearbyRestaurantFoodType: ""
-    },
-    {
-      nearbyRestaurantId: 0,
-      nearbyRestaurantLatitude: "",
-      nearbyRestaurantLongitude: "",
-      nearbyRestaurantLatLong: "",
-      nearbyRestaurantName: "",
-      nearbyRestaurantRating: 0,
-      nearbyRestaurantReviewCount: 0,
-      nearbyRestaurantDistance: 0,
-      nearbyRestaurantPriceRange: "",
-      nearbyRestaurantFoodType: ""
-    },
-  ];
-
-  nearbyHotels: Hotels[] = [
-    {
-      nearbyHotelId: 0,
-      nearbyHotelLatitude: "",
-      nearbyHotelLongitude: "",
-      nearbyHotelLatLong: "",
-      nearbyHotelName: "",
-      nearbyHotelRating: 0,
-      nearbyHotelReviewCount: 0,
-      nearbyHotelDistance: 0,
-      nearbyHotelType: ""
-    },
-    {
-      nearbyHotelId: 0,
-      nearbyHotelLatitude: "",
-      nearbyHotelLongitude: "",
-      nearbyHotelLatLong: "",
-      nearbyHotelName: "",
-      nearbyHotelRating: 0,
-      nearbyHotelReviewCount: 0,
-      nearbyHotelDistance: 0,
-      nearbyHotelType: ""
-    },
-    {
-      nearbyHotelId: 0,
-      nearbyHotelLatitude: "",
-      nearbyHotelLongitude: "",
-      nearbyHotelLatLong: "",
-      nearbyHotelName: "",
-      nearbyHotelRating: 0,
-      nearbyHotelReviewCount: 0,
-      nearbyHotelDistance: 0,
-      nearbyHotelType: ""
-    },
-    {
-      nearbyHotelId: 0,
-      nearbyHotelLatitude: "",
-      nearbyHotelLongitude: "",
-      nearbyHotelLatLong: "",
-      nearbyHotelName: "",
-      nearbyHotelRating: 0,
-      nearbyHotelReviewCount: 0,
-      nearbyHotelDistance: 0,
-      nearbyHotelType: ""
-    },
-    {
-      nearbyHotelId: 0,
-      nearbyHotelLatitude: "",
-      nearbyHotelLongitude: "",
-      nearbyHotelLatLong: "",
-      nearbyHotelName: "",
-      nearbyHotelRating: 0,
-      nearbyHotelReviewCount: 0,
-      nearbyHotelDistance: 0,
-      nearbyHotelType: ""
-    },
-    {
-      nearbyHotelId: 0,
-      nearbyHotelLatitude: "",
-      nearbyHotelLongitude: "",
-      nearbyHotelLatLong: "",
-      nearbyHotelName: "",
-      nearbyHotelRating: 0,
-      nearbyHotelReviewCount: 0,
-      nearbyHotelDistance: 0,
-      nearbyHotelType: ""
-    },
-    {
-      nearbyHotelId: 0,
-      nearbyHotelLatitude: "",
-      nearbyHotelLongitude: "",
-      nearbyHotelLatLong: "",
-      nearbyHotelName: "",
-      nearbyHotelRating: 0,
-      nearbyHotelReviewCount: 0,
-      nearbyHotelDistance: 0,
-      nearbyHotelType: ""
-    },
-    {
-      nearbyHotelId: 0,
-      nearbyHotelLatitude: "",
-      nearbyHotelLongitude: "",
-      nearbyHotelLatLong: "",
-      nearbyHotelName: "",
-      nearbyHotelRating: 0,
-      nearbyHotelReviewCount: 0,
-      nearbyHotelDistance: 0,
-      nearbyHotelType: ""
-    },
-    {
-      nearbyHotelId: 0,
-      nearbyHotelLatitude: "",
-      nearbyHotelLongitude: "",
-      nearbyHotelLatLong: "",
-      nearbyHotelName: "",
-      nearbyHotelRating: 0,
-      nearbyHotelReviewCount: 0,
-      nearbyHotelDistance: 0,
-      nearbyHotelType: ""
-    },
-    {
-      nearbyHotelId: 0,
-      nearbyHotelLatitude: "",
-      nearbyHotelLongitude: "",
-      nearbyHotelLatLong: "",
-      nearbyHotelName: "",
-      nearbyHotelRating: 0,
-      nearbyHotelReviewCount: 0,
-      nearbyHotelDistance: 0,
-      nearbyHotelType: ""
-    },
-  ];
+  private nearbyRestaurants: Restaurants[] = [];
+  private nearbyHotels: Hotels[] = [];
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    private viewportScroller: ViewportScroller,
     private tripAdvisorApi: TripAdvisorApiService) {
-    this.encodedAddress = encodeURIComponent(this.attractionAddress);
-    this.displayedRestaurants = this.nearbyRestaurants.slice(0, this.restaurantsToDisplay);
-    this.displayedHotels = this.nearbyHotels.slice(0, this.hotelsToDisplay);
-
-}
+  }
 
   ngOnInit(): void {
+    this.viewportScroller.scrollToPosition([0, 0]);
 
-    // Parameters passed via navigation state (view details button)
-    console.log('Full attraction history state', history.state);
     if (history.state.attractionObject) {
       const passedAttractionData = history.state.attractionObject;
       this.attractionName = passedAttractionData.name;
@@ -321,19 +84,19 @@ export class DestinationAttractionDetailsComponent implements OnInit {
       this.attractionDescription = passedAttractionData.description;
     }
 
-    this.getAttractionDetails()
-    this.getAttractionPhotos()
-    
+    this.getAttractionDetails();
+    this.getAttractionPhotos();
   }
 
-  //Function to get attraction details, nearby restaurants and hotels
-  getAttractionDetails() {
+  /**
+   * Fetch all details with rate limiting to avoid 429 errors
+   */
+  getAttractionDetails(): void {
     this.tripAdvisorApi.displayDestinationDescription(this.attractionLocationID).pipe(
       mergeMap(detailsResults => {
-        const newAttractionData = detailsResults;
-        console.log(newAttractionData)
-        this.businessHours = detailsResults?.hours?.weekday_text[this.workDay()] || "Hours Not Listed"
-        this.attractionAddress = detailsResults.address_obj.address_string
+        console.log(detailsResults);
+        this.businessHours = detailsResults?.hours?.weekday_text[this.workDay()] || "Hours Not Listed";
+        this.attractionAddress = detailsResults.address_obj.address_string;
         this.encodedAddress = encodeURIComponent(this.attractionAddress);
         this.attractionDescription = detailsResults.description;
         this.attractionWebsite = detailsResults.website;
@@ -342,98 +105,129 @@ export class DestinationAttractionDetailsComponent implements OnInit {
         this.long = detailsResults.longitude;
         this.latLong = this.lat + ',' + this.long;
 
-        return this.tripAdvisorApi.searchNearbyQuery(this.latLong, "restaurants");
+        // Fetch restaurants and hotels in parallel
+        return forkJoin({
+          restaurants: this.tripAdvisorApi.searchNearbyQuery(this.latLong, "restaurants"),
+          hotels: this.tripAdvisorApi.searchNearbyQuery(this.latLong, "hotels")
+        });
       }),
-      mergeMap(restaurantsResults => {
-        //Get basic restaurant Data
-        const nearbyRestaurantData = restaurantsResults;
-        /*console.log(nearbyRestaurantData)*/
-        this.updateDisplayedRestaurants(restaurantsResults.data.length);
-
-        for (let i = 0; i < restaurantsResults.data.length; i++) {
-/*          console.log(restaurantsResults.data[i])*/
-          let restaurantIdInt: number = Number(restaurantsResults.data[i].location_id);
-          let distanceInt: number = Number(restaurantsResults.data[i].distance);
-          let distanceRounded: number = this.nearbyTrunc(distanceInt, 2);
-
-          this.nearbyRestaurants[i].nearbyRestaurantId = restaurantIdInt;
-          this.nearbyRestaurants[i].nearbyRestaurantName = restaurantsResults.data[i].name;
-          this.nearbyRestaurants[i].nearbyRestaurantDistance = distanceRounded;
-        }
-
-        const restaurantDetailsArray: { index: number; locationId: number }[] = restaurantsResults.data.map((restaurant: any, index: number) => ({
-          index: index,
-          locationId: Number(restaurant.location_id)
-        }));
-
-        return from(restaurantDetailsArray).pipe(
-          mergeMap(item =>
-            this.tripAdvisorApi.displayDestinationDescription(item.locationId).pipe(
-              delay(2000),
-              mergeMap(details => Promise.resolve({ details, index: item.index }))
-            )
-          )
+      mergeMap(results => {
+        // Fetch restaurant and hotel details with concurrency limit
+        const restaurantDetailsObs = this.fetchDetailsWithConcurrencyLimit(
+          results.restaurants.data.map((r: any) => Number(r.location_id))
+        ).pipe(
+          map(detailsArray => detailsArray.map((details: any, index: number) => ({
+            ...results.restaurants.data[index],
+            details
+          })))
         );
-      }),
-      // After all restaurant details are fetched, get hotels
-      mergeMap(() => {
-        return this.tripAdvisorApi.searchNearbyQuery(this.latLong, "hotels");
-      }),
-      mergeMap(hotelResults => {
-        // Store the basic hotel data
-        const nearbyHotelData = hotelResults;
-        /*console.log(nearbyHotelData)*/
-        this.updateDisplayedHotels(hotelResults.data.length);
 
-        for (let i = 0; i < hotelResults.data.length; i++) {
-/*          console.log(hotelResults.data[i])*/
-          let hotelIdInt: number = Number(hotelResults.data[i].location_id);
-          let distanceInt: number = Number(hotelResults.data[i].distance);
-          let distanceRounded: number = this.nearbyTrunc(distanceInt, 2);
-
-          this.nearbyHotels[i].nearbyHotelId = hotelIdInt;
-          this.nearbyHotels[i].nearbyHotelName = hotelResults.data[i].name;
-          this.nearbyHotels[i].nearbyHotelDistance = distanceRounded;
-        }
-
-        // Create an array of objects that include both index and location_id
-        const hotelDetailsArray: { index: number, locationId: number } [] = hotelResults.data.map((hotel: any, index: number) => ({
-          index: index,
-          locationId: Number(hotel.location_id)
-        }));
-
-        // Use from() to emit each hotel one at a time
-        return from(hotelDetailsArray).pipe(
-          delay (2000),
-          mergeMap(item =>
-            this.tripAdvisorApi.displayDestinationDescription(item.locationId).pipe(
-              delay(5000),
-              // Map the response to include the index so we know where to store it
-              mergeMap(details => Promise.resolve({ details, index: item.index }))
-            )
-          )
+        const hotelDetailsObs = this.fetchDetailsWithConcurrencyLimit(
+          results.hotels.data.map((h: any) => Number(h.location_id))
+        ).pipe(
+          map(detailsArray => detailsArray.map((details: any, index: number) => ({
+            ...results.hotels.data[index],
+            details
+          })))
         );
+
+        return forkJoin({
+          restaurantsWithDetails: restaurantDetailsObs,
+          hotelsWithDetails: hotelDetailsObs,
+          restaurants: from([results.restaurants]),
+          hotels: from([results.hotels])
+        });
       })
-    )
-      .subscribe({
-        next: (finalResult: any) => {
-          // This is the last detail call result - you can handle it or just finish
-          console.log(finalResult);
-          console.log('All details fetched successfully');
-        },
-        error: (error) => {
-          console.error('Error in chain:', error);
-        }
-      });
+    ).subscribe({
+      next: (results: any) => {
+        this.processRestaurantsData(results.restaurants.data, results.restaurantsWithDetails);
+        this.processHotelsData(results.hotels.data, results.hotelsWithDetails);
+      },
+      error: (error) => {
+        console.error('Error fetching attraction details:', error);
+      }
+    });
   }
 
-  //Api call to get attraction photos
-  getAttractionPhotos() {
+  /**
+   * Fetch multiple location details with a concurrency limit of 3
+   */
+  private fetchDetailsWithConcurrencyLimit(locationIds: number[]): Observable<any[]> {
+    return from(locationIds).pipe(
+      mergeMap(
+        id => this.tripAdvisorApi.displayDestinationDescription(id),
+        3 // Process max 3 requests at a time
+      ),
+      toArray()
+    );
+  }
+
+  /**
+   * Process restaurant data with details
+   */
+  private processRestaurantsData(basicData: any[], detailsData: any[]): void {
+    const restaurants: Restaurants[] = basicData.map((restaurant: any, index: number) => {
+      const details = detailsData[index]?.details || detailsData[index] || {};
+      const distanceInt: number = Number(restaurant.distance);
+      const distanceRounded: number = this.nearbyTrunc(distanceInt, 2);
+
+      return {
+        nearbyRestaurantId: Number(restaurant.location_id),
+        nearbyRestaurantLatitude: details.latitude || "",
+        nearbyRestaurantLongitude: details.longitude || "",
+        nearbyRestaurantLatLong: `${details.latitude},${details.longitude}`,
+        nearbyRestaurantName: restaurant.name,
+        nearbyRestaurantRating: details.rating || 0,
+        nearbyRestaurantReviewCount: details.num_reviews || 0,
+        nearbyRestaurantDistance: distanceRounded,
+        nearbyRestaurantPriceRange: details.price_level || "N/A",
+        nearbyRestaurantFoodType: this.extractCuisine(details.cuisine) || "Various"
+      };
+    });
+
+    this.nearbyRestaurants = restaurants;
+    this.updateDisplayedRestaurants(Math.min(this.restaurantsToDisplay, restaurants.length));
+  }
+
+  /**
+   * Process hotel data with details
+   */
+  private processHotelsData(basicData: any[], detailsData: any[]): void {
+    const hotels: Hotels[] = basicData.map((hotel: any, index: number) => {
+      const details = detailsData[index]?.details || detailsData[index] || {};
+      const distanceInt: number = Number(hotel.distance);
+      const distanceRounded: number = this.nearbyTrunc(distanceInt, 2);
+
+      return {
+        nearbyHotelId: Number(hotel.location_id),
+        nearbyHotelLatitude: details.latitude || "",
+        nearbyHotelLongitude: details.longitude || "",
+        nearbyHotelLatLong: `${details.latitude},${details.longitude}`,
+        nearbyHotelName: hotel.name,
+        nearbyHotelRating: details.rating || 0,
+        nearbyHotelReviewCount: details.num_reviews || 0,
+        nearbyHotelDistance: distanceRounded,
+        nearbyHotelType: details.hotel_class || "Hotel"
+      };
+    });
+
+    this.nearbyHotels = hotels;
+    this.updateDisplayedHotels(Math.min(this.hotelsToDisplay, hotels.length));
+  }
+
+  /**
+   * Extract first cuisine type or return default
+   */
+  private extractCuisine(cuisineArray: any): string {
+    if (Array.isArray(cuisineArray) && cuisineArray.length > 0) {
+      return cuisineArray[0]?.name?.charAt(0).toUpperCase() + cuisineArray[0]?.name?.slice(1) || "various";
+    }
+    return "Various";
+  }
+
+  getAttractionPhotos(): void {
     this.tripAdvisorApi.displayDestinationPhotos(this.attractionLocationID).subscribe({
       next: (results) => {
-        const attractionPhotos = results;
-        console.log(attractionPhotos)
-
         for (let index = 0; index < 5; index++) {
           const photo = results.data?.[index].images?.original?.url;
           const photo_backup = results.data?.[index].images?.large?.url;
@@ -446,28 +240,23 @@ export class DestinationAttractionDetailsComponent implements OnInit {
     });
   }
 
-  //Function to truncate nearby distance
-  nearbyTrunc(value: number, decimals: number) {
-      const factor = Math.pow(10, decimals);
-      return Math.round(value * factor) / factor
+  nearbyTrunc(value: number, decimals: number): number {
+    const factor = Math.pow(10, decimals);
+    return Math.round(value * factor) / factor;
   }
 
-  //Function to obtain correct index for business hours
-  workDay() {
-    let currentDay = new Date().getDay()
-    if (currentDay > 0) {
-      return currentDay - 1;
-    } else {
-      return currentDay = 6;
-    }
+  workDay(): number {
+    let currentDay = new Date().getDay();
+    return currentDay > 0 ? currentDay - 1 : 6;
   }
 
-  private updateDisplayedRestaurants(count: number) {
-    this.displayedRestaurants = this.nearbyRestaurants.slice(0, count);
+  private updateDisplayedRestaurants(count: number): void {
+    this.displayedRestaurants = this.nearbyRestaurants?.slice(0, count) || [];
   }
 
-  private updateDisplayedHotels(count: number) {
-    this.displayedHotels = this.nearbyHotels.slice(0, count);
+  private updateDisplayedHotels(count: number): void {
+    this.displayedHotels = this.nearbyHotels?.slice(0, count) || [];
   }
 
-};
+
+}

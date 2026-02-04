@@ -65,6 +65,7 @@
      : adventure?.description
               }}
             </small>
+            <small *ngIf="!adventure.description || adventure.description.length == 0" class="text-muted">No description available.</small>
           </div>
         </div>
       </div>

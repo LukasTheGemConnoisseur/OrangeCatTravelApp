@@ -1,18 +1,37 @@
 <div class="reviewsContainer">
   <div class="reviewsTitle">Reviews</div>
-  <div class="reviewCard">
+
+  <!--show this item when there are no reviews present-->
+  <div *ngIf="displayedReviews.length === 0 && !isLoadingMore" class="noReviewsMessage">
+    No reviews available for this attraction yet.
+  </div>
+
+  <!--Show reviews when theye exist-->
+  <div class="reviewCard" *ngFor="let review of displayedReviews">
     <div class="reviewHeader">
       <div class="profilePic">
-        <!-- logic for a picture to be implemented -->
+        <img *ngIf="review.user?.avatar?.thumbnail" [src]="review.user?.avatar?.thumbnail" alt="Profile Picture" />
       </div>
       <div class="reviewerInfo">
-        <div class="reviewerName">{{reviewerName}}</div>
-        <div class="reviewerLocation">{{reviewerLocation}}</div>
+        <div class="reviewerName">{{review.user?.username || 'Anonymous'}}</div>
       </div>
     </div>
-      <div class="reviewScore">{{reviewScore}} Stars</div>
-      <div class="reviewTitle">{{reviewTitle}}</div>
-      <div class="reviewDate">{{reviewDate}}</div>
-      <div class="reviewContent">{{reviewContent}}</div>
+    <div class="reviewScore">
+      <i class="bi bi-star"></i>
+      {{review.rating}} Stars
+    </div>
+      <div class="reviewTitle">{{review.title}}</div>
+      <div class="reviewDate">{{review.published_date| date:'MMM yyyy'}}</div>
+      <div class="reviewContent">{{review.text}}</div>
+  </div>
+
+  <!--Show loading indicator while fetching-->
+  <div *ngIf="isLoadingMore" class="loadingIndicator">
+    Loading reviews...
+  </div>
+
+  <!--Show load more button when there are more reviews to fetch-->
+  <div *ngIf="hasMoreReviews && !isLoadingMore" class="loadMoreReviewsButton">
+    <button (click)="loadMoreReviews()" class="loadMoreReviews">Load More</button>
   </div>
 </div>

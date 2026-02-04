@@ -187,4 +187,23 @@ public class ProxyController : ControllerBase
 
         return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
     }
+
+    [HttpGet("locationReview")]
+    public async Task<IActionResult> locationReview([FromQuery] Int32 locationId, [FromQuery] int offset = 0)
+    {   var apiUrl = $"https://api.content.tripadvisor.com/api/v1/location/{locationId}/reviews?key=3ED8A95286CA4B0A90F2E60E06308D6B&language=en&offset={offset}";
+        var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
+        request.Headers.Add("accept", "application/json");
+        request.Headers.Add("referer", "http://localhost:4200");
+        request.Headers.Add("origin", "http://localhost:4200");
+
+        var response = await _httpClient.SendAsync(request);
+
+        if (response.IsSuccessStatusCode)
+        {
+            var data = await response.Content.ReadAsStringAsync();
+            return Content(data, "application/json");
+        }
+
+        return StatusCode((int)response.StatusCode, await response.Content.ReadAsStringAsync());
+    }
 }

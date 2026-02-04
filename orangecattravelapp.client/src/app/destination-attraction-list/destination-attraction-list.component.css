@@ -46,6 +46,12 @@
     transform: scale(1.05);
   }
 
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .attractionContainer .card-body .btn-primary {
   background-color: #050038;
   color: white;
@@ -55,8 +61,16 @@
 
 .card-body {
   padding: 20px;
-  height: 150px; /* Consistent card height */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
+
+  .card-body .btn-primary {
+    margin-top: auto;
+    align-self: center;
+  }
 
 .card-title {
   font-size: 18px;
@@ -73,6 +87,7 @@
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
+  flex: 1;
 }
 
 .card-footer {
@@ -162,3 +177,4 @@
 .filters input[type="checkbox"]:checked + label {
   color: #007bff;
 }*/
+

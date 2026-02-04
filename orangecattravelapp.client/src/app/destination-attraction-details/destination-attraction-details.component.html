@@ -36,7 +36,8 @@
   <div class="twoColumnView">
     <div class="aboutColumn">
       <div class="about">About</div>
-      <div class="aboutContainer">
+      <div *ngIf="!attractionDescription" class="aboutContainer">There are no details currently available for this location.</div>
+      <div *ngIf="attractionDescription" class="aboutContainer">
         {{attractionDescription}}
       </div>
     </div>
@@ -83,9 +84,6 @@
     <div class="attractionLocationContainer">
       <div class="attractionLocationTitle">Location</div>
       <div class="attractionAddress">
-        <div class="attractionLocationImage">
-          <img [src]="attractionLocationImage" alt="attraction Location Image">
-        </div>
         <i class="bi bi-geo-alt"></i>
         <a [href]="'https://www.google.com/maps/search/?api=1&query=' + encodedAddress" target="_blank">
           {{attractionAddress}}
@@ -120,33 +118,37 @@
           </div>
         </div>
         <div class="attractionLocationNearbyHotels">
-          <div class="attractionLocationNearbyHotelsTitle">Nearby Hotels</div>
-          <div class="attractionLocationNearbyHotelsCard" *ngFor="let nearbyHotel of displayedHotels">
-            <div class="nearbyHotelName">{{nearbyHotel.nearbyHotelName}}</div>
-            <div class="nearbyHotelRatingContainer">
-              <div class="nearbyHotelRating">
-                <i class="bi bi-star"></i>
-                {{nearbyHotel.nearbyHotelRating}} Stars
+          <div *ngIf="displayedHotels && displayedHotels.length > 0; else noHotels">
+            <div *ngIf="displayedHotels" class="attractionLocationNearbyHotelsTitle">Nearby Hotels</div>
+            <div class="attractionLocationNearbyHotelsCard" *ngFor="let nearbyHotel of displayedHotels">
+              <div class="nearbyHotelName">{{nearbyHotel.nearbyHotelName}}</div>
+              <div class="nearbyHotelRatingContainer">
+                <div class="nearbyHotelRating">
+                  <i class="bi bi-star"></i>
+                  {{nearbyHotel.nearbyHotelRating}} Stars
+                </div>
+                <div class="separator"></div>
+                <div class="nearbyHotelReviewCount">
+                  <i class="bi bi-file-text"></i>
+                  {{nearbyHotel.nearbyHotelReviewCount}} Reviews
+                </div>
               </div>
-              <div class="separator"></div>
-              <div class="nearbyHotelReviewCount">
-                <i class="bi bi-file-text"></i>
-                {{nearbyHotel.nearbyHotelReviewCount}} Reviews
+              <div class="nearbyHotelInfo">
+                <div class="nearbyHotelDistance">
+                  <i class="bi bi-person-walking"></i>
+                  {{nearbyHotel.nearbyHotelDistance}} miles
+                </div>
+                <div class="separator"></div>
+                <div class="nearbyHotelType">{{nearbyHotel.nearbyHotelType}}</div>
               </div>
-            </div>
-            <div class="nearbyHotelInfo">
-              <div class="nearbyHotelDistance">
-                <i class="bi bi-person-walking"></i>
-                {{nearbyHotel.nearbyHotelDistance}} miles
-              </div>
-              <div class="separator"></div>
-              <div class="nearbyHotelType">{{nearbyHotel.nearbyHotelType}}</div>
             </div>
           </div>
+          <ng-template #noHotels>
+            <div class="attractionLocationNearbyHotelsTitle">No Nearby Hotels Available</div>
+          </ng-template>
         </div>
-      </div>
     </div>
     <div class="app-reviewsContainer">
-      <app-reviews></app-reviews>
+      <app-reviews [location_id]="attractionLocationID"></app-reviews>
     </div>
 </div>

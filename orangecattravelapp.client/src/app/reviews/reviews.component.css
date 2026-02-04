@@ -33,7 +33,6 @@
 .reviewHeader {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
 }
 
 .profilePic {
@@ -65,7 +64,6 @@
   font-size: 16px;
   font-weight: bold;
   color: #ff9500;
-  margin-bottom: 10px;
   margin-left: 60px;
 }
 
@@ -90,3 +88,26 @@
   color: #444;
   margin-left: 60px;
 }
+
+.loadMoreReviewsButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+  .loadMoreReviewsButton button {
+    background-color: #050038;
+    padding: 10px 30px;
+    font-size: 16px;
+    color: white;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+    .loadMoreReviewsButton button:hover {
+      background-color: #0056b3;
+    }

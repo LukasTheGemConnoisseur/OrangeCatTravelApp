@@ -64,11 +64,19 @@ export class ReviewsComponent implements OnInit, OnChanges{
     }
 
     this.isLoadingMore = true;
+    console.log(`Reviews component loading reviews for location ${this.location_id} at offset ${this.currentOffset}`);
 
     this.tripAdvisorApi.displayLocationReviews(this.location_id, this.currentOffset).subscribe({
       next: (results) => {
         // Stores the new reviews from the API Response
         const newReviews: Reviews[] = results.data || [];
+        //console.log(`API Response:`, {
+        //  rawResults: results,
+        //  reviewCount: newReviews.length,
+        //  reviews: newReviews,
+        //  currentOffset: this.currentOffset,
+        //  totalReviewsLoaded: this.allReviews.length + newReviews.length
+        //});
 
         //Checks to see if there are any reviews in the first place
         if (this.currentOffset === 0 && newReviews.length === 0) {
@@ -88,8 +96,9 @@ export class ReviewsComponent implements OnInit, OnChanges{
         this.currentOffset += 5;
 
         // Checks if there are more reviews available
-        this.hasMoreReviews = newReviews.length > 0;
+        this.hasMoreReviews = newReviews.length >= 5 && this.currentOffset <= 5;
 
+/*        console.log(`Load complete. Next offset will be: ${this.currentOffset}, has more: ${this.hasMoreReviews}`)*/
         this.isLoadingMore = false;
       },
       error: (error) => {

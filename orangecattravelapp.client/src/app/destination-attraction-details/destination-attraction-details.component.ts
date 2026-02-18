@@ -150,13 +150,13 @@ export class DestinationAttractionDetailsComponent implements OnInit {
   }
 
   /**
-   * Fetch multiple location details with a concurrency limit of 3
+   * Fetch multiple location details with a concurrency limit of 2
    */
   private fetchDetailsWithConcurrencyLimit(locationIds: number[]): Observable<any[]> {
     return from(locationIds).pipe(
       mergeMap(
         id => this.tripAdvisorApi.displayDestinationDescription(id),
-        3 // Process max 3 requests at a time
+        2 // Process max 2 requests at a time
       ),
       toArray()
     );

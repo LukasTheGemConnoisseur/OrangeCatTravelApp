@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { tap, delay } from 'rxjs/operators';
+import { Observable, of, timer } from 'rxjs';
+import { tap, delay, concatMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,19 +9,19 @@ import { tap, delay } from 'rxjs/operators';
 export class TripAdvisorApiService {
   private cache = new Map<string, any>();
   private proxyUrl = 'https://localhost:7000/api/proxy';
-  private readonly CACHE_EXPIRY_MS = 24 * 60 * 60 * 1000; // this equals to cache not expiring until 24 hours later.
+  private readonly CACHE_EXPIRY_MS = 24 * 60 * 60 * 1000;
+  private readonly REQUEST_DELAY_MS = 100; // Add 200ms delay between requests
+  private lastRequestTime: number = 0;
 
   constructor(private http: HttpClient) {
     this.loadCacheFromLocalStorage();
   }
 
-  // Loads cached data from browser localStorage on service initialization
   private loadCacheFromLocalStorage(): void {
     try {
       const cachedData = localStorage.getItem('tripAdvisorCache');
       if (cachedData) {
         const parsedCache = JSON.parse(cachedData);
-        // Only restore non-expired entries/data
         Object.entries(parsedCache).forEach(([key, value]: [string, any]) => {
           if (value.expiry && value.expiry > Date.now()) {
             this.cache.set(key, value.data);
@@ -33,7 +33,6 @@ export class TripAdvisorApiService {
     }
   }
 
-  //Save current cache to localStorage for persistence
   private saveCacheToLocalStorage(): void {
     try {
       const cacheToSave: Record<string, any> = {};
@@ -49,7 +48,18 @@ export class TripAdvisorApiService {
     }
   }
 
-  //Get or fetch data with caching
+  /**
+   * Apply rate limiting delay before making requests
+   */
+  private applyRateLimit(): Observable<number> {
+    const now = Date.now();
+    const timeSinceLastRequest = now - this.lastRequestTime;
+    const delayNeeded = Math.max(0, this.REQUEST_DELAY_MS - timeSinceLastRequest);
+
+    this.lastRequestTime = now + delayNeeded;
+    return delayNeeded > 0 ? timer(delayNeeded) : of(0);
+  }
+
   private getFromCacheOrFetch<T>(
     cacheKey: string,
     fetchFn: () => Observable<T>
@@ -57,7 +67,8 @@ export class TripAdvisorApiService {
     if (this.cache.has(cacheKey)) {
       return of(this.cache.get(cacheKey) as T);
     }
-    return fetchFn().pipe(
+    return this.applyRateLimit().pipe(
+      concatMap(() => fetchFn()),
       tap(data => {
         this.cache.set(cacheKey, data);
         this.saveCacheToLocalStorage();
@@ -153,28 +164,12 @@ export class TripAdvisorApiService {
     const cacheKey = `reviews-${locationId}-${offset}`;
     return this.getFromCacheOrFetch(cacheKey, () => {
       const params = { locationId: locationId, offset: offset };
-      return this.http.get(`${this.proxyUrl}/locationReview/`, { params }
-      );
+      return this.http.get(`${this.proxyUrl}/locationReview/`, { params });
     });
   }
 
-  //Clear all cached data (for user preference or app reset)
   clearCache(): void {
     this.cache.clear();
     localStorage.removeItem('tripAdvisorCache');
   }
 }
-
-  //Lat long
-  //displayDestinationHotels(destinationID: number): Observable<any> {
-  //  const params = { locationId: destinationID };
-  //Lat long
-  //displayDestinationAttractionsPhotos(destinationID: number): Observable<any> {
-  //  const params = { locationId: destinationID };
-  //}
-  //displayDestinationHotelsPhotos(destinationID: number): Observable<any> {
-  //  const params = { locationId: destinationID };
-  //displayDestinationRestaurantsPhotos(destinationID: number): Observable<any> {
-  //  const params = { locationId: destinationID };
-  //}
-  //}

@@ -223,3 +223,62 @@
 .imgCarousel {
   margin: auto;
 }
+
+/* Clickable Map Styles */
+.attractionAreaMap img {
+  max-width: 300px;
+  height: auto;
+  border-radius: 10px;
+  width: 100%;
+  display: block;
+}
+
+.clickable-map {
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: inline-block;
+  width: fit-content;
+  max-width: 300px;
+}
+
+  .clickable-map:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .clickable-map:active {
+    transform: scale(0.98);
+  }
+
+.map-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 10px;
+  color: white;
+}
+
+.clickable-map:hover .map-overlay {
+  opacity: 1;
+}
+
+.map-overlay i {
+  font-size: 32px;
+}
+
+.map-overlay span {
+  font-size: 14px;
+  font-weight: 500;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}

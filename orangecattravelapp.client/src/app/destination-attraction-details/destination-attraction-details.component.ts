@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TripAdvisorApiService } from '../services/tripadvisor-api.service';
+import { GoogleMapsService, MapMarker } from '../services/google-maps.service';
 import { forkJoin, from, Observable } from 'rxjs';
 import { mergeMap, map, concatMap, toArray } from 'rxjs/operators';
 import { ViewportScroller } from '@angular/common';
+import { MapMapModalComponent } from '../map-modal/map-modal.component';
 
 interface Restaurants {
   nearbyRestaurantId: number;
@@ -36,6 +38,8 @@ interface Hotels {
   styleUrls: ['./destination-attraction-details.component.css']
 })
 export class DestinationAttractionDetailsComponent implements OnInit {
+  @ViewChild(MapMapModalComponent) mapModal!: MapMapModalComponent;
+
   attractionLocationID: number = 0;
   attractionName: string = "";
   attractionSubCategory: string = "";
@@ -56,6 +60,9 @@ export class DestinationAttractionDetailsComponent implements OnInit {
   long: string = '';
   latLong: string = '';
 
+  // Map-related properties
+  mapMarkers: MapMarker[] = [];
+
   displayedRestaurants: Restaurants[] = [];
   restaurantsToDisplay = 10;
   displayedHotels: Hotels[] = [];
@@ -68,7 +75,8 @@ export class DestinationAttractionDetailsComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private viewportScroller: ViewportScroller,
-    private tripAdvisorApi: TripAdvisorApiService) {
+    private tripAdvisorApi: TripAdvisorApiService,
+    private googleMapsService: GoogleMapsService) {
   }
 
   ngOnInit(): void {
@@ -86,6 +94,24 @@ export class DestinationAttractionDetailsComponent implements OnInit {
 
     this.getAttractionDetails();
     this.getAttractionPhotos();
+  }
+
+  /**
+   * Open the map modal
+   */
+  openMapModal(): void {
+    console.log('Opening map modal...');
+    console.log('Map Modal Reference:', this.mapModal);
+    console.log('Markers:', this.mapMarkers);
+    this.mapModal.openModal();
+  }
+
+  /**
+   * Handle marker click events
+   */
+  onMarkerClicked(marker: MapMarker): void {
+    console.log('Marker clicked:', marker);
+    // Any additional logic for marker clicks can be added here, such as showing an info window or navigating to a details page
   }
 
   /**
@@ -142,10 +168,28 @@ export class DestinationAttractionDetailsComponent implements OnInit {
       next: (results: any) => {
         this.processRestaurantsData(results.restaurants.data, results.restaurantsWithDetails);
         this.processHotelsData(results.hotels.data, results.hotelsWithDetails);
+        this.buildMapMarkers();
       },
       error: (error) => {
         console.error('Error fetching attraction details:', error);
       }
+    });
+  }
+
+  /**
+   * Build map markers from restaurants and hotels data
+   */
+  private buildMapMarkers(): void {
+    this.mapMarkers = [];
+
+    // Add restaurant markers
+    this.nearbyRestaurants.forEach(restaurant => {
+      this.mapMarkers.push(this.googleMapsService.createRestaurantMarker(restaurant));
+    });
+
+    // Add hotel markers
+    this.nearbyHotels.forEach(hotel => {
+      this.mapMarkers.push(this.googleMapsService.createHotelMarker(hotel));
     });
   }
 

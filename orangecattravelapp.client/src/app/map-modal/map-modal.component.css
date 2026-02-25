@@ -1,0 +1,37 @@
+.map-container {
+  width: 100%;
+  height: 400px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.attraction-image-container {
+  margin-bottom: 15px;
+}
+
+.attraction-image {
+  width: 100%;
+  height: auto;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.marker-info {
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+  .marker-info h6 {
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+
+  .marker-info p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+  }

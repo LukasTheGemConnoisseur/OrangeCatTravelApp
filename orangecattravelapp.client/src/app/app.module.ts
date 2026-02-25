@@ -21,6 +21,7 @@ import { DestinationRestaurantListComponent } from './destination-restaurant-lis
 import { DestinationRestaurantDetailsComponent } from './destination-restaurant-details/destination-restaurant-details.component';
 import { DestinationHotelListComponent } from './destination-hotel-list/destination-hotel-list.component';
 import { DestinationHotelDetailsComponent } from './destination-hotel-details/destination-hotel-details.component';
+import { MapMapModalComponent } from './map-modal/map-modal.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { DestinationHotelDetailsComponent } from './destination-hotel-details/de
     DestinationRestaurantListComponent,
     DestinationRestaurantDetailsComponent,
     DestinationHotelListComponent,
-    DestinationHotelDetailsComponent
+    DestinationHotelDetailsComponent,
+    MapMapModalComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, FormsModule, AppRoutingModule

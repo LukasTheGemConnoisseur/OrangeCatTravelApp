@@ -44,9 +44,12 @@
     <div class="ContactColumn">
       <div class="contact">Contact</div>
       <div class="contactContainer">
-        <div class="attractionAreaMap">
-          <!--This is where the map will go-->
-          <img src="../../assets/tokyo.jpg" />
+        <div class="attractionAreaMap clickable-map" (click)="openMapModal()" title="Click to view interactive map">
+          <img [src]="attractionImages && attractionImages.length > 0 ? attractionImages[0] : '../../assets/tokyo.jpg'" [alt]="attractionName" />
+          <div class="map-overlay">
+            <i class="bi bi-map"></i>
+            <span>View Interactive Map</span>
+          </div>
         </div>
         <div class="attractionAddress">
           <div class="attractionAddressCategory">
@@ -81,74 +84,82 @@
     </div>
   </div>
 
-    <div class="attractionLocationContainer">
-      <div class="attractionLocationTitle">Location</div>
-      <div class="attractionAddress">
-        <i class="bi bi-geo-alt"></i>
-        <a [href]="'https://www.google.com/maps/search/?api=1&query=' + encodedAddress" target="_blank">
-          {{attractionAddress}}
-        </a>
+  <div class="attractionLocationContainer">
+    <div class="attractionLocationTitle">Location</div>
+    <div class="attractionAddress">
+      <i class="bi bi-geo-alt"></i>
+      <a [href]="'https://www.google.com/maps/search/?api=1&query=' + encodedAddress" target="_blank">
+        {{attractionAddress}}
+      </a>
+    </div>
+    <div class="attractionLocationNearbySearchContainer">
+      <div class="attractionLocationNearbyRestaurants">
+        <div class="attractionLocationNearbyRestaurantsTitle">Nearby Restaurants</div>
+        <div class="attractionLocationNearbyRestaurantsCard" *ngFor="let nearbyRestaurant of displayedRestaurants">
+          <div class="nearbyRestaurantName">{{nearbyRestaurant.nearbyRestaurantName}}</div>
+          <div class="nearbyRestaurantRatingContainer">
+            <div class="nearbyRestaurantRating">
+              <i class="bi bi-star"></i>
+              {{nearbyRestaurant.nearbyRestaurantRating}} Stars
+            </div>
+            <div class="separator"></div>
+            <div class="nearbyRestaurantReviewCount">
+              <i class="bi bi-file-text"></i>
+              {{nearbyRestaurant.nearbyRestaurantReviewCount}} Reviews
+            </div>
+          </div>
+          <div class="nearbyRestaurantInfo">
+            <div class="nearbyRestaurantDistance">
+              <i class="bi bi-person-walking"></i>
+              {{nearbyRestaurant.nearbyRestaurantDistance}} miles
+            </div>
+            <div class="separator"></div>
+            <div class="nearbyRestaurantPriceRange">{{nearbyRestaurant.nearbyRestaurantPriceRange}}</div>
+            <div class="separator"></div>
+            <div class="nearbyRestaurantFoodType">{{nearbyRestaurant.nearbyRestaurantFoodType}}</div>
+          </div>
+        </div>
       </div>
-      <div class="attractionLocationNearbySearchContainer">
-        <div class="attractionLocationNearbyRestaurants">
-          <div class="attractionLocationNearbyRestaurantsTitle">Nearby Restaurants</div>
-          <div class="attractionLocationNearbyRestaurantsCard" *ngFor="let nearbyRestaurant of displayedRestaurants">
-            <div class="nearbyRestaurantName">{{nearbyRestaurant.nearbyRestaurantName}}</div>
-            <div class="nearbyRestaurantRatingContainer">
-              <div class="nearbyRestaurantRating"> 
+      <div class="attractionLocationNearbyHotels">
+        <div *ngIf="displayedHotels && displayedHotels.length > 0; else noHotels">
+          <div *ngIf="displayedHotels" class="attractionLocationNearbyHotelsTitle">Nearby Hotels</div>
+          <div class="attractionLocationNearbyHotelsCard" *ngFor="let nearbyHotel of displayedHotels">
+            <div class="nearbyHotelName">{{nearbyHotel.nearbyHotelName}}</div>
+            <div class="nearbyHotelRatingContainer">
+              <div class="nearbyHotelRating">
                 <i class="bi bi-star"></i>
-                {{nearbyRestaurant.nearbyRestaurantRating}} Stars
+                {{nearbyHotel.nearbyHotelRating}} Stars
               </div>
               <div class="separator"></div>
-              <div class="nearbyRestaurantReviewCount">
+              <div class="nearbyHotelReviewCount">
                 <i class="bi bi-file-text"></i>
-                {{nearbyRestaurant.nearbyRestaurantReviewCount}} Reviews
+                {{nearbyHotel.nearbyHotelReviewCount}} Reviews
               </div>
             </div>
-            <div class="nearbyRestaurantInfo">
-              <div class="nearbyRestaurantDistance">
+            <div class="nearbyHotelInfo">
+              <div class="nearbyHotelDistance">
                 <i class="bi bi-person-walking"></i>
-                {{nearbyRestaurant.nearbyRestaurantDistance}} miles
+                {{nearbyHotel.nearbyHotelDistance}} miles
               </div>
               <div class="separator"></div>
-              <div class="nearbyRestaurantPriceRange">{{nearbyRestaurant.nearbyRestaurantPriceRange}}</div>
-              <div class="separator"></div>
-              <div class="nearbyRestaurantFoodType">{{nearbyRestaurant.nearbyRestaurantFoodType}}</div>
+              <div class="nearbyHotelType">{{nearbyHotel.nearbyHotelType}}</div>
             </div>
           </div>
         </div>
-        <div class="attractionLocationNearbyHotels">
-          <div *ngIf="displayedHotels && displayedHotels.length > 0; else noHotels">
-            <div *ngIf="displayedHotels" class="attractionLocationNearbyHotelsTitle">Nearby Hotels</div>
-            <div class="attractionLocationNearbyHotelsCard" *ngFor="let nearbyHotel of displayedHotels">
-              <div class="nearbyHotelName">{{nearbyHotel.nearbyHotelName}}</div>
-              <div class="nearbyHotelRatingContainer">
-                <div class="nearbyHotelRating">
-                  <i class="bi bi-star"></i>
-                  {{nearbyHotel.nearbyHotelRating}} Stars
-                </div>
-                <div class="separator"></div>
-                <div class="nearbyHotelReviewCount">
-                  <i class="bi bi-file-text"></i>
-                  {{nearbyHotel.nearbyHotelReviewCount}} Reviews
-                </div>
-              </div>
-              <div class="nearbyHotelInfo">
-                <div class="nearbyHotelDistance">
-                  <i class="bi bi-person-walking"></i>
-                  {{nearbyHotel.nearbyHotelDistance}} miles
-                </div>
-                <div class="separator"></div>
-                <div class="nearbyHotelType">{{nearbyHotel.nearbyHotelType}}</div>
-              </div>
-            </div>
-          </div>
-          <ng-template #noHotels>
-            <div class="attractionLocationNearbyHotelsTitle">No Nearby Hotels Available</div>
-          </ng-template>
-        </div>
+        <ng-template #noHotels>
+          <div class="attractionLocationNearbyHotelsTitle">No Nearby Hotels Available</div>
+        </ng-template>
+      </div>
     </div>
     <div class="app-reviewsContainer">
       <app-reviews [location_id]="attractionLocationID"></app-reviews>
     </div>
-</div>
+  </div>
+
+  <!-- Google Maps Modal Component -->
+  <app-map-modal [mainAttractionLat]="lat ? +lat : 0"
+                 [mainAttractionLng]="long ? +long : 0"
+                 [mainAttractionName]="attractionName"
+                 [markers]="mapMarkers"
+                 (markerClicked)="onMarkerClicked($event)">
+  </app-map-modal>
